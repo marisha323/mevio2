@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class FavoriteDesk extends Model
 {
     use HasFactory;
+
+
+    protected $fillable = [
+        'userId',
+        'deskId',
+    ];
 }

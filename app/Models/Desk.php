@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Desk extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name',
+        'creatorId',
+        'isPublic',
+        'dateOfCreation',
+        'themeId',
+        'isArchive',
+    ];
 }

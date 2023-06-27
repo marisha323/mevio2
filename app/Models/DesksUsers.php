@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class DesksUsers extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'deskId',
+        'userId',
+    ];
 }
