@@ -1,6 +1,6 @@
 import {useState} from "react";
 
-export default function Index({user, auth}) {
+export default function Index({user}) {
     const [values, setValues] = useState({
         name: user.name || "",
         email: user.email || "",
@@ -16,7 +16,7 @@ export default function Index({user, auth}) {
                 </h1>
                 <div className="border border-success">
                     <h3 className='h3 text-center'>{values.name}</h3>
-                    <h3 className='h3 text-center'>Number of petition: {values.email}</h3>
+                    <h3 className='h3 text-center'>Email: {values.email}</h3>
 
                 </div>
             </div>

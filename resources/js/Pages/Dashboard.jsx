@@ -19,7 +19,7 @@ export default function Dashboard({auth}) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        await router.get("/UserController/index", values);
+        await router.post("/usercomponent/findByEmail", values);
         setValues({
             name: "",
             email: "",
@@ -42,10 +42,9 @@ export default function Dashboard({auth}) {
             </div>
 
             <form onSubmit={handleSubmit}>
-
                 <div className="mb-3">
                     <label htmlFor="number" className="form-label">
-                        Number Petition:
+                        Email:
                     </label>
                     <input
                         className="form-control"
@@ -58,7 +57,7 @@ export default function Dashboard({auth}) {
                 </div>
                 <div>
                     <button type="submit" className="btn btn-info">
-                        Відправити петицію
+                        FIND USER
                     </button>
                 </div>
             </form>

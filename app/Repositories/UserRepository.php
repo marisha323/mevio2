@@ -3,6 +3,7 @@ namespace App\Repositories;
 
 use App\Contracts\UserContract;
 use App\Models\User;
+use Inertia\Inertia;
 
 
 class UserRepository implements UserContract
@@ -13,21 +14,52 @@ class UserRepository implements UserContract
     {
         $this->model = $user;
     }
+    public function findById($id)
+    {
+        return User::find($id);
+    }
+
+    public function index()
+    {
+        return Inertia::render('UserComponent/Index');
+    }
+
+    public function findByEmail($email)
+    {
+        return User::where('email', $email)->first();
+    }
+
     public function create($data)
     {
-
-        return UserRepository::create($data);
+        return User::create($data);
     }
-    public function index($email): Response
+
+    public function update($id, array $data)
     {
-        $petition = User::findOrFail($email);
+        $user = User::findOrFail($id);
+        $user->fill($data);
+        $user->save();
 
-        //dd($petition);
-        return Inertia::render('UserComponent/Index', [
-            'user' => $petition,
-        ]);
-
+        return $user;
     }
+
+    public function delete($id)
+    {
+        return User::destroy($id);
+    }
+
+
+//    public function index ($email): Response
+//    {
+//        $petition = User::findOrFail($email);
+//
+//        //dd($petition);
+//        return Inertia::render('UserComponent/Index', [
+//            'user' => $petition,
+//        ]);
+//
+//    }
+
 }
 
 ?>

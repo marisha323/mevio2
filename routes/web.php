@@ -35,5 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get('/UserComponent/index/{id}',[UserController::class,'details'])->name('UserComponent.index');//DETAILS
+Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');
+
+Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
 require __DIR__.'/auth.php';

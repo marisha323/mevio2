@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class CardsUers extends Model
+class CardsUsers extends Model
 {
     use HasFactory;
     protected $fillable = [
@@ -13,3 +13,4 @@ class CardsUers extends Model
         'userId',
     ];
 }
+

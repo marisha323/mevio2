@@ -4,23 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Contracts\UserContract;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class UserController extends Controller
 {
-    private $userRepository;
+    protected $userModel;
 
     public function __construct(UserContract $userRepository)
     {
-        $this->userRepository = $userRepository;
+        $this->userModel = $userRepository;
     }
 
-    public function index($email)
+    public function index()
     {
-        $user = $this->userRepository->findById($email);
-        return Inertia::render('UserComponent/index', [
-            'values' => $user,
+       $this->userModel->index();
+    }
+
+
+
+    public function findByEmail(Request $request)
+    {
+        $email = $request->post('email');
+        $user = $this->userModel->findByEmail($email);
+       // dd($user);
+
+        return Inertia::render('UserComponent/Index', [
+            'user' => $user,
         ]);
     }
-
-
 }
