@@ -1,13 +1,37 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
+import {Head, router} from '@inertiajs/react';
+import {InertiaLink} from "@inertiajs/inertia-react";
+import {useState} from "react";
 
-export default function Dashboard({ auth }) {
+export default function Dashboard({auth}) {
+    const [values, setValues] = useState({
+        name: "",
+        email: "",
+    });
+    function handleChange(e) {
+        const key = e.target.id;
+        const value = e.target.value;
+        setValues((values) => ({
+            ...values,
+            [key]: value,
+        }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await router.get("/UserController/index", values);
+        setValues({
+            name: "",
+            email: "",
+
+        });
+    }
     return (
         <AuthenticatedLayout
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Dashboard</h2>}
         >
-            <Head title="Dashboard" />
+            <Head title="Dashboard"/>
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -16,6 +40,28 @@ export default function Dashboard({ auth }) {
                     </div>
                 </div>
             </div>
+
+            <form onSubmit={handleSubmit}>
+
+                <div className="mb-3">
+                    <label htmlFor="number" className="form-label">
+                        Number Petition:
+                    </label>
+                    <input
+                        className="form-control"
+                        type="text"
+                        id="email"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                    />
+                </div>
+                <div>
+                    <button type="submit" className="btn btn-info">
+                        Відправити петицію
+                    </button>
+                </div>
+            </form>
         </AuthenticatedLayout>
-    );
+);
 }
