@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
 
             $table->unsignedBigInteger('cardId')->nullable();
-            $table->foreign('cardId')->references('id')->on('Card')->onDelete('set null');
+            $table->foreign('cardId')->references('id')->on('CardRepository')->onDelete('set null');
             $table->timestamps();
         });
     }

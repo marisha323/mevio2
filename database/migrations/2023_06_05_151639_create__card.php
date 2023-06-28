@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Card', function (Blueprint $table) {
+        Schema::create('CardRepository', function (Blueprint $table) {
             $table->id();
             $table->string('cardName');
             $table->string('description');
 
             $table->unsignedBigInteger('columnId')->nullable();
-            $table->foreign('columnId')->references('id')->on('Column')->onDelete('set null');
+            $table->foreign('columnId')->references('id')->on('ColumnRepository')->onDelete('set null');
 
 
             $table->unsignedBigInteger('userId')->nullable();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Card');
+        Schema::dropIfExists('CardRepository');
     }
 };

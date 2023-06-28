@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Comment', function (Blueprint $table) {
+        Schema::create('CommentRepository', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('cardId')->nullable();
-            $table->foreign('cardId')->references('id')->on('Card')->onDelete('set null');
+            $table->foreign('cardId')->references('id')->on('CardRepository')->onDelete('set null');
 
             $table->string('Text');
             $table->timestamps();
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Comment');
+        Schema::dropIfExists('CommentRepository');
     }
 };

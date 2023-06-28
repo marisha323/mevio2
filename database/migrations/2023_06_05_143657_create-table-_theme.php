@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Theme', function (Blueprint $table) {
+        Schema::create('ThemeRepository', function (Blueprint $table) {
             $table->id();
             $table->string('TextColor');
             $table->string('BackGround');
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Theme');
+        Schema::dropIfExists('ThemeRepository');
     }
 };

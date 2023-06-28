@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Desk', function (Blueprint $table) {
+        Schema::create('DeskRepository', function (Blueprint $table) {
             $table->id();
             $table->string('deskName');
 
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->dateTime('DateOfCreation');
 
             $table->unsignedBigInteger('ThemeId')->nullable();
-            $table->foreign('ThemeId')->references('id')->on('Theme')->onDelete('set null');
+            $table->foreign('ThemeId')->references('id')->on('ThemeRepository')->onDelete('set null');
 
             $table->boolean('IsArchive')->default(false);
 
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Desk');
+        Schema::dropIfExists('DeskRepository');
     }
 };

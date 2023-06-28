@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Invitation', function (Blueprint $table) {
+        Schema::create('InvitationRepository', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('deskId')->nullable();
-            $table->foreign('deskId')->references('id')->on('Desk')->onDelete('set null');
+            $table->foreign('deskId')->references('id')->on('DeskRepository')->onDelete('set null');
 
             $table->unsignedBigInteger('SenderId')->nullable();
             $table->foreign('SenderId')->references('id')->on('users')->onDelete('set null');
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Invitation');
+        Schema::dropIfExists('InvitationRepository');
     }
 };
