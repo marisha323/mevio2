@@ -13,10 +13,33 @@ class UserRepository implements UserContract
     {
         $this->model = $user;
     }
+    public function findById($id)
+    {
+        return User::find($id);
+    }
+
+    public function findByEmail($email)
+    {
+        return User::where('email', $email)->first();
+    }
+
     public function create($data)
     {
+        return User::create($data);
+    }
 
-        return UserRepository::create($data);
+    public function update($id, array $data)
+    {
+        $user = User::findOrFail($id);
+        $user->fill($data);
+        $user->save();
+
+        return $user;
+    }
+
+    public function delete($id)
+    {
+        return User::destroy($id);
     }
     public function index($email): Response
     {
