@@ -1,7 +1,7 @@
 <?php
 namespace App\Contracts;
 
-interface CartUserContract
+interface CardsUserContract
 {
     public function create($data);
 

@@ -1,10 +1,10 @@
 <?php
 namespace App\Repositories;
 use App\Contracts\CardContract;
-use App\Contracts\CartUserContract;
+use App\Contracts\CardsUserContract;
 use App\Models\CardsUers;
 
-class CartUserRepository implements CardContract
+class CardsUserRepository implements CardContract
 {
     public function create($data)
     {

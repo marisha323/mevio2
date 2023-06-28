@@ -11,8 +11,8 @@ use App\Repositories\ArchiveRepository;
 use App\Contracts\CardContract;
 use App\Repositories\CardRepository;
 
-use App\Contracts\CartUserContract;
-use App\Repositories\CartUserRepository;
+use App\Contracts\CardsUserContract;
+use App\Repositories\CardsUserRepository;
 
 use App\Contracts\ColumnContract;
 use App\Repositories\ColumnRepository;
@@ -49,7 +49,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserContract::class,UserRepository::class);
         $this->app->bind(ArchiveContract::class,ArchiveRepository::class);
         $this->app->bind(CardContract::class,CardRepository::class);
-        $this->app->bind(CartUserContract::class,CartUserRepository::class);
+        $this->app->bind(CardsUserContract::class,CardsUserRepository::class);
         $this->app->bind(ColumnContract::class,ColumnRepository::class);
         $this->app->bind(CommentContract::class,CommentRepository::class);
         $this->app->bind(DeskContract::class,DeskRepository::class);
