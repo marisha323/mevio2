@@ -16,6 +16,18 @@ class CardRepository implements CardContract
     {
         // TODO: Implement create() method.
     }
+    public function AddCard(){
+
+    }
+
+    public function DeleteCard(){
+
+    }
+
+    public function MoveCard(){
+
+    }
+
 }
 
 

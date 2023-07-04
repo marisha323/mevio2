@@ -15,7 +15,7 @@ export default function Index({user}) {
                    Ваші данні
                 </h1>
                 <div className="border border-success">
-                    <h3 className='h3 text-center'>{values.name}</h3>
+                    <h3 className='h3 text-center'>Name: {values.name}</h3>
                     <h3 className='h3 text-center'>Email: {values.email}</h3>
 
                 </div>

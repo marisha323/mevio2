@@ -15,6 +15,11 @@ class ArchiveRepository implements ArchiveContract
     {
         $this->model=new ArchiveRepository();
     }
+     public function destroy($id)
+    {
+        return Archive::destroy($id);
+    }
+
     public function create($data)
     {
         return Archive::create($data);

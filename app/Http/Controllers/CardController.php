@@ -11,4 +11,15 @@ class CardController extends Controller
     {
 
     }
+    public function AddCard(){
+
+    }
+
+    public function DeleteCard(){
+
+    }
+
+    public function MoveCard(){
+
+    }
 }

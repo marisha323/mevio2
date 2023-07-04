@@ -21,16 +21,26 @@ class DeskRepository implements DeskContract
 
     public function update($id, array $data)
     {
-        $user = Desk::findOrFail($id);
-        $user->fill($data);
-        $user->save();
+        $desk = Desk::findOrFail($id);
+        $desk->fill($data);
+        $desk->save();
 
-        return $user;
+        return $desk;
     }
 
     public function delete($id)
     {
         return Desk::destroy($id);
+    }
+
+    public function AddToFavourite()
+    {
+
+    }
+
+    public function ArchiveDesk()
+    {
+        // TODO: Implement ArchiveDesk() method.
     }
 }
 

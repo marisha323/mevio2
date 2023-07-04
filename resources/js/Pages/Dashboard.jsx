@@ -47,7 +47,7 @@ export default function Dashboard({auth}) {
                         Email:
                     </label>
                     <input
-                        className="form-control"
+                        className="form-input"
                         type="text"
                         id="email"
                         name="email"
