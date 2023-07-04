@@ -1,0 +1,153 @@
+.middle_top_body_users {
+    width: 100%;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #20423F;
+  }
+  .working_space{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .working_space_img{
+    display: flex;
+    flex-direction: column;
+    width: 6rem;
+    justify-content: center;
+    align-items: center;
+  }
+  .working_space_img img {
+    position: absolute;
+    width: 4rem;
+  }
+  
+  .working_space_img > *:nth-child(3) {
+    margin-left: 1rem;
+    margin-top: -1rem;
+  }
+  .workingspace_title{
+    display: flex;
+    flex-direction: column;
+    color: white;
+  }
+  .workingspace_title h3{
+    font-weight: 400;
+  }
+  .workingspace_title h3 img{
+    margin-top: -1.5rem;
+  }
+  .workingspace_title p{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .workingspace_title p img{
+    filter: grayscale(100%);
+  }
+  .working_space button{
+    background-color: #F0C6FF;
+    border: none;
+    border-radius: 10px;
+    height: 2rem;
+    margin-left: 4rem;
+  }
+  .users_container {
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 58rem;
+    max-height: 28rem;
+  }
+  .users_list{
+    overflow: auto;
+    height: 20rem;
+  }
+  .users_list::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: transparent;
+  }
+  
+  .users_list::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  .users_container input{
+    border: 3px solid black;
+    border-radius: 10px;
+    width: 15rem;
+  }
+  .users_list{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+  }
+  .users_list hr {
+    border: none;
+    padding: 0.1rem;
+    height: 1px;
+    background-color: black;
+    opacity: 1;
+    margin-bottom: 0.3rem;
+    margin-top: 0.2rem;
+  }
+  .list_user{
+    display: flex;
+    align-items: center;
+  }
+  .list_user img{
+    height: 2.8rem;
+    margin-left: 1rem;
+  }
+  .user_name{
+    height: 3rem;
+    color: white;
+    font-weight: 400;
+    margin-left: 1rem;
+  }
+  .user_name h4{
+    font-weight: 400;
+  }
+  .user_name p {
+    margin-top: -0.8rem;
+  }
+  .user_list_control{
+    display: flex;
+    margin-left: auto;
+    align-items: center;
+    gap: 1rem;
+  }
+  .user_list_control h4{
+    color: white;
+    font-weight: 400;
+  }
+  .admin_user_btn{
+    border: none;
+    height: 1.5rem;
+    background-color: #F0C6FF;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 10px;
+    font-size: 22px;
+    padding: 1rem
+  }
+  .remove_user_btn{
+    border: none;
+    height: 1.5rem;
+    background-color: #7B69B5;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 10px;
+    font-size: 22px;
+    color: #F0C6FF;
+    padding: 1rem;
+    padding-left: 0rem;
+  }
+  .remove_user_btn img{
+    width: 0.7rem;
+    height: 0.7rem;
+  }
+  

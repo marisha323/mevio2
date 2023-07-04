@@ -1,0 +1,70 @@
+.calendar_month_h1{
+    color: #9AB9A3;
+    font-weight: 700;
+    margin-top: 1%;
+    padding-left: 3%;
+}
+.calendar_container{
+    width: 68rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.display_weeks{
+    width: 100%;
+    padding: 0.1rem;
+    display: flex;
+    background-color: #05342F;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0.2rem;
+}
+.display_weeks p{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #9AB9A3;
+    font-size: 22px;
+    margin: 0;
+    font-weight: 700;
+}
+.display_dates {
+    width: 68rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #05342F;
+    opacity: 0.95;
+    border-radius: 0 0 10px 10px;
+  }
+  
+  .date {
+    width: 9.713rem;
+    height: 5.5rem;
+    color: #9AB9A3;
+    padding-left: 0.3rem;
+    background-color: #2B514D;
+    opacity: 0.95;
+    border-right: 1px solid rgba(5, 52, 47, 0.9);
+    border-bottom: 1px solid rgba(5, 52, 47, 0.9);
+  }
+  
+  .date:nth-child(7n) {
+    border-right: none; /* Remove right border for every 7th element */
+  }
+  
+  .date:nth-child(n+29) {
+    border-bottom: none; /* Remove bottom border after the 28th element */
+  }
+  
+  .date:nth-child(29) {
+    border-bottom-left-radius: 10px; /* Add border radius to bottom left corner of the 29th date */
+  }
+  
+  .date:nth-child(35) {
+    border-bottom-right-radius: 10px; /* Add border radius to bottom right corner of the 35th date */
+  }
+  
+  .date.current-month-last-date ~ .date {
+    color: #000000; /* Change color for the next month's content */
+  }

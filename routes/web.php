@@ -39,3 +39,26 @@ Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])-
 
 Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
 require __DIR__.'/auth.php';
+
+Route::get('/desk_panel',function (){
+    return Inertia::render('DeskPanel/DeskPanel') ;
+});
+
+Route::get('/calendar',function (){
+   return Inertia::render('Calendar/Calendar') ;
+});
+
+Route::get('/current-desk',function (){
+    return Inertia::render('CurrentDesk/CurrentDesk') ;
+});
+
+Route::get('/users',function (){
+    return Inertia::render('Users/Users') ;
+});
+
+Route::get('/week-calendar',function (){
+    return Inertia::render('Calendar/WeekCalendar') ;
+});
+
+
+
