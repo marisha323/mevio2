@@ -1,9 +1,12 @@
 <?php
 namespace App\Contracts;
 
+use Illuminate\Http\Request;
+
 interface CardContract
 {
-    public function create($data);
+    public function createCard();
+    public function create(Request $request);
 
     public function destroy();
     public function MoveCard();

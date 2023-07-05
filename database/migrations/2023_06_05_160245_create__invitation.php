@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('InvitationRepository', function (Blueprint $table) {
+        Schema::create('invitation', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('deskId')->nullable();
-            $table->foreign('deskId')->references('id')->on('DeskRepository')->onDelete('set null');
+            $table->foreign('deskId')->references('id')->on('desk')->onDelete('set null');
 
-            $table->unsignedBigInteger('SenderId')->nullable();
-            $table->foreign('SenderId')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('senderId')->nullable();
+            $table->foreign('senderId')->references('id')->on('users')->onDelete('set null');
 
-            $table->unsignedBigInteger('TargetId')->nullable();
-            $table->foreign('TargetId')->references('id')->on('users')->onDelete('set null');
+            $table->unsignedBigInteger('targetId')->nullable();
+            $table->foreign('targetId')->references('id')->on('users')->onDelete('set null');
 
 
-            $table->boolean('IsAccept')->default(false);
+            $table->boolean('isAccept')->default(false);
             $table->timestamps();
         });
     }
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('InvitationRepository');
+        Schema::dropIfExists('invitation');
     }
 };

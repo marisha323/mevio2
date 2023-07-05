@@ -2,8 +2,14 @@ import React, { useEffect } from 'react';
 import DashBoardLayout from '@/Layouts/DashBoardLayout.jsx';
 
 import '../../../css/current_desk/current_desk.css';
+import {Link} from "@inertiajs/react";
 
 export default function CurrentDesk() {
+    const redirectToCreateCard = () => {
+       // console.log(111);
+        window.location.href = '/create-card';
+    };
+
   useEffect(() => {
     // Script initialization and event listeners
     const rotateImg = document.querySelector('.rotate_img');
@@ -64,6 +70,7 @@ export default function CurrentDesk() {
     };
   }, []);
 
+
   return (
     <DashBoardLayout>
       <div className="middle_desks_container">
@@ -121,7 +128,7 @@ export default function CurrentDesk() {
                   <p>Prototype</p>
                 </li>
               </ul>
-              <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                <Link href='/create-card'><img className="plus_task" src="images/plus (3) 1.png" alt=""/></Link>
             </li>
 
             <li className="column done-column">

@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('Cards_Users', function (Blueprint $table) {
+        Schema::create('cards_users', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
 
             $table->unsignedBigInteger('cardId')->nullable();
-            $table->foreign('cardId')->references('id')->on('CardRepository')->onDelete('set null');
+            $table->foreign('cardId')->references('id')->on('card')->onDelete('set null');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('Cards_Users');
+        Schema::dropIfExists('cards_users');
     }
 };

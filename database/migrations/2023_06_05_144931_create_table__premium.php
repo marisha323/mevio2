@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('PremiumRepository', function (Blueprint $table) {
+        Schema::create('premium', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('PremiumRepository');
+        Schema::dropIfExists('premium');
     }
 };

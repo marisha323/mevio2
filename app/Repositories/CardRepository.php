@@ -4,6 +4,11 @@ namespace App\Repositories;
 use App\Contracts\CardContract;
 use App\Models\Card;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
+
 class CardRepository implements CardContract
 {
     protected $model;
@@ -12,9 +17,28 @@ class CardRepository implements CardContract
     {
         $this->model=new CardRepository();
     }
-    public function create($data)
+
+    public function createCard():Response
     {
-        // TODO: Implement create() method.
+        //dd("hello");
+        return Inertia::render('UserComponent/CreateCard');
+
+    }
+    public function create(Request $request)
+    {
+
+        $user = Auth::user();
+
+        $card=new Card();
+        $card->cardName=$request->post('cardName');
+        $card->description=$request->post('description');
+        $card->columnId=1;
+        $card->userId= $user->id;
+
+        $card->save();
+      //  return redirect('/dashboard');
+
+        //return Card::create($data);
     }
 
 

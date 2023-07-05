@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\UserContract;
+use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -10,7 +11,7 @@ class UserController extends Controller
 {
     protected $userModel;
 
-    public function __construct(UserContract $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userModel = $userRepository;
     }

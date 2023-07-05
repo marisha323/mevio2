@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('CommentRepository', function (Blueprint $table) {
+        Schema::create('comment', function (Blueprint $table) {
             $table->id();
 
             $table->unsignedBigInteger('cardId')->nullable();
-            $table->foreign('cardId')->references('id')->on('CardRepository')->onDelete('set null');
+            $table->foreign('cardId')->references('id')->on('card')->onDelete('set null');
 
-            $table->string('Text');
+            $table->string('text');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('CommentRepository');
+        Schema::dropIfExists('comment');
     }
 };

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ArchiveRepository', function (Blueprint $table) {
+        Schema::create('archive', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('ArchiveRepository');
+        Schema::dropIfExists('archive');
     }
 };
