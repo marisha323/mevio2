@@ -37,44 +37,48 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-//SAVE CARD
+    Route::get('/desk_panel',function (){
+        return Inertia::render('DeskPanel/DeskPanel') ;
+    });
+
+    Route::get('/calendar',function (){
+        return Inertia::render('Calendar/Calendar') ;
+    });
+
+    Route::get('/current-desk',function (){
+        return Inertia::render('CurrentDesk/CurrentDesk') ;
+    });
+
+    Route::get('/users',function (){
+        return Inertia::render('Users/Users') ;
+    });
+
+    Route::get('/week-calendar',function (){
+        return Inertia::render('Calendar/WeekCalendar') ;
+    });
+
+    Route::get('/Home',function (){
+        return Inertia::render('Home/Home') ;
+    });
 
 
-Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
-
-
-Route::post('/create_card',[CardController::class,'create'])->name('create_card.create');
+    //SAVE CARD
+    Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
+    Route::post('/create_card',[CardController::class,'create'])->name('create_card.create');
 
 //FIND USER By Email
-Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
-Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');
+    Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
+    Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');
+});
+
+
+
+
+
 
 
 require __DIR__.'/auth.php';
 
-Route::get('/desk_panel',function (){
-    return Inertia::render('DeskPanel/DeskPanel') ;
-});
 
-Route::get('/calendar',function (){
-   return Inertia::render('Calendar/Calendar') ;
-});
-
-Route::get('/current-desk',function (){
-    return Inertia::render('CurrentDesk/CurrentDesk') ;
-});
-
-Route::get('/users',function (){
-    return Inertia::render('Users/Users') ;
-});
-
-Route::get('/week-calendar',function (){
-    return Inertia::render('Calendar/WeekCalendar') ;
-});
-
-Route::get('/Home',function (){
-    return Inertia::render('Home/Home') ;
-});
 
