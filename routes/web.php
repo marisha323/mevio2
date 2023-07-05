@@ -6,6 +6,8 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+//Added by Yehor
+use App\Http\Controllers\HomeController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,5 +62,7 @@ Route::get('/week-calendar',function (){
     return Inertia::render('Calendar/WeekCalendar') ;
 });
 
-
+Route::get('/Home',function (){
+    return Inertia::render('Home/Home') ;
+});
 
