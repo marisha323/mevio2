@@ -1,20 +1,5 @@
 import "../../css/layouts/dashboard_layout.css";
-
-const redirectToDeskPanel = () => {
-  window.location.href = "/desk_panel";
-};
-
-const redirectToUsers = () => {
-  window.location.href = "/users";
-};
-
-const redirectToCalendar = () => {
-  window.location.href = "/calendar";
-};
-
-const redirectToCurrentDesk = () => {
-  window.location.href = "/current-desk";
-};
+import { Link } from "@inertiajs/react";
 
 const DashBoardLayout = ({ children }) => {
   return (
@@ -37,38 +22,46 @@ const DashBoardLayout = ({ children }) => {
       </div>
       <div className="desks_body_container">
         <div className="side_Menu_Container">
-          <button onClick={redirectToDeskPanel}>
-            <span>
-              <img src="images/blackboard (1) 1.png" alt="" />
-              <span>Дошки</span>
-            </span>
-          </button>
+          <Link href={'/desk_panel'}>
+            <button>
+              <span>
+                <img src="images/blackboard (1) 1.png" alt="" />
+                <span>Дошки</span>
+              </span>
+            </button>
+          </Link>
           <hr />
-          <button onClick={redirectToUsers}>
-            <span>
-              <img src="images/group (1) 1.png" alt="" />
-              <span>Учасники</span>
-            </span>
-          </button>
+          <Link href={'/users'}>
+            <button>
+              <span>
+                <img src="images/group (1) 1.png" alt="" />
+                <span>Учасники</span>
+              </span>
+            </button>
+          </Link>
           <hr />
           <p>Робочий простір</p>
           <hr />
-          <button onClick={redirectToCalendar}>
-            <span>
-              <img src="images/calendar (1) 1.png" alt="" />
-              <span>Календар</span>
-            </span>
-          </button>
+          <Link href={'/calendar'}>
+            <button>
+              <span>
+                <img src="images/calendar (1) 1.png" alt="" />
+                <span>Календар</span>
+              </span>
+            </button>
+          </Link>
           <hr />
           <p>Мої дошки <span>+</span></p>
           <hr />
           <div className="myDesks">
-            <button className="desk" onClick={redirectToCurrentDesk}>
-              <span>
-                <img src="images/background1.png" alt="" />
-                <span>Курсовий проект</span>
-              </span>
-            </button>
+            <Link href={'/current-desk'}>
+              <button className="desk">
+                <span>
+                  <img src="images/background1.png" alt="" />
+                  <span>Курсовий проект</span>
+                </span>
+              </button>
+            </Link>
             <hr />
             <button className="desk">
               <span>
