@@ -18,16 +18,7 @@ class CommentRepository implements CommentContract
         return Comment::create($data);
     }
 
-    public function update($id, array $data)
-    {
-        $user = Comment::findOrFail($id);
-        $user->fill($data);
-        $user->save();
-
-        return $user;
-    }
-
-    public function delete($id)
+    public function destroy($id)
     {
         return Comment::destroy($id);
     }

@@ -6,5 +6,14 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    //
+    public function create($data)
+    {
+
+    }
+
+    public function destroy($id)
+    {
+
+    }
+
 }

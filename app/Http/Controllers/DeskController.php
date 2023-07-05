@@ -16,4 +16,12 @@ class DeskController extends Controller
     {
 
     }
+    public function AddToFavorite()
+    {
+
+    }
+    public function ArchiveDesk()
+    {
+
+    }
 }

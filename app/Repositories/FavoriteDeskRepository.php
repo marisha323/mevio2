@@ -17,14 +17,14 @@ class FavoriteDeskRepository implements FavoriteDeskContract
         return FavoriteDesk::create($data);
     }
 
-    public function update($id, array $data)
-    {
-        $user = FavoriteDesk::findOrFail($id);
-        $user->fill($data);
-        $user->save();
-
-        return $user;
-    }
+//    public function update($id, array $data)
+//    {
+//        $user = FavoriteDesk::findOrFail($id);
+//        $user->fill($data);
+//        $user->save();
+//
+//        return $user;
+//    }
 
     public function delete($id)
     {

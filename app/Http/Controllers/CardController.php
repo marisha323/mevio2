@@ -11,15 +11,20 @@ class CardController extends Controller
     {
 
     }
-    public function AddCard(){
 
-    }
 
-    public function DeleteCard(){
+    public function destroy(){
 
     }
 
     public function MoveCard(){
+
+    }
+
+    public function SetDeaadLine(){
+
+    }
+    public function OffDeadline(){
 
     }
 }

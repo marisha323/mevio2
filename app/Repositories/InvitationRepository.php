@@ -18,18 +18,15 @@ class InvitationRepository implements InvitationContract
         return Invitation::create($data);
     }
 
-    public function update($id, array $data)
-    {
-        $user = Invitation::findOrFail($id);
-        $user->fill($data);
-        $user->save();
 
-        return $user;
-    }
-
-    public function delete($id)
+    public function destroy($id)
     {
         return Invitation::destroy($id);
+    }
+
+    public function getInvitationStatus($data)
+    {
+
     }
 }
 ?>

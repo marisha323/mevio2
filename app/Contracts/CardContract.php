@@ -5,9 +5,12 @@ interface CardContract
 {
     public function create($data);
 
-    public function AddCard();
-    public function DeleteCard();
+    public function destroy();
     public function MoveCard();
+    public function SetDeadLine();
+    public function OffDeadLine();
+
+
 }
 
 
