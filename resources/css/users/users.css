@@ -21,7 +21,7 @@
   }
   .working_space_img img {
     position: absolute;
-    width: 4rem;
+    width: 3.5rem;
   }
   
   .working_space_img > *:nth-child(3) {
@@ -32,15 +32,20 @@
     display: flex;
     flex-direction: column;
     color: white;
+    justify-content: center;
+    width: 15rem;
   }
   .workingspace_title h3{
     font-weight: 400;
   }
   .workingspace_title h3 img{
     margin-top: -1.5rem;
+    margin-left: -1.5rem;
+    margin-left: auto;
   }
   .workingspace_title p{
     margin: 0;
+    margin-top: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -49,6 +54,11 @@
     filter: grayscale(100%);
   }
   .working_space button{
+    display: flex;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    align-items: center;
+    justify-content: center;
     background-color: #F0C6FF;
     border: none;
     border-radius: 10px;
@@ -110,7 +120,6 @@
     font-weight: 400;
   }
   .user_name p {
-    margin-top: -0.8rem;
   }
   .user_list_control{
     display: flex;

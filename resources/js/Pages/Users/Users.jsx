@@ -23,10 +23,10 @@ export default function Users() {
                 </div>
                 <div className="middle_middle_body">
                     <div className="users_container">
-                        <h3>Участники рабочего пространства(?)</h3>
-                        <p>Участники рабочего пространства могут просматривать доски для рабочего пространства и
-                            присоединяться к ним а так-же создавать доски в этом пространстве</p>
-                        <input type="text" placeholder="Фильтр по именам"/>
+                        <h3>Учасники робочого простору(?)</h3>
+                        <p>Учасники робочого простору можуть переглядати дошки для робочого простору та
+                            приєднуватися до них і створювати дошки в цьому просторі</p>
+                        <input type="text" placeholder="Фільтр за іменами"/>
                         <div className="users_list">
                             <hr/>
                             <div className="list_user">
@@ -37,9 +37,9 @@ export default function Users() {
                                 </div>
                                 <div className="user_list_control">
                                     <h4>На доске(?)</h4>
-                                    <button className="admin_user_btn">Администратор</button>
+                                    <button className="admin_user_btn">Адміністратор</button>
                                     <button className="remove_user_btn"><img src="images/x_icon.png"
-                                                                             alt=""/> Исключить
+                                                                             alt=""/> Виключити
                                     </button>
                                 </div>
                             </div>

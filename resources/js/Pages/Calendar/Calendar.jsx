@@ -9,45 +9,45 @@ const Calendar = () => {
         <DashBoardLayout>
             <div className="middle_desks_container">
                 <div className="middle_top_body">
-                    <h1>Календарь</h1>
+                    <h1>Календар</h1>
                 </div>
                 <div className="middle_middle_body">
-                    <h1 className="calendar_month_h1">Май 2023</h1>
+                    <h1 className="calendar_month_h1">Травень 2023</h1>
                     <div className="calendar_container">
                         <div className="display_weeks">
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Понедельник
+                                Понеділок
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Вторник
+                                Вівторок
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Среда
+                                Середа
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Четверг
+                                Четвер
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Пятница
+                                П'ятниця
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Суббота
+                                Субота
                                 </Link>
                             </p>
                             <p>
                                 <Link href={'/week-calendar'}>
-                                    Воскресенье
+                                Неділя
                                 </Link>
                             </p>
                         </div>
