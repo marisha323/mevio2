@@ -7,25 +7,25 @@ export default function DeskPanel () {
         <DashBoardLayout>
             <div className="middle_desks_container">
                 <div className="middle_top_body">
-                    <h1>Доски</h1>
+                    <h1>Дошки</h1>
                 </div>
                 <div className="middle_middle_body">
                     <select className="combobox">
-                        <option value="" disabled selected hidden>Фильтр</option>
+                        <option value="" disabled selected hidden>Фільтр</option>
                     </select>
                     <div className="search_sorting">
                         <div className="search_desk">
-                            <p>Поиск:</p>
-                            <input className="searcher1" type="text" placeholder="Поиск досок..." />
+                            <p>Пошук:</p>
+                            <input className="searcher1" type="text" placeholder="Пошук дощок..." />
                         </div>
                         <div className="search_desk">
-                            <p>Сортировка:</p>
+                            <p>Сортування:</p>
                             <select className="combobox">
-                                <option value="" disabled selected hidden>Активность</option>
+                                <option value="" disabled selected hidden>Активність</option>
                             </select>
                         </div>
                     </div>
-                    <h1 className="desks_amount">Всего досок : 10</h1>
+                    <h1 className="desks_amount">Усього дощок : 10</h1>
                     <div className="boards">
                         <div className="group_container">
                             <p>Курсовой проект</p>
