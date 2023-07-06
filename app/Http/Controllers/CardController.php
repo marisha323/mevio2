@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\CardContract;
 use App\Models\Card;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class CardController extends Controller
 
     protected $cardModel;
 
-    public function __construct(CardRepository $cardRepository)
+    public function __construct(CardContract $cardRepository)
     {
         $this->cardModel = $cardRepository;
 

@@ -64,8 +64,11 @@ Route::middleware('auth')->group(function () {
 
 
     //SAVE CARD
-    Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
-    Route::post('/create_card',[CardController::class,'create'])->name('create_card.create');
+    Route::get('/create-card',function (){
+        return Inertia::render('UserComponent/CreateCard') ;
+    });
+   // Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
+    Route::post('/posts/createCard',[CardController::class,'store'])->name('post.store');
 
 //FIND USER By Email
     Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
