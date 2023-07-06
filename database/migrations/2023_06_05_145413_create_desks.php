@@ -11,13 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorite_desk', function (Blueprint $table) {
+        Schema::create('desks', function (Blueprint $table) {
             $table->id();
+            $table->string('deskName');
+
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
 
-            $table->unsignedBigInteger('deskId')->nullable();
-            $table->foreign('deskId')->references('id')->on('desk')->onDelete('set null');
+            $table->boolean('isPublic')->default(false);
+
+            $table->dateTime('dateOfCreation');
+
+            $table->unsignedBigInteger('themeId')->nullable();
+            $table->foreign('themeId')->references('id')->on('themes')->onDelete('set null');
+
+            $table->boolean('isArchive')->default(false);
+
             $table->timestamps();
         });
     }
@@ -27,6 +36,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorite_desk');
+        Schema::dropIfExists('desks');
     }
 };

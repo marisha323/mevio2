@@ -9,10 +9,12 @@ class Card extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'cardName',
         'description',
         'columnId',
-        'targetId',
+        'userId',
         'deadLine',
     ];
+
+    public $timestamps = true;
 }

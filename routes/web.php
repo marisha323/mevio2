@@ -35,15 +35,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
 });
 
 //SAVE CARD
 
+Route::get('/create-card',function (){
+    return Inertia::render('UserComponent/CreateCard') ;
+});
 
-Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
 
+Route::post('/posts/createCard', [CardController::class, 'store'])->name('post.store');
 
-Route::post('/create_card',[CardController::class,'create'])->name('create_card.create');
+//Route::post('create_card',[CardController::class,'store'])->name('create_card.create');
+
 
 //FIND USER By Email
 Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');

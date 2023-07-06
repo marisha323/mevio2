@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('theme', function (Blueprint $table) {
+        Schema::create('columns', function (Blueprint $table) {
             $table->id();
-            $table->string('textColor');
-            $table->string('backGround');
-            $table->string('backGroundImage');
+            $table->string('columnName');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('theme');
+        Schema::dropIfExists('columns');
     }
 };

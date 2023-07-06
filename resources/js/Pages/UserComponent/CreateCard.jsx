@@ -2,11 +2,12 @@ import {useState} from "react";
 import {router} from "@inertiajs/react";
 
 
-export default function CreateCard({user}) {
+export default function CreateCard() {
 
-    userconst [values, setValues] = useState({
+    const [values, setValues] = useState({
         cardName: "",
         description: "",
+        deadLine: ""
     });
     function handleChange(e) {
         const key = e.target.id;
@@ -17,22 +18,23 @@ export default function CreateCard({user}) {
         }));
     }
 
+
     async function handleSubmit(e) {
         e.preventDefault();
-        await router.post("/create_card", values);
+        await router.post("/posts/createCard", values);
         setValues({
             cardName: "",
             description: "",
-
+            deadLine: "",
         });
     }
-
         return (
-            <div>
+            <div className="m-10">
+
                 <form onSubmit={handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="number" className="form-label">
-                            Назва колонки:
+                            Назва картки:
                         </label>
                         <input
                             className="form-input"
@@ -47,13 +49,23 @@ export default function CreateCard({user}) {
                         <label htmlFor="description" className="form-label">
                             Опис:</label>
                         <textarea
-                            className="form-input"
+                            className="form-textarea"
                             id="description"
                             name="description"
                             value={values.description}
                             onChange={handleChange}>
 
                     </textarea>
+                    </div>
+                    <div>
+                        <input
+                            type="date"
+                            id="deadLine"
+                            name="deadLine"
+                            value={values.deadLine}
+                            onChange={handleChange}
+
+                        />
                     </div>
                     <div>
                         <button type="submit" className="btn btn-info">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Card;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 use App\Repositories\CardRepository;
@@ -21,15 +22,17 @@ class CardController extends Controller
 
     }
 
-    public function createCard():Response
+    public function create()
     {
-        dd("11");
-        $this->cardModel->createCard();
-        return Inertia::render('CurrentDesk/CurrentDesk');
+        $this->cardModel->create();
+       // return Inertia::render('CurrentDesk/CurrentDesk');
     }
-    public function create(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-
+        //dd($request);
+        $this->cardModel->store($request);
+        return redirect('/dashboard');
+       //return Inertia::render('CurrentDesk/CurrentDesk');
     }
 
 

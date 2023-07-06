@@ -11,12 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('premium', function (Blueprint $table) {
+        Schema::create('desks_users', function (Blueprint $table) {
             $table->id();
+
             $table->unsignedBigInteger('userId')->nullable();
             $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
-            $table->datetime('start');
-            $table->datetime('end');
+
+            $table->unsignedBigInteger('deskId')->nullable();
+            $table->foreign('deskId')->references('id')->on('desks')->onDelete('set null');
+
             $table->timestamps();
         });
     }
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('premium');
+        Schema::dropIfExists('desks_users');
     }
 };

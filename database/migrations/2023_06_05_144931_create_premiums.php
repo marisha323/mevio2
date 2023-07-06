@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('premiums', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('cardId')->nullable();
-            $table->foreign('cardId')->references('id')->on('card')->onDelete('set null');
-
-            $table->string('text');
+            $table->unsignedBigInteger('userId')->nullable();
+            $table->foreign('userId')->references('id')->on('users')->onDelete('set null');
+            $table->datetime('start');
+            $table->datetime('end');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comment');
+        Schema::dropIfExists('premiums');
     }
 };

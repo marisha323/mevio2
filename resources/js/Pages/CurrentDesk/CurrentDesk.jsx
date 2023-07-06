@@ -128,7 +128,9 @@ export default function CurrentDesk() {
                   <p>Prototype</p>
                 </li>
               </ul>
-                <Link href='/create-card'><img className="plus_task" src="images/plus (3) 1.png" alt=""/></Link>
+                <Link href="/create-card">
+                    <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                </Link>
             </li>
 
             <li className="column done-column">
