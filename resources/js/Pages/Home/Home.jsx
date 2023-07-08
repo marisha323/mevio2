@@ -1,19 +1,22 @@
+import {Link, Head} from "@inertiajs/react";
 import '../../../css/home/home.css';
+
 
 
 function StartPage() {
   return (
     <>
+    <Head title={"Welcome"} />
     <div className="Start-Container">
     <div className="topMenuLogin">
         <h4>MEVIO</h4>
-        <a href=""><h4>Войти</h4></a>
+        <Link href={"/login"}><h4>Войти</h4></Link>
       </div>
       <div className="StartBody">
       <div className="startGImage">
         <div className="h1-btn-register">
           <h1 className="h1Mevio">MEVIO Version 2 <span>помогает собрать всех сотрудников, задачи и инструменты в одном месте</span></h1>
-          <button className="register-btn">Зарегистрируйтесь</button>
+          <Link href={"/register"} className={"register-btn"}>Зарегистрируйтесь</Link>
           <img className="vector" src="images/Vector.png" alt="Vector" />
         </div>
       </div>
@@ -67,7 +70,7 @@ function StartPage() {
                  по стандарту ISO 27001, во Франкфурте, Германия.</li>
             <li>Другие функции безопасности верхнего уровня включают стандартное 256-битное шифрование SSL, двухфакторную аутентификацию и детальные разрешения в приложениях.</li>
         </ul>
-        <img className="Shield" src="images/document_0 1.png" alt="Shield"/> 
+        <img className="Shield" src="images/document_0 1.png" alt="Shield"/>
         {/* <div className="container">
           <h1 id="polygon-heading" className="Start-h1">Начать</h1>
           <div className="image-container">
@@ -104,8 +107,8 @@ function StartPage() {
       </div>
 
 
-      
-          
+
+
 
       <div className="Start-Footer">
         <h5>MEVIO<br/><br/><br/><br/><br/><span className="Language">🌍Українська</span></h5>
