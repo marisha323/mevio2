@@ -107,7 +107,7 @@ export default function CurrentDesk() {
 
             <li className="column doing-column">
               <div className="column-header">
-                <h4>Pобити</h4>
+                <h4>В роботі</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="doing">
@@ -126,7 +126,7 @@ export default function CurrentDesk() {
 
             <li className="column done-column">
               <div className="column-header">
-                <h4>Закінчена</h4>
+                <h4>Зроблено</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="done">
