@@ -63,7 +63,7 @@ export default function CurrentDesk() {
     script.src = 'https://cdn.jsdelivr.net/npm/dragula/dist/dragula.min.js';
     script.async = true;
     document.body.appendChild(script);
-
+    //// на оцьом моменті отправлять на контролер id солонки щоб пересохранить нові дані
     return () => {
       // Clean up the script when the component unmounts
       document.body.removeChild(script);
