@@ -1,9 +1,10 @@
 import "../../css/layouts/dashboard_layout.css";
-import { Link } from "@inertiajs/react";
+import { Link, Head } from "@inertiajs/react";
 
 const DashBoardLayout = ({ children }) => {
   return (
     <>
+        <Head title={"Desks"}/>
       <div className="TopInfo_Container">
         <div className="Mevio_Title">
           <img src="images/MevioGreen_rec.png" alt="" />
@@ -17,12 +18,14 @@ const DashBoardLayout = ({ children }) => {
           <button className="create_btn">Створити</button>
           <img src="images/paint-brush (2) 1.png" alt="" />
           <img src="images/bell (3) 1.png" alt="" />
-          <img src="images/Ellipse 11.png" alt="" />
+            <Link href={'/profile'}>
+                <img src="images/Ellipse 11.png" alt="" />
+            </Link>
         </div>
       </div>
       <div className="desks_body_container">
         <div className="side_Menu_Container">
-          <Link href={'/desk_panel'}>
+          <Link href={'/desk-panel'}>
             <button>
               <span>
                 <img src="images/blackboard (1) 1.png" alt="" />
