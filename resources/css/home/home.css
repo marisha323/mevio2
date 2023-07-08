@@ -13,6 +13,7 @@ align-items: center;
 .topMenuLogin h4 {
 color: #6BEFD8;
 margin-left: 35%;
+font-weight: 1000;
 }
 
 .topMenuLogin a {
@@ -91,7 +92,7 @@ height: auto;
 margin:0;
 padding-bottom: 0.1rem;
 background-image: linear-gradient(to bottom, white, aliceblue,rgb(230, 117, 230),rgb(230, 117, 230), rgb(230, 117, 230));
-z-index: -3;
+z-index: 0;
 }
 .StartBody h5{
 color: #6BEFD8;
@@ -107,6 +108,8 @@ color: white;
 .BoostSource h1, .BoostSource1 h1{
 float: right;
 margin-right: 3rem;
+font-size: 30px;
+font-weight: 700;
 }
 .start-li{
 margin-left: 10%;
@@ -135,19 +138,6 @@ border-bottom-left-radius: 10px;
 background-color: purple;
 }
 
-.Boards h4, .Columns h4 {
-color: #6E4796;
-margin-left: 1.5rem;
-}
-
-.Boards p, .Columns p {
-margin-left: 2.7rem;
-word-wrap: break-word;
-}
-.Boards p span, .Columns p span{
-color:#6BEFD8;
-}
-
 .Columns{
 margin-top: 3rem;
 width: 30%;
@@ -155,6 +145,47 @@ margin-left: 6rem;
 padding: 0.5rem;
 position: relative;
 }
+.Boards h4, .Columns h4 {
+  color: #6E4796;
+  margin-left: 1.5rem;
+  }
+  
+  .Boards p, .Columns p {
+  margin-left: 2.7rem;
+  word-wrap: break-word;
+  }
+  .Boards p span, .Columns p span{
+  color:#6BEFD8;
+  }
+
+  .Columns {
+    position: relative;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+  }
+  
+  .Columns::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1rem;
+    height: 100%;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    transition: background-color 0.3s ease;
+    border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  }
+  
+  .Columns:hover {
+    background: #F1F1F1;
+  }
+  
+  .Columns:hover::before {
+    background-color: purple;
+    
+  }
 .imageContainer {
 position: relative;
 left: 50%;
@@ -236,6 +267,8 @@ width: 50%;
 margin-left: 7rem;
 padding: 0.5rem;
 position: relative;
+font-size: 32px;
+font-weight: 700;
 }
 .BoostSource1{
 margin-top: 1rem;

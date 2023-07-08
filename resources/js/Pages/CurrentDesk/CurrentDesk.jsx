@@ -75,14 +75,14 @@ export default function CurrentDesk() {
             <img src="images/profile3.png" alt="" />
             <img src="images/Ellipse 11.png" alt="" />
           </div>
-          <button>Поделиться</button>
+          <button>Поділитися</button>
           <img src="images/settings (1) 1.png" alt="" />
         </div>
         <div className="main-container">
           <ul className="columns">
             <li className="column to-do-column">
               <div className="column-header">
-                <h4>Нужно сделать</h4>
+                <h4>Потрібно зробити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="to-do">
@@ -126,7 +126,7 @@ export default function CurrentDesk() {
 
             <li className="column done-column">
               <div className="column-header">
-                <h4>Готово</h4>
+                <h4>Закінчена</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="done">

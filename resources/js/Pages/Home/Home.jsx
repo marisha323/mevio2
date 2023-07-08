@@ -26,7 +26,7 @@ function StartPage() {
         Дошки, колонки та картки дають вичерпне уявлення про <br/>&nbsp;&nbsp;&nbsp;&nbsp;
         те, хто чим займається і що потрібно виконати.<br/>
         </li>
-        <div className="Boards">
+        <div className="Columns">
             <h4>Дошки</h4>
             <p>Завдяки дошкам <span>MEVIO</span> завдання упорядковуються, а робота рухається.
             Достатньо одного погляду, щоб побачити всі завдання, від запланованих до виконаних.
@@ -75,10 +75,10 @@ function StartPage() {
            </div>
         </div> */}
 
-        <div class="endGImage">
-          <div class="image-container">
-            <h1 id="polygon-heading" class="Start-h1">Почати</h1>
-            <div class="polygon-image"></div>
+        <div className="endGImage">
+          <div className="image-container">
+            <h1 id="polygon-heading" className="Start-h1">Почати</h1>
+            <div className="polygon-image"></div>
           </div>
           <img className="Polygon" src="images/Polygon 7.png" alt="Polygon"/>
           <div className="ChatBot-Img">
