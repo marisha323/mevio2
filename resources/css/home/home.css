@@ -73,6 +73,9 @@ border-radius: 20px;
 width: 100%;
 max-width: 20rem;
 transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
+display: flex;
+align-items: center;
+justify-content: center;
 }
 .register-btn:hover{
 transform: scale(1.05);
@@ -98,6 +101,8 @@ z-index: 0;
 color: #6BEFD8;
 margin-left: 10%;
 margin-bottom: 2rem;
+font-size: 28px;
+font-weight: 1000;
 }
 .BoostSource{
 background-color: #B379EE;
@@ -155,7 +160,8 @@ position: relative;
   word-wrap: break-word;
   }
   .Boards p span, .Columns p span{
-  color:#6BEFD8;
+  color:#56258B;
+  font-weight: 1000;
   }
 
   .Columns {
@@ -307,7 +313,7 @@ text-shadow: 2px 5px 5px rgba(0, 0, 0, 0.25);
 display: flex;
 justify-content: center;
 align-items: flex-start; /* Align elements to the top */
-background-color: #A9EEFF;
+background-color: #8C84E9;
 width: 100%;
 height: auto;
 margin: 0;
@@ -319,7 +325,7 @@ gap: 5rem; /* Set the desired gap between elements */
 color: white;
 padding: 0;
 margin: 0;
-width: 13%;
+width: 10rem;
 padding-top: 1rem;
 font-weight: 700;
 align-self: flex-start;
@@ -341,14 +347,15 @@ gap: 1rem;
 }
 .Socials img{
 width: 3rem;
-height: auto;
+max-height: 3.7rem;
 padding-bottom: 1rem;
 z-index: 1;
 }
 .Socials img:last-child{
 position: absolute;
-width:4rem;
-margin-left: 10rem;
+max-width:4rem;
+max-height: 4rem;
+margin-left: 9rem;
 margin-top: -1rem;
 z-index: 0;
 }
