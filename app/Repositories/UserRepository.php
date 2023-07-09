@@ -23,7 +23,10 @@ class UserRepository implements UserContract
     {
         return Inertia::render('UserComponent/Index');
     }
-
+    public function returnUsers()
+    {
+        return User::all();
+    }
     public function findByEmail($email)
     {
         return User::where('email', $email)->first();
