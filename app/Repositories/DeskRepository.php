@@ -28,6 +28,16 @@ class DeskRepository implements DeskContract
         return $desk;
     }
 
+//    public function showCurrentDesk()
+//    {
+//        $cards = Card::all();
+//        $data = ['cards' => $cards];
+//
+//       // return Inertia::render('CurrentDesk/CurrentDesk', compact('data'));
+//
+//        return Inertia::render('CurrentDesk/CurrentDesk', ['data' => $data]);
+//    }
+
     public function delete($id)
     {
         return Desk::destroy($id);

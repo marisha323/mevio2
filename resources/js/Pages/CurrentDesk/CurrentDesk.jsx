@@ -4,7 +4,9 @@ import DashBoardLayout from '@/Layouts/DashBoardLayout.jsx';
 import '../../../css/current_desk/current_desk.css';
 import {Link} from "@inertiajs/react";
 
-export default function CurrentDesk() {
+export default function CurrentDesk({cards}) {
+
+
     const redirectToCreateCard = () => {
        // console.log(111);
         window.location.href = '/create-card';
@@ -93,24 +95,18 @@ export default function CurrentDesk() {
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="to-do">
-                <li className="task">
-                  <p>Analysis Analysis Analysis Analysis Analysis</p>
-                </li>
-                <li className="task">
-                  <p>Coding</p>
-                </li>
-                <li className="task">
-                  <p>Card Sorting</p>
-                </li>
-                <li className="task">
-                  <p>Measure</p>
-                </li>
-                <li className="task">
-                  <img src="images/background1.png" alt="" />
-                </li>
+                  {cards.card1.map((card) => (
+                      <div >
+                          <li className="task" key={card.id}>
+                              <p>{card.cardName}</p>
+                          </li>
+                      </div>
+                  ))}
               </ul>
-              <img className="plus_task" src="images/plus (3) 1.png" alt="" />
-            </li>
+                <Link href="/create-card?columnId=1">
+                    <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                </Link>
+              </li>
 
             <li className="column doing-column">
               <div className="column-header">
@@ -118,17 +114,16 @@ export default function CurrentDesk() {
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="doing">
-                <li className="task">
-                  <p>Hypothesis</p>
-                </li>
-                <li className="task">
-                  <p>User Testing</p>
-                </li>
-                <li className="task">
-                  <p>Prototype</p>
-                </li>
+                  {cards.card2.map((card) => (
+                      <div >
+                          <li className="task" key={card.id}>
+                              <p>{card.cardName}</p>
+                          </li>
+                      </div>
+                  ))}
+
               </ul>
-                <Link href="/create-card">
+                <Link href="/create-card?columnId=2">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </Link>
             </li>
@@ -139,14 +134,17 @@ export default function CurrentDesk() {
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
               <ul className="task-list" id="done">
-                <li className="task">
-                  <p>Ideation</p>
-                </li>
-                <li className="task">
-                  <p>Sketches</p>
-                </li>
+                  {cards.card3.map((card) => (
+                      <div >
+                          <li className="task" key={card.id}>
+                              <p>{card.cardName}</p>
+                          </li>
+                      </div>
+                  ))}
               </ul>
-              <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                <Link href="/create-card?columnId=3">
+                    <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                </Link>
             </li>
           </ul>
         </div>
@@ -154,3 +152,5 @@ export default function CurrentDesk() {
     </DashBoardLayout>
   );
 }
+
+

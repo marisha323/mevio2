@@ -1,13 +1,20 @@
 import {useState} from "react";
 import {router} from "@inertiajs/react";
+import { useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
 
 
 export default function CreateCard() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const columnId = queryParams.get("columnId");
 
     const [values, setValues] = useState({
         cardName: "",
         description: "",
-        deadLine: ""
+        deadLine: "",
+        columnId: columnId,
     });
     function handleChange(e) {
         const key = e.target.id;
@@ -26,6 +33,7 @@ export default function CreateCard() {
             cardName: "",
             description: "",
             deadLine: "",
+            columnId: columnId,
         });
     }
         return (
