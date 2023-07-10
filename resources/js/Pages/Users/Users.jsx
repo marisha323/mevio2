@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {router} from "@inertiajs/react";
+import {InertiaLink} from "@inertiajs/inertia-react";
 import DashBoardLayout from '@/Layouts/DashBoardLayout.jsx';
 import '../../../css/users/users.css';
 
@@ -18,10 +18,12 @@ export default function Users({ users }) {
   };
   const handleRemoveUser = async (userId) => {
     try {
-      await router.delete(`/users/${userId}`);
-  
+      
+      // await router.delete(`/users/${userId}`);
+      
       const updatedUsers = filteredUsers.filter((user) => user.id !== userId);
       setFilteredUsers(updatedUsers);
+      console.log("inside!");
     } catch (error) {
       console.error('Error deleting user:', error);
     }
@@ -55,9 +57,19 @@ export default function Users({ users }) {
                   <div className="user_list_control">
                     <h4>На доске(?)</h4>
                     <button className="admin_user_btn">Адміністратор</button>
-                    <button className="remove_user_btn"  onClick={() => handleRemoveUser(user.id)}>
+                    <InertiaLink
+                    className="remove_user_btn"
+                    onClick={() => handleRemoveUser(user.id)}
+                    href={`/users/${user.id}`}
+                    method="delete"
+                    as="button"
+                    type="button"
+                    >
                       <img src="images/x_icon.png" alt="" /> Виключити
-                    </button>
+                    </InertiaLink>
+                    {/* <button className="remove_user_btn"  onClick={() => handleRemoveUser(user.id)}>
+                      <img src="images/x_icon.png" alt="" /> Виключити
+                    </button> */}
                   </div>
                 </div>
               ))}
