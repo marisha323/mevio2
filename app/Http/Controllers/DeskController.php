@@ -20,10 +20,16 @@ class DeskController extends Controller
 
     }
 
+
     public function destroy($id)
     {
 
     }
+
+//    public function showCurrentDesk()
+//    {
+//
+//    }
     public function AddToFavorite()
     {
 

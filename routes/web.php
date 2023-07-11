@@ -46,9 +46,10 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Calendar/Calendar') ;
     });
 
-    Route::get('/current-desk',function (){
-        return Inertia::render('CurrentDesk/CurrentDesk') ;
-    });
+    Route::get('/current-desk', [CardController::class, 'currentDesk']);
+//    Route::get('/current-desk',function (){
+//        return Inertia::render('CurrentDesk/CurrentDesk') ;
+//    });
 
     // Route::get('/users',function (){
     //     return Inertia::render('Users/Users') ;
@@ -65,12 +66,12 @@ Route::middleware('auth')->group(function () {
 
     //SAVE CARD
     Route::get('/create-card',function (){
-        return Inertia::render('UserComponent/CreateCard') ;
+        return Inertia::render('UserComponent/CreateCard');
     });
-   // Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
     Route::post('/posts/createCard',[CardController::class,'store'])->name('post.store');
 
-//FIND USER By Email
+   // Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
+    //FIND USER By Email
     Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
     Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');
 });
