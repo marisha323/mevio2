@@ -48,6 +48,7 @@ export default function Users({ users }) {
             <div className="users_list">
               <hr />
               {filteredUsers.map((user) => (
+                <>
                 <div key={user.id} className="list_user">
                   <img src="images/profile1.png" alt="" />
                   <div className="user_name">
@@ -67,13 +68,11 @@ export default function Users({ users }) {
                     >
                       <img src="images/x_icon.png" alt="" /> Виключити
                     </InertiaLink>
-                    {/* <button className="remove_user_btn"  onClick={() => handleRemoveUser(user.id)}>
-                      <img src="images/x_icon.png" alt="" /> Виключити
-                    </button> */}
                   </div>
                 </div>
+                <hr />
+                </>
               ))}
-              <hr />
             </div>
           </div>
         </div>
