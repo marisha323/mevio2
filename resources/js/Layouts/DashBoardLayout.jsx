@@ -5,7 +5,8 @@ const DashBoardLayout = ({ children }) => {
   return (
     <>
         <Head title={"Desks"}/>
-      <div className="TopInfo_Container">
+        <div className="DashBoard_Container">
+        <div className="TopInfo_Container">
         <div className="Mevio_Title">
           <img src="images/MevioGreen_rec.png" alt="" />
           <h2>Mevio</h2>
@@ -95,6 +96,8 @@ const DashBoardLayout = ({ children }) => {
         </div>
         {children}
       </div>
+        </div>
+      
     </>
   );
 };

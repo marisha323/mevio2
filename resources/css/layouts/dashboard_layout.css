@@ -25,7 +25,7 @@ html, body {
     mix-blend-mode: multiply;
   }
 .TopInfo_Container{
-    height: 4.4rem;
+    height: 9.5%;
     width: 100%;
     background-color: #05342F;
     display: flex;
@@ -90,14 +90,28 @@ html, body {
     margin-right: 1rem;
   }
   /* body section --------------------------------------------------------------------------------------*/
+  .DashBoard_Container {
+    height: 100vh;
+    width: 100%;
+    overflow: auto;
+  }
+  .DashBoard_Container::-webkit-scrollbar {
+    width: 0.5rem;
+    background-color: transparent;
+  }
+  
+  .DashBoard_Container::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
   .desks_body_container{
     display: flex;
+    position: absolute;
     width: 100%;
-    height: 110%;
+    height: 90.5%;
   }
   .side_Menu_Container {
     width: 25rem;
-    height: 90vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     background-color: #20423F;
