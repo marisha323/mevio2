@@ -5,14 +5,16 @@ use App\Contracts\DeskContract;
 use  App\Models\Desk;
 use App\Models\DesksUsers;
 use App\Models\User;
+use App\Presenters\DeskAsArrayPresenter;
+use \Illuminate\Database\Eloquent\Collection;
 
 class DeskRepository implements DeskContract
 {
     protected $model;
 
-    function __construct()
+    public function __construct(Desk $desk)
     {
-        $this->model=new DeskRepository();
+        $this->model = $desk;
     }
     public function create($data)
     {
@@ -42,7 +44,14 @@ class DeskRepository implements DeskContract
     {
         // TODO: Implement ArchiveDesk() method.
     }
+
+    public function getDesksByUserId(int $user_id): array
+    {
+        $desks = (new DeskAsArrayPresenter())->presentCollection(Desk::where('userId',$user_id)->get());
+
+        return $desks;
+    }
 }
 
 
-?>
+

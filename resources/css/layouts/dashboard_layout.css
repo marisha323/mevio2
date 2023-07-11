@@ -2,14 +2,15 @@
     font-family: 'Caveat Brush';
     src: url('path/to/font/Caveat-Brush-Regular.ttf') format('truetype');
 }
+
 html, body {
     margin: 0;
     width: 100%;
     height: 100%;
     position: relative;
-  }
+}
 
-  html::before, body::before {
+html::before, body::before {
     content: "";
     position: fixed;
     top: 0;
@@ -23,8 +24,9 @@ html, body {
     z-index: -1;
     opacity: 0.9;
     mix-blend-mode: multiply;
-  }
-.TopInfo_Container{
+}
+
+.TopInfo_Container {
     height: 4.4rem;
     width: 100%;
     background-color: #05342F;
@@ -32,12 +34,13 @@ html, body {
     align-items: center;
     gap: 1rem;
 }
-.TopInfo_Container h1{
+
+.TopInfo_Container h1 {
     color: #9AB9A3;
 }
 
 .Mevio_Title {
-  width: 18rem;
+    width: 18rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,8 +60,9 @@ html, body {
     margin-left: 2rem;
     color: #9AB9A3;
     font-family: 'Caveat Brush', cursive;
-  }
-  .searcher {
+}
+
+.searcher {
     width: 100%;
     height: 3rem;
     border-radius: 10px;
@@ -66,36 +70,46 @@ html, body {
     padding-left: 4rem;
     font-size: 25px;
     border: none;
-  }
-  .loupe_container{
+}
+
+.loupe_container {
     display: flex;
     align-items: center;
-  }
-  .loupe_container img{
+}
+
+.loupe_container img {
     position: absolute;
     margin-left: 1rem;
-  }
-  .create_btn{
+}
+
+.create_btn {
     color: #9AB9A3;
     border-radius: 10px;
-    width: 142px;
-    height: 3rem;
+    width: 168px;
+    height: 48px;
     font-size: 24px;
-  }
-  .toTheRight_container {
+    background: #FEC3A58C;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+}
+
+.toTheRight_container {
     display: flex;
     align-items: center;
     gap: 1.5rem;
     margin-left: auto;
     margin-right: 1rem;
-  }
-  /* body section --------------------------------------------------------------------------------------*/
-  .desks_body_container{
+}
+
+/* body section --------------------------------------------------------------------------------------*/
+.desks_body_container {
     display: flex;
     width: 100%;
     height: 110%;
-  }
-  .side_Menu_Container {
+}
+
+.side_Menu_Container {
     width: 25rem;
     height: 90vh;
     display: flex;
@@ -104,9 +118,9 @@ html, body {
     background-color: #20423F;
     margin: 0;
     justify-content: flex-start;
-  }
+}
 
-  .side_Menu_Container button {
+.side_Menu_Container button {
     width: auto;
     height: 3.5rem;
     background-color: #20423F;
@@ -118,26 +132,27 @@ html, body {
     align-items: center;
     flex-wrap: wrap;
     word-wrap: break-word;
-  }
+}
 
-  hr {
+hr {
     padding: 0.2rem;
     margin: 0;
     background-color: #023A36;
-  }
+}
 
-  .side_Menu_Container button span {
+.side_Menu_Container button span {
     width: 100%;
     display: flex;
     margin: 0 13%;
     word-wrap: break-word;
-  }
-  .side_Menu_Container button span span {
+}
+
+.side_Menu_Container button span span {
     margin: 0 8%;
     word-wrap: break-word;
-  }
+}
 
-  .side_Menu_Container p {
+.side_Menu_Container p {
     width: 100%;
     color: #9AB9A3;
     font-size: 20px;
@@ -146,83 +161,85 @@ html, body {
     padding-right: 1rem;
     word-wrap: break-word;
     background-color: #023A36;
-  }
+}
 
-  .side_Menu_Container p {
+.side_Menu_Container p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
+}
 
-  .side_Menu_Container p span {
+.side_Menu_Container p span {
     margin-left: auto;
     cursor: pointer;
-  }
+}
 
-  .side_Menu_Container p:last-child span:before {
+.side_Menu_Container p:last-child span:before {
     content: none;
-  }
+}
 
-  .side_Menu_Container p:last-child span img {
+.side_Menu_Container p:last-child span img {
     margin-left: 0.5rem;
     transition: transform 0.3s ease;
-  }
+}
 
-  .rotate_img.rotate180 {
+.rotate_img.rotate180 {
     transform: rotate(-180deg);
-  }
+}
 
-  .desk {
+.desk {
     width: 100%;
-  }
+}
 
-  .desk span {
+.desk span {
     font-size: 20px;
     white-space: nowrap;
     align-items: center;
-  }
+}
 
-  .myDesks {
+.myDesks {
     width: 100%;
     height: 24%;
     overflow: auto;
     display: flex;
     flex-direction: column;
-  }
-  /* middle section -------------------------------------------------------*/
-  .middle_desks_container {
+}
+
+/* middle section -------------------------------------------------------*/
+.middle_desks_container {
     display: flex;
     flex-direction: column;
     width: 100%;
     margin: 0;
     padding: 0;
-  }
+}
 
-  .middle_top_body {
+.middle_top_body {
     width: 100%;
     padding: 0.5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-self: center;
     background-color: #20423F;
-  }
+    position: relative;
+}
 
-  .middle_top_body h1 {
+.middle_top_body h1 {
     font-weight: 400;
     font-size: 36px;
     color: #9AB9A3;
     margin: 0; /* Reset margin */
-  }
+}
 
-  .middle_middle_body {
+.middle_middle_body {
     display: flex;
     flex-direction: column;
     /* padding-left: 2rem; */
     width: 100%;
     height: 100%;
-  }
-  .combobox{
+}
+
+.combobox {
     width: 20rem;
     background-color: #E0EBE0;
     color: #05342F;
@@ -232,27 +249,32 @@ html, body {
     margin-left: auto;
     margin-right: 5rem;
     padding-left: 1rem;
-  }
-  .combobox:first-child{
+}
+
+.combobox:first-child {
     margin-top: 1.5%;
-  }
-  .search_sorting{
+}
+
+.search_sorting {
     display: flex;
     align-items: center;
     gap: 3rem;
     padding-left: 3%;
-  }
-  .search_desk{
+}
+
+.search_desk {
     display: flex;
     flex-direction: column;
-  }
-  .search_desk p{
+}
+
+.search_desk p {
     font-weight: 700;
     font-size: 25px;
     color: #05342F;
     margin: 0;
-  }
-  .searcher1{
+}
+
+.searcher1 {
     width: 100%;
     height: 2rem;
     border-radius: 5px;
@@ -260,17 +282,20 @@ html, body {
     padding-left: 1rem;
     font-size: 25px;
     border: none;
-  }
-  .searcher1::placeholder {
+}
+
+.searcher1::placeholder {
     color: #05342F;
-  }
-  .desks_amount{
+}
+
+.desks_amount {
     margin-top: 2%;
     font-weight: 500;
     font-size: 25px;
     margin-left: 3%;
-  }
-  .boards {
+}
+
+.boards {
     width: 90%;
     height: 24rem;
     margin: 0 auto;
@@ -278,30 +303,34 @@ html, body {
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 3%;
-    align-items:center;
-  }
-  .group_container{
+    align-items: center;
+}
+
+.group_container {
     width: 14rem;
     display: flex;
     justify-content: center;
     margin-bottom: 2%;
-  }
-  .group_container p{
+}
+
+.group_container p {
     position: absolute;
     z-index: 1;
     color: white;
     font-size: 17px;
     margin-left: -3rem;
     margin-top: 0.3%;
-  }
-  .group_container img {
+}
+
+.group_container img {
     width: 95%;
     filter: brightness(85%)
-  }
-  .group_container p img{
+}
+
+.group_container p img {
     width: 100%;
     position: relative;
     margin-top: 140%;
     margin-right: -6.5rem;
     margin-left: 6.5rem;
-  }
+}

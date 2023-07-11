@@ -31,6 +31,8 @@ class DesksUsersRepository implements DesksUsersContract
     {
         return DesksUsers::destroy($id);
     }
+
+
 }
 
 ?>

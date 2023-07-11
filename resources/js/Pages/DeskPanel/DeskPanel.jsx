@@ -7,6 +7,7 @@ export default function DeskPanel () {
         <DashBoardLayout>
             <div className="middle_desks_container">
                 <div className="middle_top_body">
+                    <button className="create_btn">Створити</button>
                     <h1>Дошки</h1>
                 </div>
                 <div className="middle_middle_body">

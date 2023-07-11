@@ -6,4 +6,4 @@ interface DesksUsersContract
     public function create($data);
 }
 
-?>
+
