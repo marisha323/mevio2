@@ -3,12 +3,15 @@
     font-weight: 700;
     margin-top: 1%;
     padding-left: 3%;
+    font-size: 32px;
 }
 .calendar_container{
-    width: 68rem;
+    width: 90%;
+    height: 68vh;
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    margin-top: 0.5rem;
 }
 .display_weeks{
     width: 100%;
@@ -29,7 +32,8 @@
     font-weight: 700;
 }
 .display_dates {
-    width: 68rem;
+    width: 100%;
+    height: 17.6vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -39,8 +43,8 @@
   }
   
   .date {
-    width: 9.713rem;
-    height: 5.5rem;
+    width: 14.285%;
+    height: 72%;
     color: #9AB9A3;
     padding-left: 0.3rem;
     background-color: #2B514D;
