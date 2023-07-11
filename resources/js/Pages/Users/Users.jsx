@@ -15,10 +15,10 @@ export default function Users() {
                             <img src="images/workingspaceborder.png" alt=""/>
                         </div>
                         <div className="workingspace_title">
-                            <h3>Рабочее пространство Mevio <img src="images/edit_pen.png" alt=""/></h3>
+                            <h3>Робочий простір Mevio <img src="images/edit_pen.png" alt=""/></h3>
                             <p><img src="images/graylock.png" alt=""/>Приватно</p>
                         </div>
-                        <button><img src="images/inv_peopleIcon.png" alt=""/> Приглосить в рабочее пространство</button>
+                        <button><img src="images/inv_peopleIcon.png" alt=""/> Заглушити в робочий простір</button>
                     </div>
                 </div>
                 <div className="middle_middle_body">
