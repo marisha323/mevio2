@@ -70,7 +70,12 @@ Route::middleware('auth')->group(function () {
     });
     Route::post('/posts/createCard',[CardController::class,'store'])->name('post.store');
 
-   // Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
+    //UPDATE COLUMN_ID
+    Route::post('/update-card-column/{id}', [CardController::class, 'updateCardColumn'])->name('update-card-column');
+
+
+
+    // Route::get('/create-card', [CardController::class, 'createCard'])->name('create-card.createCard');
     //FIND USER By Email
     Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
     Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');

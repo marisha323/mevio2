@@ -43,6 +43,13 @@ class CardController extends Controller
         return Inertia::render('CurrentDesk/CurrentDesk', ['cards' => $cards]);
     }
 
+    public function updateCardColumn(Request $request)
+    {
+        $this->cardModel->updateCardColumn($request);
+        return redirect('/current-desk');
+    }
+
+
 
     public function destroy(){
 
