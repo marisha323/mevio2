@@ -3,6 +3,8 @@ namespace App\Repositories;
 
 use App\Contracts\UserContract;
 use App\Models\User;
+use App\Models\DesksUsers;
+use App\Models\Desk;
 use Inertia\Inertia;
 
 
@@ -25,7 +27,27 @@ class UserRepository implements UserContract
     }
     public function returnUsers()
     {
-        return User::all();
+        $loggedInUserId = auth()->user()->id;
+
+        $userDesks = Desk::join('desks_users', 'desks.id', '=', 'desks_users.deskId')
+            ->where('desks_users.userId', $loggedInUserId)
+            ->select('desks.*')
+            ->get();
+
+        $desks = DesksUsers::whereIn('deskId', $userDesks->pluck('id')->toArray())
+            ->get();
+        
+        $usersInSameDesks = User::join('desks_users', 'users.id', '=', 'desks_users.userId')
+            ->whereIn('desks_users.deskId', $desks->pluck('id')->toArray())
+            ->select('users.*')
+            ->distinct()
+            ->get();
+        return [
+            'loggedInUserId' => $loggedInUserId,
+            'desks' => $userDesks,
+            'desksusers' => $desks,
+            'users' => $usersInSameDesks,
+        ];
     }
     public function findByEmail($email)
     {
@@ -46,9 +68,13 @@ class UserRepository implements UserContract
         return $user;
     }
 
-    public function delete($id)
+    public function delete($userId, $deskId)
     {
-        return User::destroy($id);
+        //removing user from desk!
+        $deskUser = DesksUsers::where('userId', $userId)->where('deskId', $deskId)->first();
+        if ($deskUser) {
+            $deskUser->delete();
+        }
     }
 
 
