@@ -31,17 +31,33 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+
+        //dd($request->userLogoPath);
         $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:'.User::class,
+            'email' => 'required|string|email|max:255|unique:' . User::class,
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+
+        if (request()->hasFile('userLogoPath')) {
+            // Отримайте файл з запиту
+            $file = request()->file('userLogoPath');
+            // Виконайте потрібну обробку та збереження файлу
+            $destinationPath = 'public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
+            $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
+            $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'userLogoPath' => $fileName,
+            ]);
+
+        }
+
+
 
         event(new Registered($user));
 

@@ -33,8 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-desks',[DeskController::class,'actionGetUserDesks']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::get('/users', [UserController::class, 'returnUsers']);
     Route::delete('/users/{id}', [UserController::class, 'delete']);
 
