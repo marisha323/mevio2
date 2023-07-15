@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Contracts\DeskContract;
+use App\Contracts\ThemeContract;
 use App\Repositories\DeskRepository;
+use App\Repositories\ThemeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -52,4 +54,5 @@ class DeskController extends Controller
         $desksData = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
         return Inertia::render('DeskPanel/DeskPanel', compact('desksData'));
     }
+
 }

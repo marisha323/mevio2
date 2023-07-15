@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import DashBoard from '@/Pages/DashBoard.jsx';
+import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 
 import '../../../css/current_desk/current_desk.css';
 import {Link} from "@inertiajs/react";
 
 export default function CurrentDesk({cards}) {
 
-
+console.log(cards);
     const redirectToCreateCard = () => {
        // console.log(111);
         window.location.href = '/create-card';
@@ -74,7 +74,7 @@ export default function CurrentDesk({cards}) {
 
 
   return (
-    <DashBoard>
+    <DashBoardLayout>
       <div className="middle_desks_container">
         <div className="middle_top_body_tasks">
           <h1>Курсовой проект</h1>
@@ -96,7 +96,7 @@ export default function CurrentDesk({cards}) {
               </div>
               <ul className="task-list" id="to-do">
                   {cards.card1.map((card) => (
-                      <div >
+                      <div>
                           <li className="task" key={card.id}>
                               <p>{card.cardName}</p>
                           </li>
@@ -149,7 +149,7 @@ export default function CurrentDesk({cards}) {
           </ul>
         </div>
       </div>
-    </DashBoard>
+    </DashBoardLayout>
   );
 }
 

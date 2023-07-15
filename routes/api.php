@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeskController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::middleware('auth')->group(function (){
+    Route::get('api/themes',function (){
+        return json_encode(\App\Models\Theme::all());
+    });
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
