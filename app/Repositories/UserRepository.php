@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\DesksUsers;
 use App\Models\Desk;
 use Inertia\Inertia;
+use App\Models\Theme;
 
 
 class UserRepository implements UserContract
@@ -42,11 +43,15 @@ class UserRepository implements UserContract
             ->select('users.*')
             ->distinct()
             ->get();
+        
+            $themes = Theme::all();
+            // dd($userDesks);
         return [
             'loggedInUserId' => $loggedInUserId,
             'desks' => $userDesks,
             'desksusers' => $desks,
             'users' => $usersInSameDesks,
+            'themes' => $themes
         ];
     }
     public function findByEmail($email)
