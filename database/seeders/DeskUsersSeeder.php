@@ -14,72 +14,72 @@ class DeskUsersSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('desks_users')->insert([
-            'userId' => 1,
-            'deskId' => 1,
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 1,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 1,
-            'deskId' => 2,
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 2,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 1,
-            'deskId' => 3,
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 3,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 1,
-            'deskId' => 4,
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 4,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 1,
-            'deskId' => 5,
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 5,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 2,
-            'deskId' => 6,
+        DB::table('desk_user')->insert([
+            'user_id' => 2,
+            'desk_id' => 6,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 2,
-            'deskId' => 7,
+        DB::table('desk_user')->insert([
+            'user_id' => 2,
+            'desk_id' => 7,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 2,
-            'deskId' => 8,
+        DB::table('desk_user')->insert([
+            'user_id' => 2,
+            'desk_id' => 8,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 2,
-            'deskId' => 9,
+        DB::table('desk_user')->insert([
+            'user_id' => 2,
+            'desk_id' => 9,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);
 
-        DB::table('desks_users')->insert([
-            'userId' => 2,
-            'deskId' => 10,
+        DB::table('desk_user')->insert([
+            'user_id' => 2,
+            'desk_id' => 10,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);

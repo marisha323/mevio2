@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Desk extends Model
 {
@@ -17,4 +18,9 @@ class Desk extends Model
         'themeId',
         'isArchive',
     ];
+
+    public function users (): BelongsToMany
+    {
+        return $this->belongsToMany(User::class );
+    }
 }

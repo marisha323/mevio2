@@ -17,6 +17,8 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const DASHBOARD = '/dashboard';
+
     public const DESK_PANEL = '/desk-panel';
 
     /**

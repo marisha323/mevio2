@@ -3,12 +3,18 @@
 namespace App\Presenters;
 
 use App\Models\Desk;
+use App\Models\Theme;
+use App\Repositories\ThemeRepository;
 
 class DeskAsArrayPresenter implements IPresenter
 {
     public function present(Desk $model): array
     {
-        return $model->attributesToArray();
+        $result = [];
+        $result = $model->attributesToArray();
+
+        $result['deskTheme'] = (new ThemeRepository())->getThemeByDesk($model)->attributesToArray();
+        return $result;
     }
 
     public function presentCollection($models): array

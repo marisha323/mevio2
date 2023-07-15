@@ -1,4 +1,4 @@
-import DashBoardLayout from "@/Layouts/DashBoardLayout.jsx";
+import DashBoard from "@/Pages/DashBoard.jsx";
 import {Link} from "@inertiajs/react";
 
 import "../../../css/calendar/calendar.css";
@@ -6,7 +6,7 @@ import "../../../css/calendar/calendar.css";
 
 const Calendar = () => {
     return (
-        <DashBoardLayout>
+        <DashBoard>
             <div className="middle_desks_container">
                 <div className="middle_top_body">
                     <h1>Календар</h1>
@@ -91,7 +91,7 @@ const Calendar = () => {
                     </div>
                 </div>
             </div>
-        </DashBoardLayout>
+        </DashBoard>
     )
 }
 

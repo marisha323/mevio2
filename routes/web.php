@@ -25,28 +25,26 @@ Route::get('/', function () {
     return Inertia::render('Home/Home');
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
-    Route::get('/user-desks',[DeskController::class,'actionGetUserDesks']);
+
+    Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
+        ->name('desk.panel');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
     Route::get('/users', [UserController::class, 'returnUsers']);
     Route::delete('/users/{id}', [UserController::class, 'delete']);
-
-    Route::get('/desk-panel',function (){
-        return Inertia::render('DeskPanel/DeskPanel') ;
-    });
 
     Route::get('/calendar',function (){
         return Inertia::render('Calendar/Calendar') ;
     });
 
-    Route::get('/current-desk', [CardController::class, 'currentDesk']);
+    Route::get('/current-desk/{id?}', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
 //    });
@@ -83,11 +81,5 @@ Route::middleware('auth')->group(function () {
 
 
 
-
-
-
-
 require __DIR__.'/auth.php';
-
-
 

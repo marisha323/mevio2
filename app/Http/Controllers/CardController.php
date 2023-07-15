@@ -36,10 +36,10 @@ class CardController extends Controller
        //return Inertia::render('CurrentDesk/CurrentDesk');
     }
 
-    public function currentDesk():Response
+    public function currentDesk($id):Response
     {
         $cards=$this->cardModel->currentDesk();
-       //dd($cards);
+        dd($cards);
         return Inertia::render('CurrentDesk/CurrentDesk', ['cards' => $cards]);
     }
 

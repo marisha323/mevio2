@@ -55,11 +55,16 @@ class DeskRepository implements DeskContract
         // TODO: Implement ArchiveDesk() method.
     }
 
-    public function getDesksByUserId(int $user_id): array
+    public function getUserOwnDesks(int $user_id): array
     {
-        $desks = (new DeskAsArrayPresenter())->presentCollection(Desk::where('userId',$user_id)->get());
+        return (new DeskAsArrayPresenter())->presentCollection(Desk::where('userId',$user_id)->get());
+    }
 
-        return $desks;
+    public function getAllUserDesks (int $userId): array
+    {
+        $user = User::find($userId);
+        $desks = $user->desks;
+        return (new DeskAsArrayPresenter())->presentCollection($desks);
     }
 }
 
