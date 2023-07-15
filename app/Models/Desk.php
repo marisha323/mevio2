@@ -17,4 +17,9 @@ class Desk extends Model
         'themeId',
         'isArchive',
     ];
+
+    public function users ()
+    {
+        return $this->belongsToMany(User::class,'desks_users');
+    }
 }

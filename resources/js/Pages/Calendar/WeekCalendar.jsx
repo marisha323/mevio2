@@ -1,11 +1,11 @@
-import DashBoardLayout from "@/Layouts/DashBoardLayout.jsx";
+import DashBoard from "@/Pages/DashBoard.jsx";
 
 import "../../../css/calendar/week_calendar.css";
 
 export default function WeekCalendar () {
 
     return(
-        <DashBoardLayout>
+        <DashBoard>
             <div className="middle_desks_container">
                 <div className="middle_top_body">
                     <h1>Календарь</h1>
@@ -32,6 +32,6 @@ export default function WeekCalendar () {
                     </div>
                 </div>
             </div>
-        </DashBoardLayout>
+        </DashBoard>
     )
 }

@@ -13,7 +13,9 @@ interface DeskContract
 
     public function update($id, array $data);
 
-    public function getDesksByUserId (int $user_id): array;
+    public function getUserOwnDesks (int $user_id): array;
+
+    public function getAllUserDesks (int $userId): array;
 
 }
 

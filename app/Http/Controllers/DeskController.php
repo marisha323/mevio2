@@ -6,6 +6,8 @@ use App\Contracts\DeskContract;
 use App\Repositories\DeskRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
+use Inertia\Response;
 
 class DeskController extends Controller
 {
@@ -33,9 +35,14 @@ class DeskController extends Controller
 
     }
 
-    public function actionGetUserDesks ()
+    public function actionGetUserOwnDesks ()
     {
-        $desks = $this->desk_model->getDesksByUserId(Auth::getUser()->getAuthIdentifier());
+        $desks = $this->desk_model->getUserOwnDesks(Auth::getUser()->getAuthIdentifier());
         return json_encode($desks,true);
+    }
+
+    public function actionGetAllUsersDesks ()
+    {
+//        $desks = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
     }
 }

@@ -1,7 +1,17 @@
+import {Link} from "@inertiajs/react";
+
+import { useLayoutEffect, useState } from "react";
 import DashBoardLayout from "@/Layouts/DashBoardLayout.jsx";
 
 
-export default function DeskPanel () {
+
+
+
+export default function DeskPanel (props) {
+
+
+
+    // useLayoutEffect(()=>{console.log(props.desksData)},[])
 
     return(
         <DashBoardLayout>
@@ -28,10 +38,10 @@ export default function DeskPanel () {
                     </div>
                     <h1 className="desks_amount">Усього дощок : 10</h1>
                     <div className="boards">
-                        <div className="group_container">
+                        <Link href={'/current-desk'} className="group_container">
                             <p>Курсовой проект</p>
                             <img src="images/readLeavesBackground.png" alt="" />
-                        </div>
+                        </Link>
                         <div className="group_container">
                             <p>Курсовой проект</p>
                             <img src="images/readLeavesBackground.png" alt="" />

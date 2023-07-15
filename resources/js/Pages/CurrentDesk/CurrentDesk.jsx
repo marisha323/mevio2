@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import DashBoardLayout from '@/Layouts/DashBoardLayout.jsx';
+import DashBoard from '@/Pages/DashBoard.jsx';
 
 import '../../../css/current_desk/current_desk.css';
 import {Link} from "@inertiajs/react";
@@ -72,7 +72,7 @@ export default function CurrentDesk() {
 
 
   return (
-    <DashBoardLayout>
+    <DashBoard>
       <div className="middle_desks_container">
         <div className="middle_top_body_tasks">
           <h1>Курсовой проект</h1>
@@ -151,6 +151,6 @@ export default function CurrentDesk() {
           </ul>
         </div>
       </div>
-    </DashBoardLayout>
+    </DashBoard>
   );
 }
