@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Calendar/Calendar') ;
     });
 
-    Route::get('/current-desk/{id?}', [CardController::class, 'currentDesk']);
+    Route::get('/current-desk/{id}', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
 //    });

@@ -58,7 +58,7 @@ export default function CurrentDesk({cards}) {
         drake.on('drop', (el, target, source, sibling) => {
             el.className += 'ex-moved';
 
-            console.log(el); //
+          //  console.log(el);
             const cardId = el.querySelector('.task').getAttribute('data-card-id');
             const newColumnId = target.getAttribute('data-column-id');
 
