@@ -4,20 +4,29 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Link, useForm, usePage } from '@inertiajs/react';
 import { Transition } from '@headlessui/react';
+import React, { useState } from 'react';
 
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        userLogoPath: '',
     });
+
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(e);
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('email', data.email);
+        formData.append('userLogoPath', data.userLogoPath);
 
-        patch(route('profile.update'));
+        post(route('profile.update'), formData);
     };
+
 
     return (
         <section className={className}>
@@ -29,7 +38,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 </p>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form enctype="multipart/form-data" onSubmit={submit} className="mt-6 space-y-6">
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 
@@ -38,6 +47,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         value={data.name}
                         onChange={(e) => setData('name', e.target.value)}
+
                         required
                         isFocused
                         autoComplete="name"
@@ -55,11 +65,30 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         className="mt-1 block w-full"
                         value={data.email}
                         onChange={(e) => setData('email', e.target.value)}
+
                         required
                         autoComplete="username"
                     />
 
                     <InputError className="mt-2" message={errors.email} />
+                </div>
+
+                <div className="mt-4">
+                    <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
+
+                    <label htmlFor="uploadButton" className="btn btn-light">
+                        Choose File
+                        <input
+                            id="userLogoPath"
+                            type="file"
+                            name="userLogoPath"
+                            className="file-input"
+                            autoComplete="username"
+                            onChange={(e) => setData('userLogoPath', e.target.files[0])}
+                            required
+                        />
+                    </label>
+                    <InputError message={errors.userLogoPath} className="mt-2"/>
                 </div>
 
                 {mustVerifyEmail && user.email_verified_at === null && (
