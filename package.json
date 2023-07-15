@@ -21,8 +21,6 @@
     "dependencies": {
         "@inertiajs/inertia-react": "^0.8.1",
         "dragula": "^3.7.3",
-        "react-dnd": "^16.0.1",
-        "react-dnd-html5-backend": "^16.0.1",
         "react-router-dom": "^6.14.1"
     }
 }

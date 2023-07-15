@@ -35,7 +35,6 @@
 /* drag and box -----------------------------------------------------------------------------------*/
 .main-container{
   display: flex;
-  width: 76rem;
   justify-content: center;
   height: 91%;
 }

@@ -4,9 +4,12 @@ import {useState, useEffect, useLayoutEffect} from "react";
 
 import { Head, Link } from "@inertiajs/react";
 import {Preloader} from "@/Components/Preloader.jsx";
+import {useThemes} from "@/Hooks/useThemes.js";
 
 export const DashBoardLayout = ({ children }) => {
 
+    // const {desksThemes} = useThemes();
+    // console.log(desksThemes);
     const [desks, setDesks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -24,7 +27,7 @@ export const DashBoardLayout = ({ children }) => {
     }, [])
 
     const myDesks = desks.map((desk) => (
-        <Link key={desk.id} href={`/current-desk/${desk.id}`} className="my-desk-item">
+        <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item">
           <span className="my-desk-item-span">
             <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
             <span className="my-desk-item-title">{desk.deskName}</span>
