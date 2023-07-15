@@ -9,7 +9,8 @@ interface UserContract
 
     public function findByEmail($email);
     public function index();
-
+    public function returnUsers();
+    public function delete($id);
 
 }
 

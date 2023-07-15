@@ -38,7 +38,7 @@ class CardRepository implements CardContract
         $card->cardName = $request->post('cardName');
         $card->description = $request->post('description');
         $card->deadLine = $request->post('deadLine');
-        $card->columnId = 1;
+        $card->columnId = $request->post('columnId');
         $card->userId = $userId;
 
 
@@ -48,6 +48,27 @@ class CardRepository implements CardContract
         return redirect('/dashboard');
 
        // return Card::create();
+    }
+
+    public function currentDesk()
+    {
+        //  $data = ['cards' => Card::all()];
+
+        $cards1 = Card::where('columnId', 1)->get();
+        $cards2 = Card::where('columnId', 2)->get();
+        $cards3 = Card::where('columnId', 3)->get();
+
+
+        $cards=[
+          'card1'=> $cards1,
+          'card2'=> $cards2,
+          'card3'=> $cards3,
+        ];
+       return $cards;
+
+
+
+
     }
 
 

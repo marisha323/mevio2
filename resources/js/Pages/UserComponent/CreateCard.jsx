@@ -1,14 +1,21 @@
-import {useState} from "react";
 import {router} from "@inertiajs/react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+
 
 
 export default function CreateCard() {
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const columnId = urlSearchParams.get("columnId");
 
     const [values, setValues] = useState({
         cardName: "",
         description: "",
-        deadLine: ""
+        deadLine: "",
+        columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
     });
+    console.log(111);
+    console.log(columnId);
     function handleChange(e) {
         const key = e.target.id;
         const value = e.target.value;
@@ -26,6 +33,7 @@ export default function CreateCard() {
             cardName: "",
             description: "",
             deadLine: "",
+            columnId: columnId,
         });
     }
         return (

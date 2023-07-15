@@ -68,12 +68,12 @@
   .users_container {
     margin: 0 auto;
     margin-top: 5%;
-    width: 58rem;
-    max-height: 28rem;
+    width: 77%;
+    height: 80vh;
   }
   .users_list{
     overflow: auto;
-    height: 20rem;
+    height: 78%;
   }
   .users_list::-webkit-scrollbar {
     width: 0.5rem;
