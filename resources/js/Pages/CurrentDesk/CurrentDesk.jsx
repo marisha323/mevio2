@@ -56,10 +56,11 @@ export default function CurrentDesk({cards}) {
 
     return () => {
       // Clean up event listeners
-      rotateImg.removeEventListener('click', () => {
-        rotateImg.classList.toggle('rotate180');
-      });
-
+        if (rotateImg){
+            rotateImg.removeEventListener('click', () => {
+                rotateImg.classList.toggle('rotate180');
+            });
+        }
       drake.destroy();
     };
   }, []);
