@@ -17,13 +17,5 @@ class HomeController extends Controller
         $this->deskModel = $deskRepos;
     }
 
-    public function dashboard(): Response
-    {
-        $desks = $this->deskModel->getUserOwnDesks(Auth::getUser()->getAuthIdentifier());
 
-        return Inertia::render(
-            'DashBoard',
-            ['desksData' => $desks]
-        );
-    }
 }

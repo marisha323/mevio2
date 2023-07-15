@@ -49,7 +49,7 @@ class DeskController extends Controller
 
     public function actionGetAllUsersDesks (): Response
     {
-//        $desks = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
-        return Inertia::render('DeskPanel/DeskPanel');
+        $desksData = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
+        return Inertia::render('DeskPanel/DeskPanel', compact('desksData'));
     }
 }

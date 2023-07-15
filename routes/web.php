@@ -28,10 +28,10 @@ Route::get('/', function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard',[HomeController::class,'dashboard']);
 
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
-    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
+        ->name('desk.panel');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -43,7 +43,7 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Calendar/Calendar') ;
     });
 
-    Route::get('/current-desk', [CardController::class, 'currentDesk']);
+    Route::get('/current-desk/{id?}', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
 //    });

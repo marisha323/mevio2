@@ -63,7 +63,7 @@ class DeskRepository implements DeskContract
     public function getAllUserDesks (int $userId): array
     {
         $user = User::find($userId);
-        $desks = $user->desks();
+        $desks = $user->desks;
         return (new DeskAsArrayPresenter())->presentCollection($desks);
     }
 }

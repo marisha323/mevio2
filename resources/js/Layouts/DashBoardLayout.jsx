@@ -3,6 +3,7 @@ import "../../css/layouts/dashboard_layout.css";
 import {useState, useEffect, useLayoutEffect} from "react";
 
 import { Head, Link } from "@inertiajs/react";
+import {Preloader} from "@/Components/Preloader.jsx";
 
 export const DashBoardLayout = ({ children }) => {
 
@@ -23,7 +24,7 @@ export const DashBoardLayout = ({ children }) => {
     }, [])
 
     const myDesks = desks.map((desk) => (
-        <Link key={desk.id} href={'/current-desk'} className="my-desk-item">
+        <Link key={desk.id} href={`/current-desk/${desk.id}`} className="my-desk-item">
           <span className="my-desk-item-span">
             <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
             <span className="my-desk-item-title">{desk.deskName}</span>
@@ -31,22 +32,31 @@ export const DashBoardLayout = ({ children }) => {
         </Link>
     ))
 
+    const image = "/images/preloader/preload_background.png";
+
     if (isLoading){
         return(
             <>
-                <h1>Loading...</h1>
+                <Preloader />
             </>
         )
     }
-
+console.log(image);
     return (
-        <>
+        <div>
+            <div style={{backgroundImage: `url(${image})`}} className={"background-block"}>
+
+            </div>
             <Head title={"Desks"}/>
             <div className="TopInfo_Container">
+                <Link href={"/"}>
                 <div className="Mevio_Title">
-                    <img src="images/MevioGreen_rec.png" alt=""/>
+
+                        <img src="images/MevioGreen_rec.png" alt=""/>
+
                     <h2>Mevio</h2>
                 </div>
+                </Link>
                 <div className="toTheRight_container">
                     <div className="loupe_container">
                         <img src="images/loupe (1) 1.png" alt=""/>
@@ -114,7 +124,7 @@ export const DashBoardLayout = ({ children }) => {
                 {children}
             </div>
 
-        </>
+        </div>
     );
 };
 
