@@ -1,8 +1,47 @@
 import "../../css/layouts/dashboard_layout.css";
-const DashBoard = ({ children }) => {
+
+import {useState, useEffect, useLayoutEffect} from "react";
+
+import { Head, Link } from "@inertiajs/react";
+
+export const DashBoardLayout = ({ children }) => {
+
+    const [desks, setDesks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+    async function fetchData() {
+        const resp = await axios.get('/user-own-desks');
+        if (resp) {
+            const data = await resp.data;
+            setDesks(data);
+            setIsLoading(false);
+        }
+    }
+
+    useEffect(  () => {
+        fetchData();
+    }, [])
+
+    const myDesks = desks.map((desk) => (
+        <Link key={desk.id} href={'/current-desk'} className="my-desk-item">
+          <span className="my-desk-item-span">
+            <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
+            <span className="my-desk-item-title">{desk.deskName}</span>
+          </span>
+        </Link>
+    ))
+
+    if (isLoading){
+        return(
+            <>
+                <h1>Loading...</h1>
+            </>
+        )
+    }
 
     return (
         <>
+            <Head title={"Desks"}/>
             <div className="TopInfo_Container">
                 <div className="Mevio_Title">
                     <img src="images/MevioGreen_rec.png" alt=""/>
@@ -15,42 +54,43 @@ const DashBoard = ({ children }) => {
                     </div>
 
                     <img src="images/bell (3) 1.png" alt=""/>
-                    <button>
+                    <Link href={'/profile'}>
                         <img src="images/Ellipse 11.png" alt=""/>
-                    </button>
+                    </Link>
                 </div>
             </div>
 
 
             <div className="desks_body_container">
                 <div className="side_Menu_Container">
-                    <button className="sidebar-menu-item">
+                    <Link href={"/desk-panel"} className="sidebar-menu-item">
                         <button>
                           <span>
                             <img src="images/blackboard (1) 1.png" alt=""/>
                             <span>Дошки</span>
                           </span>
                         </button>
-                    </button>
-                    <button className="sidebar-menu-item">
+                    </Link>
+                    <Link href={'/users'} className="sidebar-menu-item">
                         <button>
                           <span>
                             <img src="images/group (1) 1.png" alt=""/>
                             <span>Учасники</span>
                           </span>
                         </button>
-                    </button>
+                    </Link>
                     <p className="sidebar-category-title">Робочий простір</p>
-                    <button className="sidebar-menu-item">
+                    <Link href={'/calendar'} className="sidebar-menu-item">
                         <button>
                           <span>
                             <img src="images/calendar (1) 1.png" alt=""/>
                             <span>Календар</span>
                           </span>
                         </button>
-                    </button>
+                    </Link>
                     <p className="sidebar-category-title">Мої дошки <span>+</span></p>
                     <div className="myDesks">
+                        {myDesks}
                     </div>
                     <p className="sidebar-category-title">Обране<span><img className="rotate_img"
                                                                            src="images/right-arrow-angle (1) 1.png"
@@ -73,10 +113,9 @@ const DashBoard = ({ children }) => {
                 </div>
                 {children}
             </div>
+
         </>
     );
 };
-
-export default DashBoard;
 
 

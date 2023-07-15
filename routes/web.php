@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard',[HomeController::class,'dashboard']);
 
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
-//    Route::get('/desk-panel',[DeskController::class,'actionGetUserOwnDesks']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks']);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -77,6 +77,3 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-
-Route::get('/{any}',[HomeController::class,'dashboard'])->where('any','/.*')->middleware('auth');

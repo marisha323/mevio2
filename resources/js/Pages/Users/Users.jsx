@@ -1,11 +1,11 @@
-import DashBoard from "@/Pages/DashBoard.jsx";
 
 import "../../../css/users/users.css";
+import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 
 export default function Users() {
 
     return (
-        <DashBoard>
+        <DashBoardLayout>
             <div className="middle_desks_container">
                 <div className="middle_top_body_users">
                     <div className="working_space">
@@ -141,6 +141,6 @@ export default function Users() {
                     </div>
                 </div>
             </div>
-        </DashBoard>
+        </DashBoardLayout>
     )
 }

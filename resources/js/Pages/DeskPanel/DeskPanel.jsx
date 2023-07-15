@@ -1,17 +1,14 @@
 import {Link} from "@inertiajs/react";
 
 import { useLayoutEffect, useState } from "react";
-import DashBoardLayout from "@/Layouts/DashBoardLayout.jsx";
+
+import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 
 
 
 
 
 export default function DeskPanel (props) {
-
-
-
-    // useLayoutEffect(()=>{console.log(props.desksData)},[])
 
     return(
         <DashBoardLayout>

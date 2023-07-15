@@ -47,8 +47,9 @@ class DeskController extends Controller
         return json_encode($desks,true);
     }
 
-    public function actionGetAllUsersDesks ()
+    public function actionGetAllUsersDesks (): Response
     {
 //        $desks = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
+        return Inertia::render('DeskPanel/DeskPanel');
     }
 }
