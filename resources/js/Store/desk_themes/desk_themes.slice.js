@@ -16,3 +16,5 @@ export const deskThemesSlice
         }
     }
 })
+
+export const {actions, reducer} = deskThemesSlice;

@@ -1,24 +1,28 @@
-import React, { useEffect } from 'react';
-import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
-
 import '../../../css/current_desk/current_desk.css';
+
+import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import {Link} from "@inertiajs/react";
+import {useEffect} from "react";
 
 export default function CurrentDesk({cards}) {
 
-console.log(cards);
     const redirectToCreateCard = () => {
        // console.log(111);
         window.location.href = '/create-card';
     };
 
+
+
   useEffect(() => {
     // Script initialization and event listeners
     const rotateImg = document.querySelector('.rotate_img');
 
-    rotateImg.addEventListener('click', () => {
-      rotateImg.classList.toggle('rotate180');
-    });
+
+    if(rotateImg){
+        rotateImg.addEventListener('click', () => {
+            rotateImg.classList.toggle('rotate180');
+        });
+    }
 
     // Initialize drag and drop functionality
     const containers = [
@@ -60,6 +64,10 @@ console.log(cards);
     };
   }, []);
 
+
+
+
+
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/dragula/dist/dragula.min.js';
@@ -71,6 +79,7 @@ console.log(cards);
       document.body.removeChild(script);
     };
   }, []);
+
 
 
   return (
