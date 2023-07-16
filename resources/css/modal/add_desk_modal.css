@@ -1,0 +1,8 @@
+.modal-container {
+    width: 100vw;
+    height: 100vh;
+    background: rgba(12, 4, 4, 0.65);
+    position: absolute;
+    top: -4.4rem;
+    z-index: 2;
+}

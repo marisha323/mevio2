@@ -1,17 +1,41 @@
 import "../../css/layouts/dashboard_layout.css";
 
-import {useState, useEffect, useLayoutEffect} from "react";
+import {useState, useEffect, useLayoutEffect, useCallback} from "react";
 
 import { Head, Link } from "@inertiajs/react";
 import {Preloader} from "@/Components/Preloader.jsx";
+import {useSelector, useDispatch} from "react-redux";
+import {useActions} from "@/Hooks/useActions.js";
 import {useThemes} from "@/Hooks/useThemes.js";
+import {AddDeskModal} from "@/Components/Modal/AddDesk/AddDeskModal.jsx";
+
+
+
 
 export const DashBoardLayout = ({ children }) => {
 
-    // const {desksThemes} = useThemes();
-    // console.log(desksThemes);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    let visible = false;
+    const AddDeskHandler = (e) => {
+        e.preventDefault();
+        visible = !visible;
+        setIsModalVisible(visible);
+    }
+
+    const [mainTheme, setMainTheme] = useState({});
+
+    const {
+        fillThemes,
+        getThemeById,
+        setDefaultTheme,
+        getDefaultTheme
+    } = useActions();
+
+    const {defaultTheme} = useThemes();
+
     const [desks, setDesks] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+
 
     async function fetchData() {
         const resp = await axios.get('/user-own-desks');
@@ -24,49 +48,59 @@ export const DashBoardLayout = ({ children }) => {
 
     useEffect(  () => {
         fetchData();
+        fillThemes();
     }, [])
 
+    useEffect( () => {
+        setMainTheme(defaultTheme);
+    },[defaultTheme])
+
     const myDesks = desks.map((desk) => (
-        <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item">
+        <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item"
+              onClick={()=>{setDefaultTheme(desk.id)}}
+            style={{borderBottom: `5px solid ${mainTheme.sidebar_category_bg_color}`}}>
           <span className="my-desk-item-span">
             <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
-            <span className="my-desk-item-title">{desk.deskName}</span>
+            <span className="my-desk-item-title"
+                  style={{color: mainTheme.left_sidebar_font_color}}>{desk.deskName}</span>
           </span>
         </Link>
     ))
 
-    const image = "/images/preloader/preload_background.png";
+    const image = mainTheme.backGroundImage ?? "/images/preloader/preload_background.png";
 
     if (isLoading){
         return(
             <>
-                <Preloader />
+                <Preloader image={image} />
             </>
         )
     }
-console.log(image);
     return (
         <div>
+            <h1>{isModalVisible ? "Visible" : "Not visible"}</h1>
             <div style={{backgroundImage: `url(${image})`}} className={"background-block"}>
 
             </div>
             <Head title={"Desks"}/>
-            <div className="TopInfo_Container">
+            <div className="TopInfo_Container"
+                style={{backgroundColor: mainTheme.layout_header_bg_color}}>
                 <Link href={"/"}>
                 <div className="Mevio_Title">
 
-                        <img src="images/MevioGreen_rec.png" alt=""/>
+                        <img src={`/images/themes/${mainTheme.id}/logo.png`} alt=""/>
 
-                    <h2>Mevio</h2>
+                    <h2 style={{color: mainTheme.logo_font_color}}>Mevio</h2>
                 </div>
                 </Link>
                 <div className="toTheRight_container">
                     <div className="loupe_container">
-                        <img src="images/loupe (1) 1.png" alt=""/>
-                        <input className="searcher" type="text" placeholder="Пошук..."/>
+                        <img src={`images/themes/${mainTheme.id}/loupe.png`} alt=""/>
+                        <input className="searcher" type="text" placeholder="Пошук..."
+                            style={{color: mainTheme.layout_header_bg_color}}/>
                     </div>
 
-                    <img src="images/bell (3) 1.png" alt=""/>
+                    <img src={`/images/themes/${mainTheme.id}/bell.png`} alt=""/>
                     <Link href={'/profile'}>
                         <img src="images/Ellipse 11.png" alt=""/>
                     </Link>
@@ -75,39 +109,55 @@ console.log(image);
 
 
             <div className="desks_body_container">
-                <div className="side_Menu_Container">
-                    <Link href={"/desk-panel"} className="sidebar-menu-item">
+                <div className="side_Menu_Container"
+                    style={{backgroundColor: mainTheme.left_sidebar_bg_color}}>
+                    <Link href={"/desk-panel"} className="sidebar-menu-item"
+                        style={{borderBottom: `5px solid ${mainTheme.sidebar_category_bg_color}`,
+                                borderRight: `2px solid ${mainTheme.sidebar_category_bg_color}`}}>
                         <button>
                           <span>
-                            <img src="images/blackboard (1) 1.png" alt=""/>
-                            <span>Дошки</span>
+                            <img src={`/images/themes/${mainTheme.id}/board.png`} alt=""/>
+                            <span style={{color: mainTheme.left_sidebar_font_color}}>Дошки</span>
                           </span>
                         </button>
+                        <button className="add-button add-desk"
+                                style={{color: mainTheme.left_sidebar_font_color}}
+                        onClick={AddDeskHandler}>+</button>
                     </Link>
                     <Link href={'/users'} className="sidebar-menu-item">
                         <button>
                           <span>
-                            <img src="images/group (1) 1.png" alt=""/>
-                            <span>Учасники</span>
+                            <img src={`/images/themes/${mainTheme.id}/people.png`} alt=""/>
+                            <span style={{color: mainTheme.left_sidebar_font_color}}>Учасники</span>
                           </span>
                         </button>
                     </Link>
-                    <p className="sidebar-category-title">Робочий простір</p>
+                    <p className="sidebar-category-title"
+                        style={{backgroundColor: mainTheme.sidebar_category_bg_color,
+                            color: mainTheme.left_sidebar_font_color}}>Робочий простір</p>
                     <Link href={'/calendar'} className="sidebar-menu-item">
                         <button>
                           <span>
-                            <img src="images/calendar (1) 1.png" alt=""/>
-                            <span>Календар</span>
+                            <img src={`/images/themes/${mainTheme.id}/calendar.png`} alt=""/>
+                            <span style={{color: mainTheme.left_sidebar_font_color}}>Календар</span>
                           </span>
                         </button>
                     </Link>
-                    <p className="sidebar-category-title">Мої дошки <span>+</span></p>
+                    <p className="sidebar-category-title"
+                       style={{backgroundColor: mainTheme.sidebar_category_bg_color,
+                           color: mainTheme.left_sidebar_font_color}}>Мої дошки <span>+</span></p>
                     <div className="myDesks">
                         {myDesks}
                     </div>
-                    <p className="sidebar-category-title">Обране<span><img className="rotate_img"
-                                                                           src="images/right-arrow-angle (1) 1.png"
-                                                                           alt=""/></span>
+                    <p className="sidebar-category-title"
+                       style={{backgroundColor: mainTheme.sidebar_category_bg_color,
+                           color: mainTheme.left_sidebar_font_color}}>
+                        Обране
+                        <span>
+                            <img className="rotate_img"
+                                 src={`/images/themes/${mainTheme.id}/arrow_down.svg`}
+                                 alt=""/>
+                        </span>
                     </p>
                     <div className="myDesks">
                         <button className="desk">
@@ -126,6 +176,7 @@ console.log(image);
                 </div>
                 {children}
             </div>
+            <AddDeskModal isVisible={isModalVisible} />
 
         </div>
     );

@@ -29,6 +29,9 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
+    );
+
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
     Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
         ->name('desk.panel');

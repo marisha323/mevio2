@@ -9,6 +9,8 @@ interface ThemeContract
     public function create($data);
 
     public function getThemeByDesk(Desk $desk): Theme;
+
+    public function getAllThemes (): array;
 }
 
 

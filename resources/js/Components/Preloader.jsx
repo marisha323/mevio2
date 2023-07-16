@@ -1,6 +1,5 @@
 import "../../css/preloader.css";
-export const Preloader = () => {
-    const image = "/images/preloader/preload_background.png";
+export const Preloader = ({image}) => {
 
     return(
         <div style={{backgroundImage: `url(${image})`}} className={"preloader-box"}>
