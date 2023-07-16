@@ -1,6 +1,5 @@
 import { createSlice} from "@reduxjs/toolkit";
 
-let isVisible = false;
 
 const addDeskModalSlice
     = createSlice({
