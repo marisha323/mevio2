@@ -81,8 +81,6 @@ export default function CurrentDesk({cards}) {
     };
   }, []);
 
-
-
   return (
     <DashBoardLayout>
       <div className="middle_desks_container">
