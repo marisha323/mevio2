@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Contracts\ThemeContract;
 use App\Models\Desk;
 use App\Models\Theme;
+use App\Presenters\ThemeAsArrayPresenter;
 
 class ThemeRepository implements ThemeContract
 {
@@ -23,6 +24,11 @@ class ThemeRepository implements ThemeContract
     public function getThemeByDesk(Desk $desk): Theme
     {
         return Theme::where('id',$desk->themeId)->first();
+    }
+
+    public function getAllThemes (): array
+    {
+        return (new ThemeAsArrayPresenter())->presentCollection(Theme::all());
     }
 }
 
