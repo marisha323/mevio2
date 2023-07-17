@@ -1,10 +1,39 @@
-import {Link} from "@inertiajs/react";
-
-import "../../../css/calendar/calendar.css";
 import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
+import { Link } from "@inertiajs/react";
+import {useEffect,useState} from "react";
+import "../../../css/calendar/calendar.css";
+import React from "react";
 
+const Calendar = ({ cardsData }) => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const monthDays = Array.from({ length: daysInMonth }, (_, index) => index + 1);
 
-const Calendar = () => {
+    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
+    const lastDay = new Date(currentYear, currentMonth + 1, 0).getDay();
+    const daysInPreviousMonth = new Date(currentYear, currentMonth, 0).getDate();
+    const daysInNextMonth = 6 - lastDay;
+
+    const previousMonthDays = Array.from(
+        { length: firstDay - 1 },
+        (_, index) => daysInPreviousMonth - firstDay + index + 2
+    );
+
+    const nextMonthDays = Array.from(
+        { length: daysInNextMonth + 1 },
+        (_, index) => index + 1
+    );
+
+    const [cards,setCards] = useState([]);
+
+    useEffect(()=>{
+        setCards(cardsData);
+    },[]);
+
+    console.log(cardsData);
+
     return (
         <DashBoardLayout>
             <div className="middle_desks_container">
@@ -12,88 +41,83 @@ const Calendar = () => {
                     <h1>Календар</h1>
                 </div>
                 <div className="middle_middle_body">
-                    <h1 className="calendar_month_h1">Травень 2023</h1>
+                    <h1 className="calendar_month_h1">
+                        {getMonthName(currentMonth) + " " + currentYear}
+                    </h1>
                     <div className="calendar_container">
                         <div className="display_weeks">
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Понеділок
-                                </Link>
+                                <Link href={"/week-calendar"}>Понеділок</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Вівторок
-                                </Link>
+                                <Link href={"/week-calendar"}>Вівторок</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Середа
-                                </Link>
+                                <Link href={"/week-calendar"}>Середа</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Четвер
-                                </Link>
+                                <Link href={"/week-calendar"}>Четвер</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                П'ятниця
-                                </Link>
+                                <Link href={"/week-calendar"}>П'ятниця</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Субота
-                                </Link>
+                                <Link href={"/week-calendar"}>Субота</Link>
                             </p>
                             <p>
-                                <Link href={'/week-calendar'}>
-                                Неділя
-                                </Link>
+                                <Link href={"/week-calendar"}>Неділя</Link>
                             </p>
                         </div>
                         <div className="display_dates">
-                            <div className="date">1</div>
-                            <div className="date">2</div>
-                            <div className="date">3</div>
-                            <div className="date">4</div>
-                            <div className="date">5</div>
-                            <div className="date">6</div>
-                            <div className="date">7</div>
-                            <div className="date">8</div>
-                            <div className="date">9</div>
-                            <div className="date">10</div>
-                            <div className="date">11</div>
-                            <div className="date">12</div>
-                            <div className="date">13</div>
-                            <div className="date">14</div>
-                            <div className="date">15</div>
-                            <div className="date">16</div>
-                            <div className="date">17</div>
-                            <div className="date">18</div>
-                            <div className="date">19</div>
-                            <div className="date">20</div>
-                            <div className="date">21</div>
-                            <div className="date">22</div>
-                            <div className="date">23</div>
-                            <div className="date">24</div>
-                            <div className="date">25</div>
-                            <div className="date">26</div>
-                            <div className="date">27</div>
-                            <div className="date">28</div>
-                            <div className="date">29</div>
-                            <div className="date">30</div>
-                            <div className="date current-month-last-date excluded">31</div>
-                            <div className="date">1</div>
-                            <div className="date">2</div>
-                            <div className="date">3</div>
-                            <div className="date">4</div>
+                            {previousMonthDays.map((day) => (
+                                <div className="date previous-month" key={day}>
+                                    {day}
+                                </div>
+                            ))}
+                            {monthDays.map((monthDay) => {
+
+                                const hasDeadline =  cardsData.some((card) =>
+                                {
+                                    const deadline = new Date(card.deadLine);
+                                    console.log(deadline.getDate());
+                                   return  deadline.getDate() === monthDay} );
+                                return (
+                                    <div className="date" key={monthDay}>
+                                        {monthDay}
+                                        {hasDeadline && <span>тут</span>}
+                                    </div>
+                                );
+                            })}
+
+                            {nextMonthDays.map((day) => (
+                                <div className="date next-month" key={day}>
+                                    {day}
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
         </DashBoardLayout>
-    )
-}
+    );
+};
 
+const getMonthName = (monthNumber) => {
+    const monthNames = [
+        "Січень",
+        "Лютий",
+        "Березень",
+        "Квітень",
+        "Травень",
+        "Червень",
+        "Липень",
+        "Серпень",
+        "Вересень",
+        "Жовтень",
+        "Листопад",
+        "Грудень",
+    ];
+    return monthNames[monthNumber];
+};
 
 export default Calendar;
