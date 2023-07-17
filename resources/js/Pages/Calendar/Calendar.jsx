@@ -32,8 +32,7 @@ const Calendar = ({ cardsData }) => {
         setCards(cardsData);
     },[]);
 
-
-
+    console.log(cardsData);
 
     return (
         <DashBoardLayout>
@@ -76,7 +75,12 @@ const Calendar = ({ cardsData }) => {
                                 </div>
                             ))}
                             {monthDays.map((monthDay) => {
-                                const hasDeadline = cardsData && cardsData.some((card) => card.deadline === monthDay);
+
+                                const hasDeadline =  cardsData.some((card) =>
+                                {
+                                    const deadline = new Date(card.deadLine);
+                                    console.log(deadline.getDate());
+                                   return  deadline.getDate() === monthDay} );
                                 return (
                                     <div className="date" key={monthDay}>
                                         {monthDay}
