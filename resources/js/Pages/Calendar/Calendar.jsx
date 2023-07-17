@@ -1,7 +1,7 @@
-import {Link} from "@inertiajs/react";
-
 import "../../../css/calendar/calendar.css";
+
 import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
+import {Link} from "@inertiajs/react";
 
 
 const Calendar = () => {

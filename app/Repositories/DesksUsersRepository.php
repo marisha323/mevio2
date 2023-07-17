@@ -4,6 +4,8 @@ namespace App\Repositories;
 use App\Contracts\DesksUsersContract;
 use App\Models\DesksUsers;
 use App\Models\User;
+use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\DB;
 
 class DesksUsersRepository implements DesksUsersContract
 {
@@ -11,11 +13,17 @@ class DesksUsersRepository implements DesksUsersContract
 
     function __construct()
     {
-        $this->model=new DesksUsersRepository();
+
     }
-    public function create($data)
+    public function create($deskId, $userId)
     {
-        return DesksUsers::create($data);
+        DB::table('desk_user')->insert([
+            'user_id' => 1,
+            'desk_id' => 1,
+            'created_at' => Date::now(),
+            'updated_at' => Date::now()
+        ]);
+        return true;
     }
 
     public function update($id, array $data)

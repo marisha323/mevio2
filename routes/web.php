@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/users/{id}', [UserController::class, 'delete']);
 
     Route::get('/calendar',function (){
-        return Inertia::render('Calendar/Calendar') ;
+        return Inertia::render('Calendar/Calendar');
     });
 
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
@@ -63,6 +63,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/Home',function (){
         return Inertia::render('Home/Home') ;
     });
+
+    //SAVE DESK
+    Route::post('/create-desk',[DeskController::class,'actionCreateDesk']);
 
 
     //SAVE CARD

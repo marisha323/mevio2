@@ -1,5 +1,5 @@
 .modal-container {
-    display: none;
+    display: flex;
     width: 100vw;
     height: calc(100vh + 4.4rem);
     background: rgba(12, 4, 4, 0.65);
@@ -8,31 +8,43 @@
     z-index: 2;
     justify-content: center;
     align-items: center;
-    transition: opacity 0.3s ease-in-out;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s ease-in-out 0.3s;
 }
 
 .modal-window {
     display: flex;
     width: 400px;
-    height: 560px;
     flex-direction: column;
-    gap: 50px;
+    align-items: center;
+    gap: 40px;
     background-color: #6E4796;
     padding: 15px;
     border-radius: 8px;
-    transition: opacity 0.3s ease-in-out;
+    margin-top: 4.4vh;
 }
 
-.modal-is-visible {
-    opacity: 1;
-    display: flex;
-
+.modal-window-div {
+    width: 100%;
 }
 
 .modal-window__desk-title {
     color: white;
     font-size: 26px;
     text-align: center;
+}
+
+.modal-is-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s;
+}
+
+.modal-not-visible {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s ease-in-out 0.3s;
 }
 
 .modal-window__subcategory-title {
@@ -49,6 +61,44 @@
 .theme-images .theme-images-mini {
     border-radius: 8px;
     cursor: pointer;
+    height: 40px;
+}
+
+.mini-background-img {
+    height: 150px;
+    margin:auto;
+    border-radius: 8px;
+}
+
+.mini-background-box {
+    height: auto;
+}
+
+.desk-title-input {
+    width: 100%;
+    font-size: 20px;
+}
+
+.desk-privacy-select {
+    width: 100%;
+    font-size: 20px;
+}
+
+.modal-window-div.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    gap: 75px;
+}
+
+.modal-window-form-button {
+    width: 125px;
+    height: 50px;
+    border: 1px solid black;
+    color: white;
+    font-size: 20px;
+    border-radius: 8px;
 }
 
 
