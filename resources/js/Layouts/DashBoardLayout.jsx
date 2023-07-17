@@ -8,18 +8,20 @@ import {useSelector, useDispatch} from "react-redux";
 import {useActions} from "@/Hooks/useActions.js";
 import {useThemes} from "@/Hooks/useThemes.js";
 import {AddDeskModal} from "@/Components/Modal/AddDesk/AddDeskModal.jsx";
+import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 
 
 
 
 export const DashBoardLayout = ({ children }) => {
+    const {
+        showAddDeskModal
+    } = useActions();
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    let visible = false;
+
     const AddDeskHandler = (e) => {
         e.preventDefault();
-        visible = !visible;
-        setIsModalVisible(visible);
+        showAddDeskModal();
     }
 
     const [mainTheme, setMainTheme] = useState({});
@@ -57,7 +59,7 @@ export const DashBoardLayout = ({ children }) => {
 
     const myDesks = desks.map((desk) => (
         <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item"
-              onClick={()=>{setDefaultTheme(desk.id)}}
+              onClick={()=>{setDefaultTheme(desk.themeId)}}
             style={{borderBottom: `5px solid ${mainTheme.sidebar_category_bg_color}`}}>
           <span className="my-desk-item-span">
             <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
@@ -78,7 +80,6 @@ export const DashBoardLayout = ({ children }) => {
     }
     return (
         <div>
-            <h1>{isModalVisible ? "Visible" : "Not visible"}</h1>
             <div style={{backgroundImage: `url(${image})`}} className={"background-block"}>
 
             </div>
@@ -176,7 +177,7 @@ export const DashBoardLayout = ({ children }) => {
                 </div>
                 {children}
             </div>
-            <AddDeskModal isVisible={isModalVisible} />
+            <AddDeskModal />
 
         </div>
     );

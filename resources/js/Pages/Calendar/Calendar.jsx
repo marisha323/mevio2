@@ -1,4 +1,3 @@
-import DashBoard from "@/Pages/DashBoard.jsx";
 import {Link} from "@inertiajs/react";
 
 import "../../../css/calendar/calendar.css";
