@@ -8,12 +8,11 @@ export const AddDeskModal = () => {
     const { isVisible } = useAddDeskModalVisibility();
     const { hideAddDeskModal } = useActions();
 
-    if(isVisible){
-        return (
-            <div className="modal-container"
-             onClick={()=>{hideAddDeskModal()}}>
-                <ModalWindow />
-            </div>
-        )
-    }
+    return (
+        <div className={`modal-container ${isVisible ? 'modal-is-visible' : ''}`}
+         onClick={()=>{hideAddDeskModal()}}>
+            <ModalWindow />
+        </div>
+    )
+
 }
