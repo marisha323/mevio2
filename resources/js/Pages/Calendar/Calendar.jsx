@@ -1,4 +1,4 @@
-import DashBoardLayout from "@/Layouts/DashBoardLayout.jsx";
+import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import { Link } from "@inertiajs/react";
 import {useEffect,useState} from "react";
 import "../../../css/calendar/calendar.css";
@@ -32,7 +32,7 @@ const Calendar = ({ cardsData }) => {
         setCards(cardsData);
     },[]);
 
-    console.log(cardsData);
+
 
 
     return (
