@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
@@ -46,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/calendar',function (){
         return Inertia::render('Calendar/Calendar') ;
     });
-
+    Route::get('/calendar/calendar', [CalendarController::class, 'index']);
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
