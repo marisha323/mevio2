@@ -59,7 +59,7 @@ export const DashBoardLayout = ({ children }) => {
 
     const myDesks = desks.map((desk) => (
         <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item"
-              onClick={()=>{setDefaultTheme(desk.id)}}
+              onClick={()=>{setDefaultTheme(desk.themeId)}}
             style={{borderBottom: `5px solid ${mainTheme.sidebar_category_bg_color}`}}>
           <span className="my-desk-item-span">
             <img className="my-desk-item-image" src={desk.deskTheme.backGroundImage} alt=""/>
