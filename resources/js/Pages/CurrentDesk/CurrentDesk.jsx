@@ -2,12 +2,22 @@ import '../../../css/current_desk/current_desk.css';
 
 import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import {Link} from "@inertiajs/react";
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
+import axios from 'axios';
 
-export default function CurrentDesk({cards}) {
+
+export default function CurrentDesk({cards})
+{
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const deskId = urlSearchParams.get("desk_id");
+
+    const [values, setValues] = useState(
+
+    );
 
     const redirectToCreateCard = () => {
-       // console.log(111);
+        // console.log(111);
         window.location.href = '/create-card';
     };
 
@@ -15,12 +25,12 @@ export default function CurrentDesk({cards}) {
 
   useEffect(() => {
     // Script initialization and event listeners
-    const rotateImg = document.querySelector('.rotate_img');
+      const taskList = document.querySelector('.task');
 
 
-    if(rotateImg){
-        rotateImg.addEventListener('click', () => {
-            rotateImg.classList.toggle('rotate180');
+    if(taskList){
+        taskList.addEventListener('click', () => {
+            taskList.classList.toggle('rotate180');
         });
     }
 
@@ -39,6 +49,7 @@ export default function CurrentDesk({cards}) {
 
     // Event listeners for drag and drop
     drake.on('drag', (el) => {
+
       el.className.replace('ex-moved', '');
     });
 
@@ -54,15 +65,41 @@ export default function CurrentDesk({cards}) {
       container.className.replace('ex-over', '');
     });
 
-    return () => {
-      // Clean up event listeners
-        if (rotateImg){
-            rotateImg.removeEventListener('click', () => {
-                rotateImg.classList.toggle('rotate180');
-            });
-        }
-      drake.destroy();
-    };
+      drake.on('drop', (el, target, source, sibling) => {
+          el.className += 'ex-moved';
+
+          console.log(el); //
+          const cardId = el.querySelector('.task').getAttribute('data-card-id');
+          const newColumnId = target.getAttribute('data-column-id');
+
+
+          //  const cardId = el.key; //
+          console.log("cardId: "+ cardId);
+          console.log("columnId: "+ newColumnId);
+          // Оновлюємо значення columnId у стані
+          setValues((prevState) => ({
+              ...prevState,
+              columnId: newColumnId,
+          }));
+
+          // Робимо запит до сервера, щоб оновити значення columnId в базі даних
+          axios.post(`/update-card-column/${cardId}`, { columnId: newColumnId })
+              .then((response) => {
+                  console.log('Column updated successfully!');
+                  window.location.href = '/current-desk';
+              })
+              .catch((error) => {
+                  console.error('Failed to update column:', error);
+              });
+      });
+      return () => {
+          // Clean up event listeners
+          taskList.removeEventListener('click', () => {
+              taskList.classList.toggle('rotate180');
+          });
+
+          drake.destroy();
+      };
   }, []);
 
 
@@ -102,10 +139,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Нужно сделать</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="to-do">
+              <ul className="task-list" id="to-do" data-column-id="1">
                   {cards.card1.map((card) => (
-                      <div>
-                          <li className="task" key={card.id}>
+                      <div className="rotate_image">
+                          <li className="task" key={card.id} data-card-id={card.id}>
                               <p>{card.cardName}</p>
                           </li>
                       </div>
@@ -121,10 +158,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Pобити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="doing">
+              <ul className="task-list" id="doing" data-column-id="2">
                   {cards.card2.map((card) => (
-                      <div >
-                          <li className="task" key={card.id}>
+                      <div className="rotate_image">
+                          <li className="task" key={card.id} data-card-id={card.id}>
                               <p>{card.cardName}</p>
                           </li>
                       </div>
@@ -141,10 +178,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Готово</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="done">
+              <ul className="task-list" id="done" data-column-id="3">
                   {cards.card3.map((card) => (
-                      <div >
-                          <li className="task" key={card.id}>
+                      <div  >
+                          <li className="task" key={card.id} data-card-id={card.id} >
                               <p>{card.cardName}</p>
                           </li>
                       </div>

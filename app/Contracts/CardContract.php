@@ -8,7 +8,7 @@ interface CardContract
     public function create();
     public function store(Request $request);
 
-    public function currentDesk();
+    public function currentDesk(Request $request);
 
     public function destroy();
     public function MoveCard();

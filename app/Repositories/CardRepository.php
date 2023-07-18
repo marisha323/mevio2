@@ -45,19 +45,22 @@ class CardRepository implements CardContract
         $card->created_at = new \DateTime();
         $card->updated_at = new \DateTime();
         $card->save();
-        return redirect('/dashboard');
+       // return redirect('/dashboard');
 
        // return Card::create();
     }
 
-    public function currentDesk()
+    public function currentDesk(Request $request)
     {
-        //  $data = ['cards' => Card::all()];
+        $deskId = $request->post('desk_id');
+       // $deskId = $request->post('desk_id');
 
         $cards1 = Card::where('columnId', 1)->get();
         $cards2 = Card::where('columnId', 2)->get();
         $cards3 = Card::where('columnId', 3)->get();
-
+//        $cards1 = Card::where('columnId', 1)->where('deskId', $deskId)->get();
+//        $cards2 = Card::where('columnId', 2)->where('deskId', $deskId)->get();
+//        $cards3 = Card::where('columnId', 3)->where('deskId', $deskId)->get();
 
         $cards=[
           'card1'=> $cards1,
@@ -65,10 +68,6 @@ class CardRepository implements CardContract
           'card3'=> $cards3,
         ];
        return $cards;
-
-
-
-
     }
 
 

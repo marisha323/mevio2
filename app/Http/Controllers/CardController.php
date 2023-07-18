@@ -17,7 +17,7 @@ class CardController extends Controller
 
     protected $cardModel;
 
-    public function __construct(CardContract $cardRepository)
+    public function __construct(CardRepository $cardRepository)
     {
         $this->cardModel = $cardRepository;
 
@@ -32,14 +32,14 @@ class CardController extends Controller
     {
         //dd($request);
         $this->cardModel->store($request);
-        return redirect('/dashboard');
+        return redirect('/current-desk');
        //return Inertia::render('CurrentDesk/CurrentDesk');
     }
 
     public function currentDesk(Request $request):Response
     {
-        $desk_id = $request->get('desk_id');
-        $cards=$this->cardModel->currentDesk();
+       // $desk_id = $request->get('desk_id');
+        $cards=$this->cardModel->currentDesk($request);
         return Inertia::render('CurrentDesk/CurrentDesk', ['cards' => $cards]);
 //        return Inertia::render('CurrentDesk/CurrentDesk');
     }
@@ -53,7 +53,7 @@ class CardController extends Controller
 
     }
 
-    public function SetDeaadLine(){
+    public function SetDeadLine(){
 
     }
     public function OffDeadline(){

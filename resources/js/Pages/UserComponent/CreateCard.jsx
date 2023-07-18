@@ -12,7 +12,7 @@ export default function CreateCard() {
         cardName: "",
         description: "",
         deadLine: "",
-        columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
+        columnId: columnId || "",
     });
     console.log(111);
     console.log(columnId);
