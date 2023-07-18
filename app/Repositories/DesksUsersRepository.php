@@ -18,8 +18,8 @@ class DesksUsersRepository implements DesksUsersContract
     public function create($deskId, $userId)
     {
         DB::table('desk_user')->insert([
-            'user_id' => 1,
-            'desk_id' => 1,
+            'user_id' => $userId,
+            'desk_id' => $deskId,
             'created_at' => Date::now(),
             'updated_at' => Date::now()
         ]);

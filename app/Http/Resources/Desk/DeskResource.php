@@ -19,6 +19,7 @@ class DeskResource extends JsonResource
             'deskName' => $request->deskName,
             'isPublic' => $request->isPublic,
             'themeId' => $request->themeId,
+            'deskId' => $this->id
         ];
     }
 }

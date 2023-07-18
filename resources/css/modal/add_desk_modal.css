@@ -77,6 +77,8 @@
 .desk-title-input {
     width: 100%;
     font-size: 20px;
+    border: 5px solid rgba(0, 0, 0, 0);
+    height: 43px;
 }
 
 .desk-privacy-select {

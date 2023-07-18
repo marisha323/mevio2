@@ -15,7 +15,9 @@ export const AddDeskModal = () => {
             formWindow.classList.remove("modal-not-visible");
 
             const successWindow = document.querySelector(".success-desk-modal");
-            successWindow.classList.remove("modal-is-visible");
+            if (successWindow){
+                successWindow.classList.remove("modal-is-visible");
+            }
         },300)
     }
 

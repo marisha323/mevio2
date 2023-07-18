@@ -11,6 +11,7 @@ class Desk extends Model
     use HasFactory;
 
     protected $fillable = [
+        'id',
         'deskName',
         'userId',
         'isPublic',
