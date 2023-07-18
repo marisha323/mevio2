@@ -34,9 +34,9 @@ export const ModalWindow = () => {
 
     function HandleSubmit (e) {
         e.preventDefault()
-        /*axios.post('/create-desk',postDesk)
+        axios.post('/create-desk',postDesk)
             .then((resp)=>console.log(resp))
-            .catch(()=>console.log("error"));*/
+            .catch(()=>console.log("error"));
     }
 
     useEffect(()=>{
