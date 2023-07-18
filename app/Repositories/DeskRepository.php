@@ -7,18 +7,26 @@ use App\Models\DesksUsers;
 use App\Models\User;
 use App\Presenters\DeskAsArrayPresenter;
 use \Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 
 class DeskRepository implements DeskContract
 {
-    protected $model;
+    protected $deskModel;
 
     public function __construct(Desk $desk)
     {
-        $this->model = $desk;
+        $this->deskModel = $desk;
     }
-    public function create($data)
+    public function create($desk)
     {
-        return Desk::create($data);
+
+        $desk['userId'] = Auth::user()->getAuthIdentifier();
+        $desk['dateOfCreation'] = Date::now();
+        $desk['created_at'] = Date::now();
+        $desk['updated_at'] = Date::now();
+
+        return Desk::create($desk);
     }
 
     public function update($id, array $data)
