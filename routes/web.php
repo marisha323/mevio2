@@ -47,9 +47,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/calendar', [CalendarController::class, 'index']);
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
-//    Route::get('/current-desk',function (){
-//        return Inertia::render('CurrentDesk/CurrentDesk') ;
-//    });
+
 
     // Route::get('/users',function (){
     //     return Inertia::render('Users/Users') ;
