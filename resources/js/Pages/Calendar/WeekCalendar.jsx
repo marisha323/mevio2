@@ -1,4 +1,3 @@
-import DashBoard from "@/Pages/DashBoard.jsx";
 
 import "../../../css/calendar/week_calendar.css";
 import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";

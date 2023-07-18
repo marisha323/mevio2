@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Contracts\CalendarContract;
 use App\Contracts\UserContract;
+use App\Repositories\CalendarRepository;
 use App\Repositories\UserRepository;
 
 use App\Contracts\ArchiveContract;
@@ -58,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(InvitationContract::class,InvitationRepository::class);
         $this->app->bind(PremiumContract::class,PremiumRepository::class);
         $this->app->bind(ThemeContract::class,ThemeRepository::class);
+        $this->app->bind(CalendarContract::class,CalendarRepository::class);
     }
 
     /**

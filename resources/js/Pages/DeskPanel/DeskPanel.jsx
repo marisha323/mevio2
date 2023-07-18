@@ -19,7 +19,7 @@ export default function DeskPanel ({desksData}) {
 
     const desksItems = desksData.map((desk) =>(
         <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="group_container"
-              onClick={()=>{setDefaultTheme(desk.id)}}>
+              onClick={()=>{setDefaultTheme(desk.themeId)}}>
             <p>{desk.deskName}</p>
             <img src={desk.deskTheme.backGroundImage} alt="" />
         </Link>
