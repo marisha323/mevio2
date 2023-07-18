@@ -1,6 +1,10 @@
+import "../../../../css/modal/success_desk_modal.css";
+import "../../../../css/modal/add_desk_modal.css";
+
 import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 import {useEffect, useState} from "react";
 import {useActions} from "@/Hooks/useActions.js";
+import {SuccessAddDesk} from "@/Components/Modal/SuccessAddDesk.jsx";
 
 
 export const ModalWindow = () => {
@@ -30,9 +34,9 @@ export const ModalWindow = () => {
 
     function HandleSubmit (e) {
         e.preventDefault()
-        axios.post('/create-desk',postDesk)
+        /*axios.post('/create-desk',postDesk)
             .then((resp)=>console.log(resp))
-            .catch(()=>console.log("error"));
+            .catch(()=>console.log("error"));*/
     }
 
     useEffect(()=>{
@@ -43,8 +47,18 @@ export const ModalWindow = () => {
     },[themeId])
 
 
+    function HideClick () {
+        const formWindow = document.querySelector(".modal-window");
+        formWindow.classList.add("modal-not-visible");
+
+        const successWindow = document.querySelector(".success-desk-modal");
+        successWindow.classList.add("modal-is-visible");
+    }
+
 
     return (
+        <div>
+            <SuccessAddDesk  />
         <form onSubmit={HandleSubmit} method="post">
         <div onClick={(e) => {
             e.stopPropagation()
@@ -79,10 +93,11 @@ export const ModalWindow = () => {
                 </select>
             </div>
             <div className="modal-window-div buttons">
-                <button onClick={()=>hideAddDeskModal()} className="modal-window-form-button">Відміна</button>
+                <button onClick={HideClick} className="modal-window-form-button">Відміна</button>
                 <button onClick={HandleSubmit} className="modal-window-form-button">Створити</button>
             </div>
         </div>
         </form>
+        </div>
     )
 }

@@ -36,9 +36,9 @@
 }
 
 .modal-is-visible {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transition: opacity 0.3s !important;
 }
 
 .modal-not-visible {
