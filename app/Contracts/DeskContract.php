@@ -3,7 +3,7 @@ namespace App\Contracts;
 
 interface DeskContract
 {
-    public function create($data);
+    public function create($desk);
 
     public function delete($id);
 
