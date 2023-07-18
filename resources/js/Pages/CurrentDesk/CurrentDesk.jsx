@@ -2,7 +2,8 @@ import '../../../css/current_desk/current_desk.css';
 
 import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import {Link} from "@inertiajs/react";
-import {useEffect} from "react";
+import React, { useRef } from 'react';
+import { Card, Board } from '@/React-dnd-Components';
 
 export default function CurrentDesk({cards}) {
 
@@ -10,76 +11,21 @@ export default function CurrentDesk({cards}) {
        // console.log(111);
         window.location.href = '/create-card';
     };
+    const cardRef = useRef(null);
 
-
-
-  useEffect(() => {
-    // Script initialization and event listeners
-    const rotateImg = document.querySelector('.rotate_img');
-
-
-    if(rotateImg){
-        rotateImg.addEventListener('click', () => {
-            rotateImg.classList.toggle('rotate180');
-        });
-    }
-
-    // Initialize drag and drop functionality
-    const containers = [
-      document.getElementById('to-do'),
-      document.getElementById('doing'),
-      document.getElementById('done'),
-      document.getElementById('trash')
-    ];
-
-    const drake = dragula(containers);
-
-    // Remove on spill
-    drake.removeOnSpill = false;
-
-    // Event listeners for drag and drop
-    drake.on('drag', (el) => {
-      el.className.replace('ex-moved', '');
-    });
-
-    drake.on('drop', (el) => {
-      el.className += ' ex-moved';
-    });
-
-    drake.on('over', (el, container) => {
-      container.className += ' ex-over';
-    });
-
-    drake.on('out', (el, container) => {
-      container.className.replace('ex-over', '');
-    });
-
-    return () => {
-      // Clean up event listeners
-        if (rotateImg){
-            rotateImg.removeEventListener('click', () => {
-                rotateImg.classList.toggle('rotate180');
-            });
+    const handleDragEnd = () => {
+      const card = cardRef.current;
+      const parent = card.parentElement;
+      const board = parent.closest('.board');
+  
+      if (!board) {
+        // If the card is dragged outside the Board, append it back to its original parent
+        const originalBoard = document.getElementById(card.dataset.originalBoard);
+        if (originalBoard) {
+          originalBoard.appendChild(card);
         }
-      drake.destroy();
+      }
     };
-  }, []);
-
-
-
-
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/dragula/dist/dragula.min.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up the script when the component unmounts
-      document.body.removeChild(script);
-    };
-  }, []);
 
   return (
     <DashBoardLayout>
@@ -102,35 +48,59 @@ export default function CurrentDesk({cards}) {
                 <h4>Нужно сделать</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="to-do">
-                  {cards.card1.map((card) => (
-                      <div>
-                          <li className="task" key={card.id}>
-                              <p>{card.cardName}</p>
-                          </li>
-                      </div>
-                  ))}
-              </ul>
+              <Board id="to-do" className="task-list">
+                {cards.card1.map((card)=>(
+                  <div>
+                  <Card className="task"
+                   key={card.id}
+                   id={card.id}
+                   draggable="true"
+                   ref={cardRef}
+                   onDragEnd={handleDragEnd}
+                   data-original-board="to-do"
+                   >
+                      <p>{card.cardName}</p>
+                  </Card>
+              </div>
+                ))}
+                {/* <Card
+                id="card-1"
+                className="task"
+                draggable="true"
+                ref={cardRef}
+                onDragEnd={handleDragEnd}
+                data-original-board="to-do"
+                > 
+                  <p>Card one</p>
+                </Card> */}
+                
+              </Board>
                 <Link href="/create-card?columnId=1">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </Link>
-              </li>
+            </li>
 
             <li className="column doing-column">
               <div className="column-header">
                 <h4>Pобити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="doing">
-                  {cards.card2.map((card) => (
-                      <div >
-                          <li className="task" key={card.id}>
-                              <p>{card.cardName}</p>
-                          </li>
-                      </div>
-                  ))}
-
-              </ul>
+              <Board id="doing" className="task-list">
+                {cards.card2.map((card)=>(
+                  <div>
+                  <Card className="task"
+                   key={card.id}
+                   id={card.id}
+                   draggable="true"
+                   ref={cardRef}
+                   onDragEnd={handleDragEnd}
+                   data-original-board="doing"
+                   >
+                      <p>{card.cardName}</p>
+                  </Card>
+              </div>
+                ))}
+              </Board>
                 <Link href="/create-card?columnId=2">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </Link>
@@ -141,15 +111,22 @@ export default function CurrentDesk({cards}) {
                 <h4>Готово</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="done">
-                  {cards.card3.map((card) => (
-                      <div >
-                          <li className="task" key={card.id}>
-                              <p>{card.cardName}</p>
-                          </li>
-                      </div>
-                  ))}
-              </ul>
+              <Board id="done" className="task-list">
+                {cards.card3.map((card)=>(
+                  <div>
+                  <Card className="task"
+                  id={card.id}
+                   key={card.id}
+                   draggable="true"
+                   ref={cardRef}
+                   onDragEnd={handleDragEnd}
+                   data-original-board="done"
+                   >
+                      <p>{card.cardName}</p>
+                  </Card>
+              </div>
+                ))}
+              </Board>
                 <Link href="/create-card?columnId=3">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </Link>
