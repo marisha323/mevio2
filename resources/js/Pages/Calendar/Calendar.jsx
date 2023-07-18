@@ -32,7 +32,6 @@ const Calendar = ({ cardsData }) => {
         setCards(cardsData);
     },[]);
 
-    console.log(cardsData);
 
     return (
         <DashBoardLayout>
@@ -75,19 +74,50 @@ const Calendar = ({ cardsData }) => {
                                 </div>
                             ))}
                             {monthDays.map((monthDay) => {
+                                const tasksForDay = [];
 
-                                const hasDeadline =  cardsData.some((card) =>
-                                {
+                                cardsData.forEach((card) => {
                                     const deadline = new Date(card.deadLine);
-                                    console.log(deadline.getDate());
-                                   return  deadline.getDate() === monthDay} );
+                                    if (deadline.getDate() === monthDay && card.cardName && card.description) {
+                                        tasksForDay.push({
+                                            cardName: card.cardName,
+                                            cardDes: card.description,
+                                            cardDeadLine: card.deadLine
+                                        });
+                                    }
+                                });
+
                                 return (
                                     <div className="date" key={monthDay}>
                                         {monthDay}
-                                        {hasDeadline && <span>тут</span>}
+                                        {tasksForDay.length > 0 && tasksForDay.map((task, index) => (
+                                            <div className='task' key={index}>
+                                                <div className='task__tags'>
+                        <span className='task__tag task__tag--copyright'>
+                            {'Name: ' + task.cardName}
+                        </span>
+                                                    <button className='task__options'>
+                                                        <i className="fas fa-ellipsis-h"></i>
+                                                    </button>
+                                                </div>
+                                                <p>{'Description: ' + task.cardDes}</p>
+                                                <div className='task__stats'>
+                        <span>
+                            <time dateTime={task.cardDeadLine}>
+                                <i className="fas fa-flag"></i>
+                                {'Date: ' + task.cardDeadLine}
+                            </time>
+                        </span>
+                                                    <span><i className="fas fa-comment"></i>3</span>
+                                                    <span><i className="fas fa-paperclip"></i>7</span>
+                                                    <span className='task__owner'></span>
+                                                </div>
+                                            </div>
+                                        ))}
                                     </div>
                                 );
                             })}
+
 
                             {nextMonthDays.map((day) => (
                                 <div className="date next-month" key={day}>

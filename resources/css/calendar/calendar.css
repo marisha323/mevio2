@@ -51,13 +51,15 @@
     opacity: 0.95;
     border-right: 1px solid rgba(5, 52, 47, 0.9);
     border-bottom: 1px solid rgba(5, 52, 47, 0.9);
+    overflow: auto;
+    max-height: 200px;
 }
 
 .date:nth-child(7n) {
     border-right: none; /* Remove right border for every 7th element */
 }
 
-.date:nth-child(n+29) {
+.date:nth-child(n+36) {
     border-bottom: none; /* Remove bottom border after the 28th element */
 }
 
@@ -79,3 +81,14 @@
 {
     color: black;
 }
+.task {
+    background-color: black;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin-bottom: 1rem;
+    border: 3px dashed transparent;
+
+}
+
