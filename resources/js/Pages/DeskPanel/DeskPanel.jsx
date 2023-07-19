@@ -6,6 +6,7 @@ import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import {DesksContainer} from "@/Pages/DeskPanel/DesksContainer.jsx";
 import {useActions} from "@/Hooks/useActions.js";
 import {useThemes} from "@/Hooks/useThemes.js";
+import {DeskToolComponent} from "@/Pages/DeskPanel/DeskToolComponent.jsx";
 
 export default function DeskPanel ({desksData}) {
     const [mainTheme, setMainTheme] = useState({});
@@ -22,6 +23,7 @@ export default function DeskPanel ({desksData}) {
               onClick={()=>{setDefaultTheme(desk.themeId)}}>
             <p>{desk.deskName}</p>
             <img src={desk.deskTheme.backGroundImage} alt="" />
+            <DeskToolComponent desk={desk} />
         </Link>
     ))
 

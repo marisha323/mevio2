@@ -12,6 +12,8 @@ class Archive extends Model
     protected $fillable = [
         'userId',
         'deskId',
+        'created_at',
+        'updated_at'
     ];
 
 }

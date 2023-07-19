@@ -4,15 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Contracts\DeskContract;
 use App\Contracts\DesksUsersContract;
+use App\Contracts\FavoriteDeskContract;
 use App\Contracts\ThemeContract;
+use App\Http\Requests\Desk\ChangeFavoriteRequest;
 use App\Http\Requests\Desk\StoreRequest;
 use App\Http\Resources\Desk\DeskResource;
+use App\Models\Archive;
+use App\Models\FavoriteDesk;
 use App\Repositories\DeskRepository;
 use App\Repositories\DesksUsersRepository;
+use App\Repositories\FavoriteDeskRepository;
 use App\Repositories\ThemeRepository;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Date;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,17 +26,20 @@ class DeskController extends Controller
 {
     protected DeskRepository $desk_model;
     protected ThemeRepository $themeModel;
+    protected FavoriteDeskRepository $favoriteModel;
 
     protected DesksUsersRepository $deskUserModel;
 
     public function __construct (
             DeskContract $desk_repos,
             ThemeContract $themeRepos,
-            DesksUsersContract $deskUserRepos
+            DesksUsersContract $deskUserRepos,
+            FavoriteDeskContract $favoriteRepos
         ){
         $this->desk_model = $desk_repos;
         $this->themeModel = $themeRepos;
         $this->deskUserModel = $deskUserRepos;
+        $this->favoriteModel = $favoriteRepos;
     }
 
     public function create($data)
@@ -88,4 +97,17 @@ class DeskController extends Controller
         }
     }
 
+    public function actionChangeDeskFavorite (ChangeFavoriteRequest $request): bool|string
+    {
+        $favoriteDesk = $request->validated();
+        $isUpdated = $this->favoriteModel->update([
+            'userId' => Auth::user()->getAuthIdentifier(),
+            'deskId' => $favoriteDesk['deskId'],
+            'isFavorite' => $favoriteDesk['isFavorite']
+        ]);
+
+        $message = $isUpdated ? "success" : "error";
+
+        return json_encode(['message' => $message]);
+    }
 }

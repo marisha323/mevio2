@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Caveat Brush';
     src: url('path/to/font/Caveat-Brush-Regular.ttf') format('truetype');
@@ -379,6 +380,14 @@ hr {
     justify-content: center;
     margin-bottom: 2%;
 }
+
+.group_container:hover>.desk-tool {
+    opacity: 1;
+    visibility: visible;
+    bottom: 10px;
+}
+
+
 
 .group_container p {
     top: 10px;

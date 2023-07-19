@@ -1,5 +1,6 @@
 import {useEffect} from "react";
 import {useActions} from "@/Hooks/useActions.js";
+import {Link} from "@inertiajs/react";
 
 
 export const InfoAddDesk = () => {
@@ -23,7 +24,7 @@ export const InfoAddDesk = () => {
         <div className="success-desk-modal"
             onClick={(e)=>{e.stopPropagation()}}>
             <h1 className="success-desk-title"></h1>
-            <button onClick={()=>HideModal()}  className="ok-button">OK</button>
+            <Link href={'/desk-panel'} onClick={()=>HideModal()}  className="ok-button">OK</Link>
         </div>
     )
 }

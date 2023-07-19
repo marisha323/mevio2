@@ -32,10 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
     );
 
-    Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
-    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
-        ->name('desk.panel');
-
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -47,6 +43,13 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Calendar/Calendar');
     });
 
+
+    //DESKS
+    Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
+
+    Route::post("/change-desk-favorite",[DeskController::class,'actionChangeDeskFavorite']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
+        ->name('desk.panel');
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
