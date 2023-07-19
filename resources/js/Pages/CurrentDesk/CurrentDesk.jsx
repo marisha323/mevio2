@@ -17,10 +17,11 @@ export default function CurrentDesk({cards}) {
 
     useEffect(() => {
         // Script initialization and event listeners
-        const rotateImg = document.querySelector('.rotate_img');
+       // const rotateImg = document.querySelector('.rotate_img');
+        const rotateImg = document.querySelector('.task');
+
 
         if(rotateImg){
-
         rotateImg.addEventListener('click', () => {
             rotateImg.classList.toggle('rotate180');
         });
@@ -83,7 +84,7 @@ export default function CurrentDesk({cards}) {
                 })
                 .catch((error) => {
                     console.error('Failed to update column:', error);
-                });
+                }); 
         });
         return () => {
             // Clean up event listeners

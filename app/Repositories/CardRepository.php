@@ -70,6 +70,27 @@ class CardRepository implements CardContract
        return $cards;
     }
 
+//    public function updateCardColumn(Request $request)
+//    {
+//        $cardId = $request->route('id');
+//        $card = Card::findOrFail($cardId);
+//
+//        $card->columnId = $request->post('columnId');
+//        $card->save();
+//
+//        return redirect('/current-desk');
+//    }
+
+    public function updateCardColumn(Request $request, $id)
+    {
+        $card = Card::findOrFail($id);
+
+        $card->columnId = $request->post('columnId');
+        $card->save();
+
+        return redirect('/current-desk');
+    }
+
 
     public function destroy(){
 

@@ -10,6 +10,8 @@ interface CardContract
 
     public function currentDesk(Request $request);
 
+    public function updateCardColumn(Request $request, $id);
+
     public function destroy();
     public function MoveCard();
     public function SetDeadLine();
