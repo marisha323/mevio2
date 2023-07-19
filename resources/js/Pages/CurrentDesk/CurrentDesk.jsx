@@ -1,87 +1,116 @@
-import '../../../css/current_desk/current_desk.css';
+import React, { useEffect,useState } from 'react';
+import {DashBoardLayout} from '@/Layouts/DashBoardLayout.jsx';
+import axios from 'axios';
 
-import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
+import '../../../css/current_desk/current_desk.css';
 import {Link} from "@inertiajs/react";
-import {useEffect} from "react";
 
 export default function CurrentDesk({cards}) {
+    const [values, setValues] = useState(
+
+    );
 
     const redirectToCreateCard = () => {
-       // console.log(111);
+        // console.log(111);
         window.location.href = '/create-card';
     };
 
+    useEffect(() => {
+        // Script initialization and event listeners
+        const rotateImg = document.querySelector('.rotate_img');
 
+        if(rotateImg){
 
-  useEffect(() => {
-    // Script initialization and event listeners
-    const rotateImg = document.querySelector('.rotate_img');
-
-
-    if(rotateImg){
         rotateImg.addEventListener('click', () => {
             rotateImg.classList.toggle('rotate180');
         });
-    }
+        }
 
-    // Initialize drag and drop functionality
-    const containers = [
-      document.getElementById('to-do'),
-      document.getElementById('doing'),
-      document.getElementById('done'),
-      document.getElementById('trash')
-    ];
+        // Initialize drag and drop functionality
+        const containers = [
+            document.getElementById('to-do'),
+            document.getElementById('doing'),
+            document.getElementById('done'),
+            document.getElementById('trash')
+        ];
 
-    const drake = dragula(containers);
+        const drake = dragula(containers);
 
-    // Remove on spill
-    drake.removeOnSpill = false;
+        // Remove on spill
+        drake.removeOnSpill = false;
 
-    // Event listeners for drag and drop
-    drake.on('drag', (el) => {
-      el.className.replace('ex-moved', '');
-    });
+        // Event listeners for drag and drop
+        drake.on('drag', (el) => {
+            el.className.replace('ex-moved', '');
+        });
 
-    drake.on('drop', (el) => {
-      el.className += ' ex-moved';
-    });
+        // drake.on('drop', (el) => {
+        //     el.className += ' ex-moved';
+        // });
 
-    drake.on('over', (el, container) => {
-      container.className += ' ex-over';
-    });
+        drake.on('over', (el, container) => {
+            container.className += ' ex-over';
+        });
 
-    drake.on('out', (el, container) => {
-      container.className.replace('ex-over', '');
-    });
+        drake.on('out', (el, container) => {
+            container.className.replace('ex-over', '');
+        });
 
-    return () => {
-      // Clean up event listeners
-        if (rotateImg){
+        /////////
+
+        drake.on('drop', (el, target, source, sibling) => {
+            el.className += 'ex-moved';
+
+            console.log(el); //
+            const cardId = el.querySelector('.task').getAttribute('data-card-id');
+            const newColumnId = target.getAttribute('data-column-id');
+
+
+            //  const cardId = el.key; //
+            console.log("cardId: "+ cardId);
+            console.log("columnId: "+ newColumnId);
+            // Оновлюємо значення columnId у стані
+            setValues((prevState) => ({
+                ...prevState,
+                columnId: newColumnId,
+            }));
+
+            // Робимо запит до сервера, щоб оновити значення columnId в базі даних
+            axios.post(`/update-card-column/${cardId}`, { columnId: newColumnId })
+                .then((response) => {
+                    console.log('Column updated successfully!');
+                    window.location.href = '/current-desk';
+                })
+                .catch((error) => {
+                    console.error('Failed to update column:', error);
+                });
+        });
+        return () => {
+            // Clean up event listeners
+            if(rotateImg)
+            {
             rotateImg.removeEventListener('click', () => {
                 rotateImg.classList.toggle('rotate180');
             });
-        }
-      drake.destroy();
-    };
-  }, []);
+            }
 
+            drake.destroy();
+        };
+    }, []);
 
+    useEffect(() => {
+        const script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/dragula/dist/dragula.min.js';
+        script.async = true;
+        document.body.appendChild(script);
 
+        return () => {
+            // Clean up the script when the component unmounts
+            document.body.removeChild(script);
+        };
+    }, []);
 
-
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdn.jsdelivr.net/npm/dragula/dist/dragula.min.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      // Clean up the script when the component unmounts
-      document.body.removeChild(script);
-    };
-  }, []);
-
-  return (
+    return (
     <DashBoardLayout>
       <div className="middle_desks_container">
         <div className="middle_top_body_tasks">
@@ -102,10 +131,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Нужно сделать</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="to-do">
+              <ul className="task-list" id="to-do" data-column-id="1">
                   {cards.card1.map((card) => (
-                      <div>
-                          <li className="task" key={card.id}>
+                      <div draggable={true}>
+                          <li className="task" key={card.id} data-card-id={card.id}>
                               <p>{card.cardName}</p>
                           </li>
                       </div>
@@ -121,10 +150,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Pобити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="doing">
+              <ul className="task-list" id="doing" data-column-id="2">
                   {cards.card2.map((card) => (
                       <div >
-                          <li className="task" key={card.id}>
+                          <li className="task" key={card.id} data-card-id={card.id}>
                               <p>{card.cardName}</p>
                           </li>
                       </div>
@@ -141,10 +170,10 @@ export default function CurrentDesk({cards}) {
                 <h4>Готово</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <ul className="task-list" id="done">
+              <ul className="task-list" id="done" data-column-id="3">
                   {cards.card3.map((card) => (
                       <div >
-                          <li className="task" key={card.id}>
+                          <li className="task" key={card.id} data-card-id={card.id}>
                               <p>{card.cardName}</p>
                           </li>
                       </div>
