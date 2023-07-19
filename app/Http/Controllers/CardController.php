@@ -11,6 +11,9 @@ use App\Repositories\CardRepository;
 use Inertia\Inertia;
 use Inertia\Response;
 
+use App\Models\User;
+use App\Models\DesksUsers;
+
 
 class CardController extends Controller
 {
@@ -36,14 +39,31 @@ class CardController extends Controller
        //return Inertia::render('CurrentDesk/CurrentDesk');
     }
 
-    public function currentDesk(Request $request):Response
+//     public function currentDesk(Request $request):Response
+//     {
+//         $desk_id = $request->get('desk_id');
+//         $cards=$this->cardModel->currentDesk();
+//         return Inertia::render('CurrentDesk/CurrentDesk', ['cards' => $cards]);
+// //        return Inertia::render('CurrentDesk/CurrentDesk');
+//     }
+
+    public function currentDesk(Request $request): Response
     {
         $desk_id = $request->get('desk_id');
-        $cards=$this->cardModel->currentDesk();
-        return Inertia::render('CurrentDesk/CurrentDesk', ['cards' => $cards]);
-//        return Inertia::render('CurrentDesk/CurrentDesk');
-    }
 
+        // Fetch users who do not exist in the given desk using the doesNotHave relationship.
+        $users = User::whereDoesntHave('desks', function ($query) use ($desk_id) {
+            $query->where('desk_id', $desk_id);
+        })->get();
+
+        // Fetch the cards associated with the desk. I'm assuming you already have a method in your cardModel for this.
+        $cards = $this->cardModel->currentDesk();
+
+        return Inertia::render('CurrentDesk/CurrentDesk', [
+            'cards' => $cards,
+            'users' => $users,
+        ]);
+    }
 
     public function destroy(){
 
