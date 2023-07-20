@@ -5,7 +5,8 @@ use Illuminate\Http\Request;
 
 interface CalendarContract
 {
-    public function index();
+    public function index($userId);
+    public function index_week($userId);
 }
 
 

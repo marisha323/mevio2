@@ -78,11 +78,12 @@ const Calendar = ({ cardsData }) => {
 
                                 cardsData.forEach((card) => {
                                     const deadline = new Date(card.deadLine);
-                                    if (deadline.getDate() === monthDay && card.cardName && card.description) {
+                                    if (deadline.getDate() === monthDay && card.cardName && card.description && currentYear) {
                                         tasksForDay.push({
                                             cardName: card.cardName,
                                             cardDes: card.description,
-                                            cardDeadLine: card.deadLine
+                                            cardDeadLine: card.deadLine,
+                                            currentYear: currentYear
                                         });
                                     }
                                 });
@@ -90,30 +91,17 @@ const Calendar = ({ cardsData }) => {
                                 return (
                                     <div className="date" key={monthDay}>
                                         {monthDay}
+                                        <div className="info">
                                         {tasksForDay.length > 0 && tasksForDay.map((task, index) => (
                                             <div className='task' key={index}>
-                                                <div className='task__tags'>
-                        <span className='task__tag task__tag--copyright'>
-                            {'Name: ' + task.cardName}
-                        </span>
-                                                    <button className='task__options'>
-                                                        <i className="fas fa-ellipsis-h"></i>
-                                                    </button>
-                                                </div>
-                                                <p>{'Description: ' + task.cardDes}</p>
-                                                <div className='task__stats'>
-                        <span>
-                            <time dateTime={task.cardDeadLine}>
-                                <i className="fas fa-flag"></i>
-                                {'Date: ' + task.cardDeadLine}
-                            </time>
-                        </span>
-                                                    <span><i className="fas fa-comment"></i>3</span>
-                                                    <span><i className="fas fa-paperclip"></i>7</span>
-                                                    <span className='task__owner'></span>
-                                                </div>
+                                                <ul>
+                                                    <li>{'Name: ' + task.cardName}</li>
+                                                    <li>{'Description: ' + task.cardDes}</li>
+                                                    <li>{'DeadLine: ' + new Date(task.cardDeadLine).getDate()+'.0'+new Date(task.cardDeadLine).getMonth()+'.'+task.currentYear}</li>
+                                                </ul>
+
                                             </div>
-                                        ))}
+                                        ))}</div>
                                     </div>
                                 );
                             })}
