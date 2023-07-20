@@ -1,10 +1,15 @@
-.calendar_month_h1{
+.calendar_month_h1:nth-child(1){
     color: #9AB9A3;
     font-weight: 700;
     margin-top: 1%;
     padding-left: 3%;
+    padding-right: 3%;
     font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
 .calendar_container{
     width: 90%;
     height: 68vh;
@@ -87,16 +92,21 @@
     color: black;
 }
 .task {
+    overflow: auto;
+    max-width: 300px;
     display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
     justify-content: center;
     background-color: black;
     padding: 1rem;
     border-radius: 8px;
     width: 98%;
-    height: 85%;
+    height: 88%;
     box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
     margin-bottom: 1rem;
     border: 3px dashed transparent;
 }
+
 
 

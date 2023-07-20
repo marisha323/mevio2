@@ -41,30 +41,31 @@ const Calendar = ({ cardsData }) => {
                 </div>
                 <div className="middle_middle_body">
                     <h1 className="calendar_month_h1">
-                        {getMonthName(currentMonth) + " " + currentYear}
+                        <span>{getMonthName(currentMonth) + " " + currentYear}</span>
+                        <button className="button_week"> <Link href={"/week-calendar"}>Тижневий</Link></button>
                     </h1>
                     <div className="calendar_container">
                         <div className="display_weeks">
                             <p>
-                                <Link href={"/week-calendar"}>Понеділок</Link>
+                                Понеділок
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>Вівторок</Link>
+                                Вівторок
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>Середа</Link>
+                               Середа
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>Четвер</Link>
+                                Четвер
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>П'ятниця</Link>
+                                П'ятниця
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>Субота</Link>
+                                Субота
                             </p>
                             <p>
-                                <Link href={"/week-calendar"}>Неділя</Link>
+                                Неділя
                             </p>
                         </div>
                         <div className="display_dates">
@@ -92,16 +93,15 @@ const Calendar = ({ cardsData }) => {
                                     <div className="date" key={monthDay}>
                                         {monthDay}
                                         <div className="info">
-                                        {tasksForDay.length > 0 && tasksForDay.map((task, index) => (
-                                            <div className='task' key={index}>
-                                                <ul>
-                                                    <li>{'Name: ' + task.cardName}</li>
-                                                    <li>{'Description: ' + task.cardDes}</li>
-                                                    <li>{'DeadLine: ' + new Date(task.cardDeadLine).getDate()+'.0'+new Date(task.cardDeadLine).getMonth()+'.'+task.currentYear}</li>
-                                                </ul>
-
-                                            </div>
-                                        ))}</div>
+                                            {tasksForDay.length > 0 && tasksForDay.map((task, index) => (
+                                                <div className='task' key={index}>
+                                                    <ul>
+                                                        <li>{'Name: ' + task.cardName}</li>
+                                                        <li>{'Description: ' + task.cardDes}</li>
+                                                        <li>{'DeadLine: ' + new Date(task.cardDeadLine).getDate()+'.0'+new Date(task.cardDeadLine).getMonth()+'.'+task.currentYear}</li>
+                                                    </ul>
+                                                </div>
+                                            ))}</div>
                                     </div>
                                 );
                             })}
