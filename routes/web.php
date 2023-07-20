@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
 
     Route::post("/change-desk-favorite",[DeskController::class,'actionChangeDeskFavorite']);
+    Route::post("/change-desk-archive",[DeskController::class,'actionChangeDeskArchive']);
     Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
         ->name('desk.panel');
     Route::get('/current-desk', [CardController::class, 'currentDesk']);

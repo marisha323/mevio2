@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Contracts\ArchiveContract;
 use App\Contracts\DeskContract;
 use App\Contracts\DesksUsersContract;
 use App\Contracts\FavoriteDeskContract;
 use App\Contracts\ThemeContract;
+use App\Http\Requests\Desk\ChangeArchiveRequest;
 use App\Http\Requests\Desk\ChangeFavoriteRequest;
 use App\Http\Requests\Desk\StoreRequest;
 use App\Http\Resources\Desk\DeskResource;
 use App\Models\Archive;
 use App\Models\FavoriteDesk;
+use App\Repositories\ArchiveRepository;
 use App\Repositories\DeskRepository;
 use App\Repositories\DesksUsersRepository;
 use App\Repositories\FavoriteDeskRepository;
@@ -27,19 +30,21 @@ class DeskController extends Controller
     protected DeskRepository $desk_model;
     protected ThemeRepository $themeModel;
     protected FavoriteDeskRepository $favoriteModel;
-
     protected DesksUsersRepository $deskUserModel;
+    protected ArchiveRepository $archiveModel;
 
     public function __construct (
             DeskContract $desk_repos,
             ThemeContract $themeRepos,
             DesksUsersContract $deskUserRepos,
-            FavoriteDeskContract $favoriteRepos
+            FavoriteDeskContract $favoriteRepos,
+            ArchiveContract $archiveRepos
         ){
         $this->desk_model = $desk_repos;
         $this->themeModel = $themeRepos;
         $this->deskUserModel = $deskUserRepos;
         $this->favoriteModel = $favoriteRepos;
+        $this->archiveModel = $archiveRepos;
     }
 
     public function create($data)
@@ -104,6 +109,21 @@ class DeskController extends Controller
             'userId' => Auth::user()->getAuthIdentifier(),
             'deskId' => $favoriteDesk['deskId'],
             'isFavorite' => $favoriteDesk['isFavorite']
+        ]);
+
+        $message = $isUpdated ? "success" : "error";
+
+        return json_encode(['message' => $message]);
+    }
+
+
+    public function actionChangeDeskArchive (ChangeArchiveRequest $request):bool|string
+    {
+        $archiveDesk = $request->validated();
+        $isUpdated = $this->archiveModel->update([
+            'userId'=> Auth::user()->getAuthIdentifier(),
+            'deskId' => $archiveDesk['deskId'],
+            'isArchive' => $archiveDesk['isArchive']
         ]);
 
         $message = $isUpdated ? "success" : "error";

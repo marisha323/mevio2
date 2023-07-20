@@ -63,7 +63,6 @@ class FavoriteDeskRepository implements FavoriteDeskContract
         catch (\Exception $ex){
             return false;
         }
-
     }
 }
 

@@ -14,6 +14,10 @@ import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 
 
 export const DashBoardLayout = ({ children }) => {
+    const [showFavorite, setShowFavorite] = useState(true);
+    const [showMyDesks, setShowMyDesks] = useState(true);
+    const [showArchive, setShowArchive] = useState(false);
+
     const {
         showAddDeskModal
     } = useActions();
@@ -57,7 +61,6 @@ export const DashBoardLayout = ({ children }) => {
         setMainTheme(defaultTheme);
     },[defaultTheme])
 
-    console.log(mainTheme.left_sidebar_bg_color);
 
     const myDesks = desks.map((desk) => (
         <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item"
@@ -148,8 +151,14 @@ export const DashBoardLayout = ({ children }) => {
                     </Link>
                     <p className="sidebar-category-title"
                        style={{backgroundColor: mainTheme.sidebar_category_bg_color,
-                           color: mainTheme.left_sidebar_font_color}}>Мої дошки <span>+</span></p>
-                    <div className="myDesks">
+                           color: mainTheme.left_sidebar_font_color}}>Мої дошки
+                        <span>
+                            <img src={`/images/themes/${mainTheme.id}/arrow_down.svg`} alt=""
+                                className={`arrow-img ${showMyDesks ? "" : "rotate-arrow"}`}
+                                onClick={()=>setShowMyDesks(!showMyDesks)}/>
+                        </span>
+                    </p>
+                    <div className={`myDesks ${showMyDesks ? "" : "hide-my-desks"}`}>
                         {myDesks}
                     </div>
                     <p className="sidebar-category-title"

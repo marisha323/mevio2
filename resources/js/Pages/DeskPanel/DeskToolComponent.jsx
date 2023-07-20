@@ -16,7 +16,21 @@ export const DeskToolComponent = ({desk}) => {
 
     function ArchiveToggleHandler(e) {
         e.preventDefault();
-        e.stopPropagation()
+        e.stopPropagation();
+
+        const body = {
+            deskId: desk.id,
+            isArchive: isArchive
+        }
+        axios.post("/change-desk-archive", body)
+            .then((resp) => {
+                const message = resp.data.message;
+                if (message === "success")
+                {
+                    setIasArchive(!isArchive);
+                }
+            })
+            .catch((error)=>console.log(error.message))
     }
 
     function FavoriteToggleHandler(e) {
@@ -26,7 +40,6 @@ export const DeskToolComponent = ({desk}) => {
             deskId: desk.id,
             isFavorite: isFavorite
         }
-
         axios.post("/change-desk-favorite", body)
             .then((resp) => {
                 const message = resp.data.message;
