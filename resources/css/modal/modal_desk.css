@@ -1,7 +1,8 @@
 .modal-card-container {
     position: absolute;
-    width: 80vw;
-    height: 50vh;
+    width: 100vw;
+    height: calc(100vh + 4.4rem);
+    top: -8rem;
     background: rgba(26, 32, 44, 0.51);
     opacity: 0;
     visibility: hidden;
@@ -26,7 +27,12 @@
 
 .modal-card-window {
     width: 400px;
-    height: 700px;
     background: #8C84E9;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
 }
