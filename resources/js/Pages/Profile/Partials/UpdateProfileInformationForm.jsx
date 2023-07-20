@@ -78,15 +78,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <div className="mt-4">
                     <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
 
-                    <label htmlFor="userLogoPath" className="btn btn-light" style={{
-                        backgroundColor: "#f0f0f0",
-                        border: "1px solid #ccc",
-                        color: "#333",
-                        padding: "8px 16px",
-                        fontSize: "14px",
-                        borderRadius: "4px",
-                        cursor: "pointer"
-                    }}>
+                    <label htmlFor="userLogoPath" className="btn btn-light" >
                         Choose File
                     </label>
                     <input
@@ -99,6 +91,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                         onChange={(e) => setData('userLogoPath', e.target.files[0])}
                         required
                     />
+
                     <InputError message={errors.userLogoPath} className="mt-2"/>
                 </div>
 
