@@ -33,16 +33,16 @@ function Card(props) {
             }
         }
 
-        // Change in db
-        axios
-            .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
-            .then((response) => {
-                console.log('Column updated successfully!');
-                window.location.href = '/current-desk';
-            })
-            .catch((error) => {
-                console.error('Failed to update column:', error);
-            });
+        // // Change in db
+        // axios
+        //     .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
+        //     .then((response) => {
+        //         console.log('Column updated successfully!');
+        //         window.location.href = '/current-desk';
+        //     })
+        //     .catch((error) => {
+        //         console.error('Failed to update column:', error);
+        //     });
     };
 
     return (
@@ -54,7 +54,7 @@ function Card(props) {
             onDragOver={dragOver}
             onDragEnd={dragEnd}
             data-card-id={props.cardId} //  data-card-id
-            data-column-id={props.columnId} //  data-column-id
+            //data-column-id={props.columnId} //  data-column-id
         >
             {props.children}
         </li>

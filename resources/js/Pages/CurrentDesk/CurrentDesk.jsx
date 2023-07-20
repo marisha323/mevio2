@@ -179,13 +179,13 @@ export default function CurrentDesk({ cards, users }) {
                 <h4>Потрібно зробити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-                <Board id="to-do" className="task-list" data-column-id="1">
+                <Board id="to-do" className="task-list" columnId={1}>
                     {cards.card1.map((card) => (
                         <div key={card.id}>
                             <Card
                                 className="task"
-                                columnId={1} // Передайте columnId як пропс
-                                cardId={card.id} // Передайте cardId як пропс
+                                columnId={1} // add
+                                cardId={card.id} // add
                                 key={card.id}
                                 id={card.id}
                                 draggable="true"
@@ -222,13 +222,13 @@ export default function CurrentDesk({ cards, users }) {
                       <h4>В Pоботі</h4>
                       <img src="images/bookmark (2) 2.png" alt="" />
                   </div>
-                  <Board id="doing" className="task-list" data-column-id="2">
+                  <Board id="doing" className="task-list" columnId={2}>
                       {cards.card2.map((card) => (
                           <div key={card.id}>
                               <Card
                                   className="task"
-                                  columnId={2} // Передайте columnId як пропс
-                                  cardId={card.id} // Передайте cardId як пропс
+                                  //columnId={2} //add
+                                  cardId={card.id} // add
                                   key={card.id}
                                   id={card.id}
                                   draggable="true"
@@ -261,17 +261,17 @@ export default function CurrentDesk({ cards, users }) {
                 <h4>Виконано</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <Board id="done" className="task-list" data-column-id="3">
+              <Board id="done" className="task-list" columnId={3}>
                 {cards.card3.map((card)=>(
                   <div key={card.id}>
                   <Card className="task"
-                        columnId={3}
-                        cardId={card.id}
+                  columnId={3}
+                  cardId={card.id}
                   id={card.id}
                    key={card.id}
                    draggable="true"
                    ref={cardRef}
-                        onDragEnd={(e) => handleDragEnd(e, card.id, 3)}
+                   onDragEnd={(e) => handleDragEnd(e, card.id, 3)}
                    data-original-board="done"
                    >
                       <p>{card.cardName}</p>

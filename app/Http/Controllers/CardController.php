@@ -65,9 +65,9 @@ class CardController extends Controller
         ]);
     }
 
-    public function updateCardColumn(Request $request)
+    public function updateCardColumn(Request $request,$id)
     {
-        $this->cardModel->updateCardColumn($request);
+        $this->cardModel->updateCardColumn($request,$id);
         return redirect('/current-desk');
     }
 
@@ -79,7 +79,7 @@ class CardController extends Controller
 
     }
 
-    public function SetDeaadLine(){
+    public function SetDeadLine(){
 
     }
     public function OffDeadline(){
