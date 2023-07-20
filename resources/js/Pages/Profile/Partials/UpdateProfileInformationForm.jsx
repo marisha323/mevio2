@@ -22,10 +22,10 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('email', data.email);
-        console.log("data");
-        console.log(data.userLogoPath);
-        formData.append('userLogoPath', data.userLogoPath);
 
+
+        formData.append('userLogoPath', data.userLogoPath);
+        console.log(1111);
         post(route('profile.update'), formData);
     };
 
