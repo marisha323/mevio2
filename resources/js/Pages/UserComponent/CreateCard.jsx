@@ -1,3 +1,4 @@
+
 import {router} from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
