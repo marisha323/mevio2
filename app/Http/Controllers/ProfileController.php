@@ -36,7 +36,7 @@ class ProfileController extends Controller
 
         if ($request->hasFile('userLogoPath')) {
             // Отримайте файл з запиту
-            //dd($request->userLogoPath);
+
             $file = $request->file('userLogoPath');
             // Виконайте потрібну обробку та збереження файлу
             $destinationPath = 'public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл

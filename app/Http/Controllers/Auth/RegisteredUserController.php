@@ -40,11 +40,12 @@ class RegisteredUserController extends Controller
         ]);
 
 
-        if (request()->hasFile('userLogoPath')) {
-            // Отримайте файл з запиту
-            $file = request()->file('userLogoPath');
-            // Виконайте потрібну обробку та збереження файлу
-            $destinationPath = 'public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
+//        if (request()->hasFile('userLogoPath')) {
+            //// Отримайте файл з запиту
+            //$file = request()->file('userLogoPath');
+            //// Виконайте потрібну обробку та збереження файлу
+            $file='public/userLogoPath/user.png';
+            $destinationPath = 'public/public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
             $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
             $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
 
@@ -55,7 +56,7 @@ class RegisteredUserController extends Controller
                 'userLogoPath' => $fileName,
             ]);
 
-        }
+        //}
 
 
 

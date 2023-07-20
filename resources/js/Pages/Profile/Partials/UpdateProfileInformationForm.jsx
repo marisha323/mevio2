@@ -12,7 +12,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
-        userLogoPath: '',
+        userLogoPath: user.userLogoPath,
     });
 
 
@@ -22,6 +22,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('email', data.email);
+        console.log("data");
+        console.log(data.userLogoPath);
         formData.append('userLogoPath', data.userLogoPath);
 
         post(route('profile.update'), formData);
