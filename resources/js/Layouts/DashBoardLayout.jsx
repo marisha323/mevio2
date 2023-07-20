@@ -57,6 +57,8 @@ export const DashBoardLayout = ({ children }) => {
         setMainTheme(defaultTheme);
     },[defaultTheme])
 
+    console.log(mainTheme.left_sidebar_bg_color);
+
     const myDesks = desks.map((desk) => (
         <Link key={desk.id} href={`/current-desk?desk_id=${desk.id}`} className="my-desk-item"
               onClick={()=>{setDefaultTheme(desk.themeId)}}
@@ -111,7 +113,7 @@ export const DashBoardLayout = ({ children }) => {
 
             <div className="desks_body_container">
                 <div className="side_Menu_Container"
-                    style={{backgroundColor: mainTheme.left_sidebar_bg_color}}>
+                    style={{background: mainTheme.left_sidebar_bg_color}}>
                     <Link href={"/desk-panel"} className="sidebar-menu-item"
                         style={{borderBottom: `5px solid ${mainTheme.sidebar_category_bg_color}`,
                                 borderRight: `2px solid ${mainTheme.sidebar_category_bg_color}`}}>
