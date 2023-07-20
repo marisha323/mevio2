@@ -45,7 +45,7 @@ class CardRepository implements CardContract
         $card->created_at = new \DateTime();
         $card->updated_at = new \DateTime();
         $card->save();
-        return redirect('/dashboard');
+        return redirect('/current-desk');
 
        // return Card::create();
     }
@@ -65,10 +65,18 @@ class CardRepository implements CardContract
           'card3'=> $cards3,
         ];
        return $cards;
+    }
+
+    public function updateCardColumn(Request $request,$id)
+    {
+
+        $card = Card::findOrFail($id);
 
 
+        $card->columnId = $request->columnId;
+        $card->save();
 
-
+        return redirect('/current-desk');
     }
 
 
