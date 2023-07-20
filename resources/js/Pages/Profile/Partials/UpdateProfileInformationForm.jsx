@@ -77,7 +77,6 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
                 <div className="mt-4">
                     <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
-
                     <label htmlFor="uploadButton" className="btn btn-light">
                         Choose File
                         <input
@@ -85,6 +84,24 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                             type="file"
                             name="userLogoPath"
                             className="file-input"
+                            style={{
+                                position: "absolute",
+                                top: 0,
+                                left: 0,
+                                opacity: 0,
+                                width: "100%",
+                                height: "100%",
+                                cursor: "pointer"
+                                // backgroundColor: "#f0f0f0",
+                                // border: "1px solid #ccc",
+                                // color: "#333",
+                                // padding: "8px 16px",
+                                // fontSize: "14px",
+                                // borderRadius: "4px",
+                                // cursor: "pointer",
+                                // position: "relative",
+                                // zIndex: 1,
+                        }}
                             autoComplete="username"
                             onChange={(e) => setData('userLogoPath', e.target.files[0])}
                             required
