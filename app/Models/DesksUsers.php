@@ -10,7 +10,7 @@ class DesksUsers extends Model
     use HasFactory;
 
     protected $fillable = [
-        'deskId',
-        'userId',
+        'desk_id',
+        'user_id',
     ];
 }

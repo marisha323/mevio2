@@ -37,13 +37,13 @@ class UserRepository implements UserContract
 
         $desks = DesksUsers::whereIn('deskId', $userDesks->pluck('id')->toArray())
             ->get();
-        
+
         $usersInSameDesks = User::join('desks_users', 'users.id', '=', 'desks_users.userId')
             ->whereIn('desks_users.deskId', $desks->pluck('id')->toArray())
             ->select('users.*')
             ->distinct()
             ->get();
-        
+
             $themes = Theme::all();
             // dd($userDesks);
         return [
