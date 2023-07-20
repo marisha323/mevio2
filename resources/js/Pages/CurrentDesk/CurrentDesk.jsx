@@ -4,6 +4,7 @@ import {DashBoardLayout} from "@/Layouts/DashBoardLayout.jsx";
 import {Link} from "@inertiajs/react";
 import {useEffect} from "react";
 
+
 export default function CurrentDesk({cards}) {
 
     const redirectToCreateCard = () => {
@@ -14,6 +15,7 @@ export default function CurrentDesk({cards}) {
 
 
   useEffect(() => {
+      console.log("111");
     // Script initialization and event listeners
     const rotateImg = document.querySelector('.rotate_img');
 
@@ -39,29 +41,42 @@ export default function CurrentDesk({cards}) {
 
     // Event listeners for drag and drop
     drake.on('drag', (el) => {
+
+        console.log("3444");
       el.className.replace('ex-moved', '');
     });
 
     drake.on('drop', (el) => {
+
+        console.log("444");
       el.className += ' ex-moved';
     });
 
     drake.on('over', (el, container) => {
+
+        console.log("555")
+        console.log(el);
       container.className += ' ex-over';
     });
 
     drake.on('out', (el, container) => {
+        console.log("111");
+
       container.className.replace('ex-over', '');
     });
 
     return () => {
       // Clean up event listeners
-        if (rotateImg){
+         if (rotateImg){
+            console.log("sdfsdgfs");
+
             rotateImg.removeEventListener('click', () => {
                 rotateImg.classList.toggle('rotate180');
             });
         }
-      drake.destroy();
+        console.log(rotateImg);
+         console.log("click");
+        drake.destroy();
     };
   }, []);
 
@@ -80,8 +95,6 @@ export default function CurrentDesk({cards}) {
       document.body.removeChild(script);
     };
   }, []);
-
-
 
   return (
     <DashBoardLayout>
