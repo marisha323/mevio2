@@ -44,10 +44,11 @@ class RegisteredUserController extends Controller
             //// Отримайте файл з запиту
             //$file = request()->file('userLogoPath');
             //// Виконайте потрібну обробку та збереження файлу
-            $file='public/userLogoPath/user.png';
+            $file='userLogoPath/user.png';
+        $fileName='user.png';
             $destinationPath = 'public/public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
-            $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
-            $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
+//            $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
+//            $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
 
             $user = User::create([
                 'name' => $request->name,
