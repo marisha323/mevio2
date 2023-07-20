@@ -105,13 +105,18 @@ export default function CurrentDesk({cards, users}) {
 //////////////////////////////// FOR MODAL WINDOW
     const [isVisible, setIsVisible] = useState(false);
     const [selectedCardId, setSelectedCardId] = useState(null); //
-    const ToggleVisibleModal = (id) => {
-        setIsVisible(!isVisible);
-        setSelectedCardId(id); // Зберігаємо значення id в стані для модального вікна
-    };
+    // const ToggleVisibleModal = (id) => {
+    //     setIsVisible(!isVisible);
+    //     setSelectedCardId(id); // Зберігаємо значення id в стані для модального вікна
+    // };
 
-    // GET CURRENT DESK by selectedCardId
-    //const currentCard = cards.find((card) => card.id === selectedCardId);
+    const ToggleVisibleModal = (columnId) => {
+        setIsVisible(!isVisible);
+        setCardValues((prevValues) => ({
+            ...prevValues,
+            columnId: columnId,
+        }));
+    };
 
     //SAVE CARD TO DB
 
@@ -147,19 +152,19 @@ export default function CurrentDesk({cards, users}) {
 
     return (
         <DashBoardLayout>
-            <div onClick={ToggleVisibleModal}
+           <div onClick={ToggleVisibleModal}
                  className={`modal-card-container ${isVisible ? 'modal-card-visible' : 'modal-card-hide'}`}>
                 <div onClick={(e) => {
                     e.stopPropagation()
                 }}>
                     <form className="modal-card-window" onSubmit={handleCardSubmit}>
                         <div>
-                            <div>
+                            <label className='label_style'>
                                 Назва картки:
-                            </div>
+                            </label>
                             <div>
                                 <input
-                                    className="form-input"
+                                    className="card_name"
                                     type="text"
                                     id="cardName"
                                     name="cardName"
@@ -170,11 +175,11 @@ export default function CurrentDesk({cards, users}) {
                         </div>
                         <div>
                             <div>
-                                <label htmlFor="description" className="form-label">
+                                <label htmlFor="description" className="label_style">
                                     Опис:</label>
                             </div>
                             <div>
-                                <textarea className="form-textarea"
+                                <textarea className="card_textarea"
                                           id="description"
                                           name="description"
                                           value={cardValues.description}
@@ -185,6 +190,7 @@ export default function CurrentDesk({cards, users}) {
                         <div>
                             <div>
                                 <input type="date"
+                                       className="card_date"
                                        id="deadLine"
                                        name="deadLine"
                                        value={cardValues.deadLine}
@@ -192,7 +198,7 @@ export default function CurrentDesk({cards, users}) {
                             </div>
                         </div>
                         <div>
-                            <button type="submit" className="btn btn-info">
+                            <button type="submit" className="btn btn-info btn2">
                                 Зберегти карточку
                             </button>
                         </div>
@@ -300,7 +306,7 @@ export default function CurrentDesk({cards, users}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('1')}>
+                            <button onClick={() => ToggleVisibleModal('2')}>
                                 <img className="plus_task" src="images/plus (3) 1.png" alt=""/>
                             </button>
                         </li>

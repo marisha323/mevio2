@@ -36,3 +36,48 @@
     justify-content: center;
     align-items: center;
 }
+
+.card_name{
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.card_textarea{
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.card_date{
+    box-sizing: border-box;
+    display: flex;
+    height: 2.8rem;
+    width: 9rem;
+    flex-direction: row;
+    align-items: center;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    padding-top: 0.2rem;
+    margin-left: 0.5rem;
+    background: #111624;
+    border: 1px solid #52a7e4;
+    border-radius: 0.625rem;
+    color: #52a7e4;
+    font-style: normal;
+    font-size: 1rem;
+}
+
+
+.label_style{
+    width: 9rem;
+    height: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 2.1rem;
+    color: teal;
+}
+
+.btn2{
+    background: lightskyblue ;
+
+}

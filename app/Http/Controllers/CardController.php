@@ -35,7 +35,7 @@ class CardController extends Controller
     {
         //dd($request);
         $this->cardModel->store($request);
-        return redirect('/dashboard');
+        return redirect('/current-desk');
        //return Inertia::render('CurrentDesk/CurrentDesk');
     }
 
