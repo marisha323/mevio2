@@ -1,0 +1,31 @@
+.modal-card-container {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(26, 32, 44, 0.51);
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s all ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-card-visible {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.3s all ease-in-out;
+}
+
+.modal-card-hide {
+    opacity: 0;
+    visibility: hidden;
+    transition: 0.3s all ease-in-out;
+}
+
+.modal-card-window {
+    width: 400px;
+    height: 700px;
+    background: #8C84E9;
+    border-radius: 8px;
+}

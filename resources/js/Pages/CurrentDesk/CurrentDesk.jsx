@@ -1,15 +1,28 @@
 import '../../../css/current_desk/current_desk.css';
+import "../../../css/modal/modal_desk.css";
 
 import React, { useRef, useEffect, useState } from 'react';
 import { Card, Board } from '@/React-dnd-Components';
 import axios from 'axios';
 import { DashBoardLayout } from '@/Layouts/DashBoardLayout.jsx';
-import { Link } from '@inertiajs/react';
+import {Link, router} from '@inertiajs/react';
 //import card from "@/React-dnd-Components/Card.jsx";
 
 export default function CurrentDesk({ cards, users }) {
 
-  const [searchValue, setSearchValue, setValues] = useState('');
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const columnId = urlSearchParams.get("columnId");
+
+  const [searchValue, setSearchValue, setValues] = useState({
+      cardName: "",
+      description: "",
+      deadLine: "",
+      columnId: columnId || "", // FROM QUERY PARAMS
+  });
+
+
+
+
 
   //filter user display search
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -26,9 +39,9 @@ export default function CurrentDesk({ cards, users }) {
     setFilteredUsers(filtered);
   }, [searchValue, users]);
 
-  const redirectToCreateCard = () => {
-    window.location.href = '/create-card';
-  };
+  // const redirectToCreateCard = () => {
+  //   window.location.href = '/create-card';
+  // };
 
   //needed for card display
   const cardRef = useRef(null);
@@ -46,38 +59,9 @@ export default function CurrentDesk({ cards, users }) {
             }
         }
 
-        // axios
-        //     .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
-        //     .then((response) => {
-        //         console.log('Column updated successfully!');
-        //         window.location.href = '/current-desk';
-        //     })
-        //     .catch((error) => {
-        //         console.error('Failed to update column:', error);
-        //     });
     };
 
     //drag and drop
-
-    // const handleDragEnd = (e, cardId, newColumnId) => {
-    //     console.log("handleDragEnd");
-    //     setValues((prevState) => ({
-    //         ...prevState,
-    //         columnId: newColumnId,
-    //     }));
-    //   console.log("CardId" + cardId);
-    //     console.log("ColumnId" + newColumnId);
-    //     // Робимо запит до сервера, щоб оновити значення columnId в базі даних
-    //     axios
-    //         .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
-    //         .then((response) => {
-    //             console.log('Column updated successfully!');
-    //             window.location.href = '/current-desk';
-    //         })
-    //         .catch((error) => {
-    //             console.error('Failed to update column:', error);
-    //         });
-    // };
 
 
     //Display the toggle invite div
@@ -127,9 +111,98 @@ export default function CurrentDesk({ cards, users }) {
       });
     }
   };
+//////////////////////////////// FOR MODAL WINDOW
+    const [isVisible, setIsVisible] = useState(false);
+    function ToggleVisibleModal () {
+        console.log("sinvdn");
+        setIsVisible(!isVisible);
+    }
+
+
+
+
+    // const [values, setValues] = useState({
+    //     cardName: "",
+    //     description: "",
+    //     deadLine: "",
+    //     columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
+    // });
+    console.log(111);
+    console.log(columnId);
+    function handleChange(e) {
+        const key = e.target.id;
+        const value = e.target.value;
+        setValues((values) => ({
+            ...values,
+            [key]: value,
+        }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        await router.post("/posts/createCard", values);
+        setValues({
+            cardName: "",
+            description: "",
+            deadLine: "",
+            columnId: columnId,
+        });
+    }
 
   return (
     <DashBoardLayout>
+        <div onClick={ToggleVisibleModal} className ={`modal-card-container ${isVisible ? 'modal-card-visible' : 'modal-card-hide'}`}>
+            <div className="modal-card-window">
+
+                <div className="m-10">
+
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="number" className="form-label">
+                                Назва картки:
+                            </label>
+                            <input
+                                className="form-input"
+                                type="text"
+                                id="cardName"
+                                name="cardName"
+                                value={values.cardName}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div>
+                            <label htmlFor="description" className="form-label">
+                                Опис:</label>
+                            <textarea
+                                className="form-textarea"
+                                id="description"
+                                name="description"
+                                value={values.description}
+                                onChange={handleChange}>
+
+                    </textarea>
+                        </div>
+                        <div>
+                            <input
+                                type="date"
+                                id="deadLine"
+                                name="deadLine"
+                                value={values.deadLine}
+                                onChange={handleChange}
+
+                            />
+                        </div>
+                        <div>
+                            <button type="submit" className="btn btn-info">
+                                Зберегти карточку
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
+            </div>
+        </div>
       <div className='Add_User_Background_Overlayer' onClick={ToggleInviteDesk}></div>
       <div className='middle_desks_container'>
         <div className='middle_top_body_tasks'>
@@ -208,13 +281,13 @@ export default function CurrentDesk({ cards, users }) {
                     {/*    <p>Card one</p>*/}
                     {/*</Card>*/}
                 </Board>
-                <Link href="/create-card?columnId=1">
+                <button onClick={ToggleVisibleModal} id='1'>
                     <img
                         className="plus_task"
                         src="images/plus (3) 1.png"
                         alt=""
                     />
-                </Link>
+                </button>
             </li>
 
               <li className="column doing-column">
@@ -251,9 +324,9 @@ export default function CurrentDesk({ cards, users }) {
                       {/*    <p>Card two</p>*/}
                       {/*</Card>*/}
                   </Board>
-                <Link href="/create-card?columnId=2">
+                  <button onClick={ToggleVisibleModal}>
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
-                </Link>
+                </button>
             </li>
 
             <li className="column done-column">
@@ -289,9 +362,9 @@ export default function CurrentDesk({ cards, users }) {
                   {/*    <p>Card one</p>*/}
                   {/*</Card>*/}
               </Board>
-                <Link href="/create-card?columnId=3">
+                <button onClick={ToggleVisibleModal}>
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
-                </Link>
+                </button>
             </li>
           </ul>
         </div>
