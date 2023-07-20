@@ -3,7 +3,6 @@ import {useState} from "react";
 
 export const DeskToolComponent = ({desk}) => {
 
-    console.log(desk);
     const [isFavorite, setIsFavorite] = useState(desk.isFavorite);
     const [isArchive, setIasArchive] = useState(desk.isArchive);
 

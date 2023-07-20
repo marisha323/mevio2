@@ -21,7 +21,6 @@ class DeskAsArrayPresenter implements IPresenter
 
         $isFavorite = FavoriteDesk::where('deskId',$model->id)->first();
 
-        dd($isFavorite);
         $result['isFavorite'] = $isFavorite ? true : false;
 
         return $result;

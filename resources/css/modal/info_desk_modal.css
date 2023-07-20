@@ -1,4 +1,4 @@
-.success-desk-modal {
+.info-desk-modal {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -19,7 +19,7 @@
     padding: 15px;
 }
 
-.success-desk-title {
+.info-desk-title {
     color: white;
     font-size: 20px;
     text-align: center;

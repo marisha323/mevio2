@@ -8,12 +8,11 @@ export const InfoAddDesk = () => {
 
     function HideModal () {
         hideAddDeskModal();
-        hideAddDeskModal();
         setTimeout(()=>{
             const formWindow = document.querySelector(".modal-window");
             formWindow.classList.remove("modal-not-visible");
 
-            const successWindow = document.querySelector(".success-desk-modal");
+            const successWindow = document.querySelector(".info-desk-modal");
             if (successWindow){
                 successWindow.classList.remove("modal-is-visible");
             }
@@ -21,10 +20,10 @@ export const InfoAddDesk = () => {
     }
 
     return(
-        <div className="success-desk-modal"
+        <div className="info-desk-modal"
             onClick={(e)=>{e.stopPropagation()}}>
-            <h1 className="success-desk-title"></h1>
-            <Link href={'/desk-panel'} onClick={()=>HideModal()}  className="ok-button">OK</Link>
+            <h1 className="info-desk-title"></h1>
+            <Link href={'/desk-panel'} className="ok-button">OK</Link>
         </div>
     )
 }
