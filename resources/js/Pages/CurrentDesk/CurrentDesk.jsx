@@ -5,10 +5,11 @@ import { Card, Board } from '@/React-dnd-Components';
 import axios from 'axios';
 import { DashBoardLayout } from '@/Layouts/DashBoardLayout.jsx';
 import { Link } from '@inertiajs/react';
+//import card from "@/React-dnd-Components/Card.jsx";
 
 export default function CurrentDesk({ cards, users }) {
 
-  const [searchValue, setSearchValue] = useState('');
+  const [searchValue, setSearchValue, setValues] = useState('');
 
   //filter user display search
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -17,6 +18,7 @@ export default function CurrentDesk({ cards, users }) {
   const [notification, setNotification] = useState(null);
 
   useEffect(() => {
+      console.log(11);
     // Filter the users based on the searchValue
     const filtered = users.filter(
       (user) => user.email.toLowerCase().includes(searchValue.toLowerCase())
@@ -32,20 +34,53 @@ export default function CurrentDesk({ cards, users }) {
   const cardRef = useRef(null);
 
   //drag and drop
-  const handleDragEnd = () => {
-    const card = cardRef.current;
-    const parent = card.parentElement;
-    const board = parent.closest('.board');
+    const handleDragEnd = (e, cardId, newColumnId) => {
+        const card = cardRef.current;
+        const parent = card.parentElement;
+        const board = parent.closest('.board');
 
-    if (!board) {
-      const originalBoard = document.getElementById(card.dataset.originalBoard);
-      if (originalBoard) {
-        originalBoard.appendChild(card);
-      }
-    }
-  };
+        if (!board) {
+            const originalBoard = document.getElementById(card.dataset.originalBoard);
+            if (originalBoard) {
+                originalBoard.appendChild(card);
+            }
+        }
 
-  //Display the toggle invite div
+        // axios
+        //     .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
+        //     .then((response) => {
+        //         console.log('Column updated successfully!');
+        //         window.location.href = '/current-desk';
+        //     })
+        //     .catch((error) => {
+        //         console.error('Failed to update column:', error);
+        //     });
+    };
+
+    //drag and drop
+
+    // const handleDragEnd = (e, cardId, newColumnId) => {
+    //     console.log("handleDragEnd");
+    //     setValues((prevState) => ({
+    //         ...prevState,
+    //         columnId: newColumnId,
+    //     }));
+    //   console.log("CardId" + cardId);
+    //     console.log("ColumnId" + newColumnId);
+    //     // Робимо запит до сервера, щоб оновити значення columnId в базі даних
+    //     axios
+    //         .post(`/update-card-column/${cardId}`, { columnId: newColumnId })
+    //         .then((response) => {
+    //             console.log('Column updated successfully!');
+    //             window.location.href = '/current-desk';
+    //         })
+    //         .catch((error) => {
+    //             console.error('Failed to update column:', error);
+    //         });
+    // };
+
+
+    //Display the toggle invite div
   const ToggleInviteDesk = () => {
     const inv_desk = document.getElementsByClassName('Add_User_Overlayer')[0];
     const overlayer = document.getElementsByClassName(
@@ -141,62 +176,81 @@ export default function CurrentDesk({ cards, users }) {
           <ul className="columns">
             <li className="column to-do-column">
               <div className="column-header">
-                <h4>Нужно сделать</h4>
+                <h4>Потрібно зробити</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <Board id="to-do" className="task-list">
-                {cards.card1.map((card)=>(
-                  <div>
-                  <Card className="task"
-                   key={card.id}
-                   id={card.id}
-                   draggable="true"
-                   ref={cardRef}
-                   onDragEnd={handleDragEnd}
-                   data-original-board="to-do"
-                   >
-                      <p>{card.cardName}</p>
-                  </Card>
-              </div>
-                ))}
-                <Card
-                id="card-1"
-                className="task"
-                draggable="true"
-                ref={cardRef}
-                onDragEnd={handleDragEnd}
-                data-original-board="to-do"
-                > 
-                  <p>Card one</p>
-                </Card>
-                
-              </Board>
+                <Board id="to-do" className="task-list" data-column-id="1">
+                    {cards.card1.map((card) => (
+                        <div key={card.id}>
+                            <Card
+                                className="task"
+                                columnId={1} // Передайте columnId як пропс
+                                cardId={card.id} // Передайте cardId як пропс
+                                key={card.id}
+                                id={card.id}
+                                draggable="true"
+                                ref={cardRef}
+                                onDragEnd={(e) => handleDragEnd(e, card.id, 1)}
+                                data-original-board="to-do"
+                            >
+                                <p>{card.cardName}</p>
+                            </Card>
+                        </div>
+                    ))}
+                    {/*<Card*/}
+                    {/*    id="card-1"*/}
+                    {/*    className="task"*/}
+                    {/*    draggable="true"*/}
+                    {/*    ref={cardRef}*/}
+                    {/*    onDragEnd={(e) => handleDragEnd(e, "card-1", 1)}*/}
+                    {/*    data-original-board="to-do"*/}
+                    {/*>*/}
+                    {/*    <p>Card one</p>*/}
+                    {/*</Card>*/}
+                </Board>
                 <Link href="/create-card?columnId=1">
-                    <img className="plus_task" src="images/plus (3) 1.png" alt="" />
+                    <img
+                        className="plus_task"
+                        src="images/plus (3) 1.png"
+                        alt=""
+                    />
                 </Link>
             </li>
 
-            <li className="column doing-column">
-              <div className="column-header">
-                <h4>Pобити</h4>
-                <img src="images/bookmark (2) 2.png" alt="" />
-              </div>
-              <Board id="doing" className="task-list">
-                {cards.card2.map((card)=>(
-                  <div>
-                  <Card className="task"
-                   key={card.id}
-                   id={card.id}
-                   draggable="true"
-                   ref={cardRef}
-                   onDragEnd={handleDragEnd}
-                   data-original-board="doing"
-                   >
-                      <p>{card.cardName}</p>
-                  </Card>
-              </div>
-                ))}
-              </Board>
+              <li className="column doing-column">
+                  <div className="column-header">
+                      <h4>В Pоботі</h4>
+                      <img src="images/bookmark (2) 2.png" alt="" />
+                  </div>
+                  <Board id="doing" className="task-list" data-column-id="2">
+                      {cards.card2.map((card) => (
+                          <div key={card.id}>
+                              <Card
+                                  className="task"
+                                  columnId={2} // Передайте columnId як пропс
+                                  cardId={card.id} // Передайте cardId як пропс
+                                  key={card.id}
+                                  id={card.id}
+                                  draggable="true"
+                                  ref={cardRef}
+                                  onDragEnd={(e) => handleDragEnd(e, card.id, 2)}
+                                  data-original-board="doing"
+                              >
+                                  <p>{card.cardName}</p>
+                              </Card>
+                          </div>
+                      ))}
+                      {/*<Card*/}
+                      {/*    id="card-2"*/}
+                      {/*    className="task"*/}
+                      {/*    draggable="true"*/}
+                      {/*    ref={cardRef}*/}
+                      {/*    onDragEnd={(e) => handleDragEnd(e, "card-2", 2)}*/}
+                      {/*    data-original-board="doing"*/}
+                      {/*>*/}
+                      {/*    <p>Card two</p>*/}
+                      {/*</Card>*/}
+                  </Board>
                 <Link href="/create-card?columnId=2">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </Link>
@@ -204,24 +258,36 @@ export default function CurrentDesk({ cards, users }) {
 
             <li className="column done-column">
               <div className="column-header">
-                <h4>Готово</h4>
+                <h4>Виконано</h4>
                 <img src="images/bookmark (2) 2.png" alt="" />
               </div>
-              <Board id="done" className="task-list">
+              <Board id="done" className="task-list" data-column-id="3">
                 {cards.card3.map((card)=>(
-                  <div>
+                  <div key={card.id}>
                   <Card className="task"
+                        columnId={3}
+                        cardId={card.id}
                   id={card.id}
                    key={card.id}
                    draggable="true"
                    ref={cardRef}
-                   onDragEnd={handleDragEnd}
+                        onDragEnd={(e) => handleDragEnd(e, card.id, 3)}
                    data-original-board="done"
                    >
                       <p>{card.cardName}</p>
                   </Card>
               </div>
                 ))}
+                  {/*<Card*/}
+                  {/*    id="card-3"*/}
+                  {/*    className="task"*/}
+                  {/*    draggable="true"*/}
+                  {/*    ref={cardRef}*/}
+                  {/*    onDragEnd={(e) => handleDragEnd(e, "card-3", 3)}*/}
+                  {/*    data-original-board="done"*/}
+                  {/*>*/}
+                  {/*    <p>Card one</p>*/}
+                  {/*</Card>*/}
               </Board>
                 <Link href="/create-card?columnId=3">
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />

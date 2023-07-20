@@ -74,6 +74,9 @@ Route::middleware('auth')->group(function () {
     //FIND USER By Email
     Route::get('/usercomponent/Index',[UserController::class,'index'])->name('UserComponent.Index');
     Route::post('/usercomponent/findByEmail',[UserController::class,'findByEmail'])->name('UserComponent.findByEmail');
+
+    Route::post('/update-card-column/{id}',[CardController::class, 'updateCardColumn']);
+
 });
 
 

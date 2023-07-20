@@ -65,6 +65,12 @@ class CardController extends Controller
         ]);
     }
 
+    public function updateCardColumn(Request $request)
+    {
+        $this->cardModel->updateCardColumn($request);
+        return redirect('/current-desk');
+    }
+
     public function destroy(){
 
     }
