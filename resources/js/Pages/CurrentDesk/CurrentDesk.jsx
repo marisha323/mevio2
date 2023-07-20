@@ -13,16 +13,7 @@ export default function CurrentDesk({ cards, users }) {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const columnId = urlSearchParams.get("columnId");
 
-  const [searchValue, setSearchValue, setValues] = useState({
-      cardName: "",
-      description: "",
-      deadLine: "",
-      columnId: columnId || "", // FROM QUERY PARAMS
-  });
-
-
-
-
+    const [searchValue, setSearchValue, setValues] = useState('');
 
   //filter user display search
   const [filteredUsers, setFilteredUsers] = useState(users);
@@ -113,35 +104,40 @@ export default function CurrentDesk({ cards, users }) {
   };
 //////////////////////////////// FOR MODAL WINDOW
     const [isVisible, setIsVisible] = useState(false);
-    function ToggleVisibleModal () {
-        console.log("sinvdn");
+    const [selectedCardId, setSelectedCardId] = useState(null); //
+    const ToggleVisibleModal = (id) => {
         setIsVisible(!isVisible);
-    }
+        setSelectedCardId(id); // Зберігаємо значення id в стані для модального вікна
+    };
 
+    // GET CURRENT DESK by selectedCardId
+    //const currentCard = cards.find((card) => card.id === selectedCardId);
 
+    //SAVE CARD TO DB
 
+    // Змініть стан для зберігання даних картки
+    const [cardValues, setCardValues] = useState({
+        cardName: "",
+        description: "",
+        deadLine: "",
+        columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
+    });
 
-    // const [values, setValues] = useState({
-    //     cardName: "",
-    //     description: "",
-    //     deadLine: "",
-    //     columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
-    // });
-    console.log(111);
-    console.log(columnId);
-    function handleChange(e) {
+// Опрацювання зміни для полів картки
+    function handleCardChange(e) {
         const key = e.target.id;
         const value = e.target.value;
-        setValues((values) => ({
-            ...values,
+        setCardValues((prevCardValues) => ({
+            ...prevCardValues,
             [key]: value,
         }));
     }
 
-    async function handleSubmit(e) {
+// Опрацювання подання форми для збереження картки
+    async function handleCardSubmit(e) {
         e.preventDefault();
-        await router.post("/posts/createCard", values);
-        setValues({
+        await router.post("/posts/createCard", cardValues);
+        setCardValues({
             cardName: "",
             description: "",
             deadLine: "",
@@ -152,11 +148,11 @@ export default function CurrentDesk({ cards, users }) {
   return (
     <DashBoardLayout>
         <div onClick={ToggleVisibleModal} className ={`modal-card-container ${isVisible ? 'modal-card-visible' : 'modal-card-hide'}`}>
-            <div className="modal-card-window">
+            <div className="modal-card-window" onClick ={(e)=>{e.stopPropagation()}}
 
                 <div className="m-10">
 
-                    <form onSubmit={handleSubmit}>
+                    <form onSubmit={handleCardSubmit}>
                         <div className="mb-3">
                             <label htmlFor="number" className="form-label">
                                 Назва картки:
@@ -166,8 +162,8 @@ export default function CurrentDesk({ cards, users }) {
                                 type="text"
                                 id="cardName"
                                 name="cardName"
-                                value={values.cardName}
-                                onChange={handleChange}
+                                value={cardValues.cardName}
+                                onChange={handleCardChange}
                             />
                         </div>
                         <div>
@@ -177,8 +173,8 @@ export default function CurrentDesk({ cards, users }) {
                                 className="form-textarea"
                                 id="description"
                                 name="description"
-                                value={values.description}
-                                onChange={handleChange}>
+                                value={cardValues.description}
+                                onChange={handleCardChange}>
 
                     </textarea>
                         </div>
@@ -187,8 +183,8 @@ export default function CurrentDesk({ cards, users }) {
                                 type="date"
                                 id="deadLine"
                                 name="deadLine"
-                                value={values.deadLine}
-                                onChange={handleChange}
+                                value={cardValues.deadLine}
+                                onChange={handleCardChange}
 
                             />
                         </div>
@@ -270,18 +266,8 @@ export default function CurrentDesk({ cards, users }) {
                             </Card>
                         </div>
                     ))}
-                    {/*<Card*/}
-                    {/*    id="card-1"*/}
-                    {/*    className="task"*/}
-                    {/*    draggable="true"*/}
-                    {/*    ref={cardRef}*/}
-                    {/*    onDragEnd={(e) => handleDragEnd(e, "card-1", 1)}*/}
-                    {/*    data-original-board="to-do"*/}
-                    {/*>*/}
-                    {/*    <p>Card one</p>*/}
-                    {/*</Card>*/}
                 </Board>
-                <button onClick={ToggleVisibleModal} id='1'>
+                <button onClick={() => ToggleVisibleModal('1')}>
                     <img
                         className="plus_task"
                         src="images/plus (3) 1.png"
@@ -313,18 +299,8 @@ export default function CurrentDesk({ cards, users }) {
                               </Card>
                           </div>
                       ))}
-                      {/*<Card*/}
-                      {/*    id="card-2"*/}
-                      {/*    className="task"*/}
-                      {/*    draggable="true"*/}
-                      {/*    ref={cardRef}*/}
-                      {/*    onDragEnd={(e) => handleDragEnd(e, "card-2", 2)}*/}
-                      {/*    data-original-board="doing"*/}
-                      {/*>*/}
-                      {/*    <p>Card two</p>*/}
-                      {/*</Card>*/}
                   </Board>
-                  <button onClick={ToggleVisibleModal}>
+                  <button onClick={() => ToggleVisibleModal('1')}>
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </button>
             </li>
@@ -351,18 +327,8 @@ export default function CurrentDesk({ cards, users }) {
                   </Card>
               </div>
                 ))}
-                  {/*<Card*/}
-                  {/*    id="card-3"*/}
-                  {/*    className="task"*/}
-                  {/*    draggable="true"*/}
-                  {/*    ref={cardRef}*/}
-                  {/*    onDragEnd={(e) => handleDragEnd(e, "card-3", 3)}*/}
-                  {/*    data-original-board="done"*/}
-                  {/*>*/}
-                  {/*    <p>Card one</p>*/}
-                  {/*</Card>*/}
-              </Board>
-                <button onClick={ToggleVisibleModal}>
+                  </Board>
+                <button onClick={() => ToggleVisibleModal('3')}>
                     <img className="plus_task" src="images/plus (3) 1.png" alt="" />
                 </button>
             </li>
