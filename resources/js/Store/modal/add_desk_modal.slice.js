@@ -5,7 +5,8 @@ const addDeskModalSlice
     = createSlice({
     name: 'addDeskModalVisibility',
     initialState: {
-        isVisible: false
+        isVisible: false,
+        isSuccess: false
     },
     reducers: {
         hideAddDeskModal: (state) => {
@@ -13,6 +14,12 @@ const addDeskModalSlice
         },
         showAddDeskModal: (state) => {
             state.isVisible = true;
+        },
+        setToSuccess: (state)=> {
+            state.isSuccess = true;
+        },
+        setToFail: (state)=>{
+            state.isSuccess = false;
         }
     }
 })

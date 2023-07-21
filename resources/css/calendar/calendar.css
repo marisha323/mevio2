@@ -45,9 +45,9 @@
     background-color: #05342F;
     opacity: 0.95;
     border-radius: 0 0 10px 10px;
-}
+  }
 
-.date {
+  .date {
     width: 14.285%;
     height: 72%;
     color: #bce0c7;
@@ -66,7 +66,13 @@
 }
 
 .date:nth-child(7n) {
+  }
+
+  .date:nth-child(7n) {
     border-right: none; /* Remove right border for every 7th element */
+  }
+
+  .date:nth-child(n+29) {
 }
 
 .date:nth-child(n+36) {
@@ -107,6 +113,5 @@
     margin-bottom: 1rem;
     border: 3px dashed transparent;
 }
-
 
 

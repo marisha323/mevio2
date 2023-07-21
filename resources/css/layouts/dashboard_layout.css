@@ -1,3 +1,4 @@
+
 @font-face {
     font-family: 'Caveat Brush';
     src: url('path/to/font/Caveat-Brush-Regular.ttf') format('truetype');
@@ -214,6 +215,8 @@ hr {
 .sidebar-category-title {
     height: 4vh;
     font-size: 2vh;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
 }
 .side_Menu_Container p {
     display: flex;
@@ -256,6 +259,7 @@ hr {
     overflow: auto;
     display: flex;
     flex-direction: column;
+    transition: 0.3s all ease-in-out;
 }
 
 ::-webkit-scrollbar {
@@ -355,7 +359,7 @@ hr {
 }
 
 .desks_amount {
-    margin-top: 2%;
+    margin: 2% 0;
     font-weight: 500;
     font-size: 25px;
     margin-left: 3%;
@@ -366,9 +370,9 @@ hr {
     height: 24rem;
     margin: 0 auto;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     flex-wrap: wrap;
-    gap: 3%;
+    gap: 40px;
     align-items: center;
 }
 
@@ -377,8 +381,15 @@ hr {
     width: 15rem;
     display: flex;
     justify-content: center;
-    margin-bottom: 2%;
 }
+
+.group_container:hover>.desk-tool {
+    opacity: 1;
+    visibility: visible;
+    bottom: 10px;
+}
+
+
 
 .group_container p {
     top: 10px;
@@ -390,7 +401,6 @@ hr {
 }
 
 .group_container img {
-    width: 95%;
     filter: brightness(85%);
     border-radius: 10px;
 }
@@ -419,4 +429,21 @@ hr {
     transform: scale(1.2);
 }
 
-/*add-desk*/
+
+.hide-my-desks {
+    height: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.arrow-img {
+    transition: 0.3s all ease-in-out;
+}
+
+.rotate-arrow {
+    transform: rotate(180deg);
+    transition: 0.3s all ease-in-out;
+}
+
+.pointer {
+    cursor: pointer
+}

@@ -12,11 +12,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\UserRepository::factory(10)->create();
-
-        // \App\Models\UserRepository::factory()->create([
-        //     'name' => 'Test UserRepository',
-        //     'email' => 'test@example.com',
-        // ]);
+        $this->call(ThemesSeeder::class);
+        $this->call(DesksSeeder::class);
+        $this->call(DeskUsersSeeder::class);
     }
 }

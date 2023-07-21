@@ -10,7 +10,17 @@ async function fetchThemes() {
 
 let themesState = [];
 
-let initialState = {};
+let initialState = {
+    left_sidebar_bg_color: "linear-gradient(180deg, #000046 0%, #1CB5E0 100%, rgba(27, 37, 56, 0.00) 100%)",
+    id: "default",
+    logo_font_color: "#84B7CE",
+    sidebar_category_bg_color: "#2B5876",
+    left_sidebar_font_color: "#84B7CE",
+    layout_header_bg_color: "#2B5876",
+    page_header_bg_color: "#086E9C",
+    create_button_bg_color: "aqua",
+    filter_input_bg_color: "aqua"
+};
 
 
 

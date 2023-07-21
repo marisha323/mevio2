@@ -1,14 +1,13 @@
-import "../../../../css/modal/success_desk_modal.css";
+import "../../../../css/modal/info_desk_modal.css";
 import "../../../../css/modal/add_desk_modal.css";
 
-import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 import {useEffect, useState} from "react";
 import {useActions} from "@/Hooks/useActions.js";
-import {SuccessAddDesk} from "@/Components/Modal/SuccessAddDesk.jsx";
+import {InfoAddDesk} from "@/Components/Modal/AddDesk/InfoAddDesk.jsx";
 
 
 export const ModalWindow = () => {
-    const { hideAddDeskModal } = useActions();
+    const { hideAddDeskModal, setToSuccess, setToFail } = useActions();
     const [themeId, setThemeId] = useState(1);
     const [postDesk, setPostDesk] = useState({
         deskName: '',
@@ -16,7 +15,17 @@ export const ModalWindow = () => {
         themeId: themeId,
     })
 
-    function HandleSlectChange (e) {
+    useEffect(()=>setToFail,[]);
+
+    useEffect(()=>{
+        setPostDesk({
+            ...postDesk,
+            themeId: themeId
+        })
+    },[themeId])
+
+
+    function HandleSelectChange (e) {
         setPostDesk({
             ...postDesk,
             isPublic: e.target.value,
@@ -35,32 +44,85 @@ export const ModalWindow = () => {
     function HandleSubmit (e) {
         e.preventDefault()
         axios.post('/create-desk',postDesk)
-            .then((resp)=>console.log(resp))
-            .catch(()=>console.log("error"));
+            .then((resp)=>{
+                console.log(resp);
+                HandleSuccess();
+                HandleResponse();
+            })
+            .catch((error)=>{
+                console.log(error);
+                HandleError();
+                HandleResponse();
+            });
     }
 
-    useEffect(()=>{
-        setPostDesk({
-            ...postDesk,
-            themeId: themeId
-        })
-    },[themeId])
+    function HandleCancel (e) {
+        e.preventDefault();
+        hideAddDeskModal();
+        const formWindow = document.querySelector(".modal-window");
+        // formWindow.classList.add("modal-not-visible");
+
+        const successWindow = document.querySelector(".success-desk-modal");
+        // successWindow.classList.add("modal-is-visible");
+    }
 
 
-    function HideClick () {
+    function HandleResponse () {
         const formWindow = document.querySelector(".modal-window");
         formWindow.classList.add("modal-not-visible");
 
-        const successWindow = document.querySelector(".success-desk-modal");
-        successWindow.classList.add("modal-is-visible");
+        const infoWindow = document.querySelector(".info-desk-modal");
+        infoWindow.classList.add("modal-is-visible");
+    }
+
+    function HandleSuccess () {
+        setToSuccess();
+        const title = document.querySelector(".info-desk-title");
+        title.innerText = postDesk.deskName.toUpperCase() + " успішно створена";
+
+        const container = document.querySelector(".modal-container");
+        container.href = "/desk-panel";
+
+        const okButton = document.querySelector(".ok-button");
+        okButton.addEventListener("click",(e)=>{
+
+            const infoWindow = document.querySelector(".info-desk-modal");
+            infoWindow.classList.remove("modal-is-visible");
+            setTimeout(()=>{
+                const formWindow = document.querySelector(".modal-window");
+                formWindow.classList.remove("modal-not-visible");
+            },300);
+            hideAddDeskModal();
+
+        })
+
+    }
+
+    function HandleError () {
+        const title = document.querySelector(".info-desk-title");
+        title.innerText = "Помилка при створенні дошки";
+
+        const okButton = document.querySelector(".ok-button");
+        okButton.addEventListener("click",(e)=>{
+            e.preventDefault();
+            hideAddDeskModal();
+            const infoWindow = document.querySelector(".info-desk-modal");
+            infoWindow.classList.remove("modal-is-visible");
+
+            setTimeout(()=>{
+                const formWindow = document.querySelector(".modal-window");
+                formWindow.classList.remove("modal-not-visible");
+            },300);
+        })
     }
 
 
     return (
         <div>
-            <SuccessAddDesk  />
-        <form onSubmit={HandleSubmit} method="post">
+            <InfoAddDesk  />
+        <form onSubmit={HandleSubmit} method="post" onClick={(e)=>e.preventDefault()}>
         <div onClick={(e) => {
+            e.preventDefault();
             e.stopPropagation()
         }}
              className={`modal-window`}>
@@ -87,13 +149,13 @@ export const ModalWindow = () => {
                 <div className="modal-window__subcategory-title">
                     Видимість
                 </div>
-                <select onChange={HandleSlectChange} className="desk-privacy-select">
+                <select onChange={HandleSelectChange} className="desk-privacy-select">
                     <option selected value="1">Публічна</option>
                     <option value="0">Приватна</option>
                 </select>
             </div>
             <div className="modal-window-div buttons">
-                <button onClick={HideClick} className="modal-window-form-button">Відміна</button>
+                <button type="button" onClick={HandleCancel} className="modal-window-form-button">Відміна</button>
                 <button onClick={HandleSubmit} className="modal-window-form-button">Створити</button>
             </div>
         </div>

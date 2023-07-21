@@ -50,6 +50,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/calendar', [CalendarController::class, 'index']);
     Route::get('/week-calendar', [CalendarController::class, 'index_week']);
+
+    //DESKS
+    Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
+    Route::get('/get-favorite-desks',[DeskController::class,'actionGetFavoriteDesks']);
+    Route::get('/get-archive-desks',[DeskController::class,'actionGetArchiveDesks']);
+    Route::post("/change-desk-favorite",[DeskController::class,'actionChangeDeskFavorite']);
+    Route::post("/change-desk-archive",[DeskController::class,'actionChangeDeskArchive']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
+        ->name('desk.panel');
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
 //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;

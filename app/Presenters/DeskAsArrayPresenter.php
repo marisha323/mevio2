@@ -2,7 +2,9 @@
 
 namespace App\Presenters;
 
+use App\Models\Archive;
 use App\Models\Desk;
+use App\Models\FavoriteDesk;
 use App\Models\Theme;
 use App\Repositories\ThemeRepository;
 
@@ -14,8 +16,16 @@ class DeskAsArrayPresenter implements IPresenter
         $result = $model->attributesToArray();
 
         $result['deskTheme'] = (new ThemeRepository())->getThemeByDesk($model)->attributesToArray();
+        $isArchive = Archive::where('deskId', $model->id)->first();
+        $result['isArchive'] = $isArchive ? true : false;
+
+        $isFavorite = FavoriteDesk::where('deskId',$model->id)->first();
+
+        $result['isFavorite'] = $isFavorite ? true : false;
+
         return $result;
     }
+
 
     public function presentCollection($models): array
     {
@@ -23,6 +33,29 @@ class DeskAsArrayPresenter implements IPresenter
         foreach ($models as $model){
             $returns[] = $this->present($model);
         }
+
         return $returns;
+    }
+
+
+    public function presentCollectionByIdArray($data):array
+    {
+        $presents = [];
+
+        foreach ($data as $key => $value){
+            $desk =  new Desk();
+            $desk = Desk::where('id',$value->deskId)->get();
+
+            $item = $desk[0];
+
+            $presents[] = [
+                'id'=> $item['id'],
+                'deskName' => $item['deskName'],
+                'deskTheme' => (new ThemeRepository())->getThemeByDesk($item)->attributesToArray()
+            ];
+
+        }
+
+        return $presents;
     }
 }

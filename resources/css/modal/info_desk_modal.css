@@ -1,0 +1,39 @@
+.info-desk-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 200px;
+    border-radius: 8px;
+    border: 1px solid black;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s ease-in-out 0.3s;
+    background-color: #6E4796;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+}
+
+.info-desk-title {
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.ok-button {
+    width: 200px;
+    height: 65px;
+    background: #4d86e7;
+    color: rgba(255, 255, 255, 0.92);
+    border-radius: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

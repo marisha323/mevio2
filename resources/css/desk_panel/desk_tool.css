@@ -1,0 +1,21 @@
+.desk-tool {
+    position: absolute;
+    bottom: -10px;
+    left: 5%;
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.desk-tool-img {
+    width: 30px !important;
+    transition: 0.3s;
+}
+
+.desk-tool-img:hover {
+    transform: scale(1.2);
+}

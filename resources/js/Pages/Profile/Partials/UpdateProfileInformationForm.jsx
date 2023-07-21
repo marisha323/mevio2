@@ -12,7 +12,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
-        userLogoPath: user.userLogoPath,
+        userLogoPath: '',
     });
 
 
@@ -22,10 +22,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('email', data.email);
-
-
         formData.append('userLogoPath', data.userLogoPath);
-        console.log(1111);
+
         post(route('profile.update'), formData);
     };
 
@@ -78,20 +76,18 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <div className="mt-4">
                     <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
 
-                    <label htmlFor="userLogoPath" className="btn btn-light" >
+                    <label htmlFor="uploadButton" className="btn btn-light">
                         Choose File
+                        <input
+                            id="userLogoPath"
+                            type="file"
+                            name="userLogoPath"
+                            className="file-input"
+                            autoComplete="username"
+                            onChange={(e) => setData('userLogoPath', e.target.files[0])}
+                            required
+                        />
                     </label>
-                    <input
-                        id="userLogoPath"
-                        type="file"
-                        name="userLogoPath"
-                        className="file-input"
-                        style={{ display: "none" }}
-                        autoComplete="username"
-                        onChange={(e) => setData('userLogoPath', e.target.files[0])}
-                        required
-                    />
-
                     <InputError message={errors.userLogoPath} className="mt-2"/>
                 </div>
 

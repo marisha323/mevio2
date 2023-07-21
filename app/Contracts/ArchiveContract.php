@@ -3,10 +3,14 @@ namespace App\Contracts;
 
 interface ArchiveContract
 {
-    public function create($data);
+    public function create($data):bool;
 
-    public function destroy($id);
+    public function destroy($data):bool;
+
+    public function update($data);
+
+    public function getArchiveDesksByUserId ($userId):array;
 
 }
 
-?>
+
