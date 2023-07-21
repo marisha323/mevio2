@@ -4,6 +4,8 @@ namespace App\Repositories;
 use App\Contracts\CardContract;
 use App\Models\Card;
 
+use App\Models\Desk;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -52,7 +54,6 @@ class CardRepository implements CardContract
     public function currentDesk(Request $request)
     {
         $deskId = $request->get('desk_id');
-        $cards = Card::where('desk_id', $deskId)->get();
 
 
         $cards1 = Card::where('desk_id', $deskId)->where('columnId', 1)->get();
@@ -73,6 +74,8 @@ class CardRepository implements CardContract
 
         return $cards;
     }
+
+
 
 
 

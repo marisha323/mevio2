@@ -407,3 +407,6 @@ width: 1.5rem;
 .notification.error {
   background-color: #f44336;
 }
+.imguser{
+    border-radius: 50%;
+}

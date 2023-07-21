@@ -9,10 +9,12 @@ import {Link, router} from '@inertiajs/react';
 
 
 
-export default function CurrentDesk({cards, users}) {
+export default function CurrentDesk({cards, users,deskUsers}) {
 
     console.log(cards);
     console.log(users);
+    console.log(deskUsers);
+
     //const cardsArray = Object.values(cards);//перетворення на масив
     const card1Array = Object.values(cards.card1);
     const card1Array2 = Object.values(cards.card2);
@@ -235,10 +237,11 @@ export default function CurrentDesk({cards, users}) {
                 <div className='middle_top_body_tasks'>
                     <h1>Курсовий проект</h1>
                     <div className='tasks_user_profiles'>
-                        <img src='images/profile1.png' alt=''/>
-                        <img src='images/profile2.png' alt=''/>
-                        <img src='images/profile3.png' alt=''/>
-                        <img src='images/Ellipse 11.png' alt=''/>
+                        {deskUsers.map((user)=>(
+                        <img className='imguser' src={`userLogoPath/${user.userLogoPath}`} alt=''/>
+
+                        ))}
+
                     </div>
                     <button onClick={ToggleInviteDesk}>Поділитися</button>
                     <img src='images/settings (1) 1.png' alt=''/>
@@ -263,7 +266,7 @@ export default function CurrentDesk({cards, users}) {
                         {filteredUsers.map((user) => (
                             <React.Fragment key={user.email}>
                                 <div className='User_Add_Container'>
-                                    <img className='add_user_pfp' src={`public/userLogoPath/${user.userLogoPath}`} alt=''/>
+                                    <img className='add_user_pfp' src={`userLogoPath/${user.userLogoPath}`} alt=''/>
                                     <p>{user.email}</p>
                                     <button className='add_btn_user_desk'>Додати</button>
                                 </div>

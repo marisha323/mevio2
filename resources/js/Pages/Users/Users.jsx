@@ -83,7 +83,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
                 {filteredUsers.map((user) => (
                   <>
                   <div key={user.id} className="list_user">
-                    <img src="images/profile1.png" alt="" />
+                    <img src={`userLogoPath/${user.userLogoPath}`} alt="" />
                     <div className="user_name">
                       <h4>{user.name}</h4>
                       <p>{user.email}</p>
