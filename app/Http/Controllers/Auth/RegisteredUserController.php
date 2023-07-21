@@ -39,17 +39,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-
-//        if (request()->hasFile('userLogoPath')) {
-            //// Отримайте файл з запиту
-            //$file = request()->file('userLogoPath');
-            //// Виконайте потрібну обробку та збереження файлу
-            $file='userLogoPath/user.png';
-        $fileName='user.png';
-            $destinationPath = 'public/public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
-//            $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
-//            $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
-
+            $fileName='user.png';
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
