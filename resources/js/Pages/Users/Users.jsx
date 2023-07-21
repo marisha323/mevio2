@@ -7,15 +7,17 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
   const [filteredUsers, setFilteredUsers] = useState(users);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedBoard, setSelectedBoard] = useState(null);
-  const [filteredDesks, setFilteredDesks] = useState([]);
+  const [filteredDesks, setFilteredDesks] = useState(desksusers);
 
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-
+  
     setFilteredUsers(() => {
       return users.filter((user) =>
-        user.name.toLowerCase().includes(searchTerm.toLowerCase())
+        filteredDesks.some(
+          (deskuser) => deskuser.desk_id === selectedBoard.id && deskuser.user_id === user.id
+        ) && user.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     });
   };
@@ -25,7 +27,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
 
     setFilteredUsers(() => {
       return users.filter((user) =>
-        desksusers.some((deskuser) => deskuser.desk_id === board.id && deskuser.user_id === user.id)
+      filteredDesks.some((deskuser) => deskuser.desk_id === board.id && deskuser.user_id === user.id)
       );
     });
     console.log(filteredUsers);
@@ -76,6 +78,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
               <div className="users_list">
                 <hr />
                 {filteredUsers.map((user) => (
+                  <>
                   <div key={user.id} className="list_user">
                     <img src="images/profile1.png" alt="" />
                     <div className="user_name">
@@ -89,7 +92,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
                       ) : (
                         <button className="admin_user_btn">Користувач</button>
                       )}
-                      {loggedInUserId === selectedBoard.user_id ? (
+                      {loggedInUserId === selectedBoard.userId ? (
                         <InertiaLink
                           className="remove_user_btn"
                           onClick={() => handleRemoveUser(user.id)}
@@ -103,8 +106,9 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
                       ) : null}
                     </div>
                   </div>
+                  <hr />
+                  </>
                 ))}
-                <hr />
               </div>
             )}
           </div>

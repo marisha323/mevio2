@@ -59,7 +59,7 @@ class UserRepository implements UserContract
 public function delete($userId, $deskId)
     {
         //removing user from desk!
-        $deskUser = DesksUsers::where('userId', $userId)->where('deskId', $deskId)->first();
+        $deskUser = DesksUsers::where('user_id', $userId)->where('desk_id', $deskId)->first();
         if ($deskUser) {
             $deskUser->delete();
         }
