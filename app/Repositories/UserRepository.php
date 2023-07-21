@@ -30,15 +30,16 @@ class UserRepository implements UserContract
 {
     $loggedInUserId = auth()->user()->id;
 
+    //return al desks that the logged in user has
     $userDesks = Desk::join('desk_user', 'desks.id', '=', 'desk_user.desk_id')
         ->where('desk_user.user_id', $loggedInUserId)
         ->select('desks.*')
         ->get();
 
-    // Assuming 'desk_user' has columns 'desk_id' and 'user_id'
-    $desks = Desk::whereIn('id', $userDesks->pluck('id')->toArray())
-        ->get();
+    //return all of the desk_user where we will use later to take users_id and desks_id
+    $desks = DesksUsers::whereIn('deskId', $userDesks->pluck('id')->toArray())->get();
 
+    //return all users that are in the same desk that is the logged in user
     $usersInSameDesks = User::join('desk_user', 'users.id', '=', 'desk_user.user_id')
         ->whereIn('desk_user.desk_id', $desks->pluck('id')->toArray())
         ->select('users.*')

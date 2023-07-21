@@ -1,7 +1,7 @@
-import "../../../css/users/users.css";
-import { DashBoardLayout } from "@/Layouts/DashBoardLayout.jsx";
 import React, { useState } from 'react';
 import { InertiaLink } from "@inertiajs/inertia-react";
+import { DashBoardLayout } from '@/Layouts/DashBoardLayout.jsx';
+import '../../../css/users/users.css';
 
 export default function Users({ users, desks, desksusers, loggedInUserId, themes }) {
   const [filteredUsers, setFilteredUsers] = useState(users);
