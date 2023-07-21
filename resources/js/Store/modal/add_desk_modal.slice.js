@@ -5,7 +5,7 @@ const addDeskModalSlice
     = createSlice({
     name: 'addDeskModalVisibility',
     initialState: {
-        isVisible: true
+        isVisible: false
     },
     reducers: {
         hideAddDeskModal: (state) => {

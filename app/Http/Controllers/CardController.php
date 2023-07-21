@@ -20,7 +20,7 @@ class CardController extends Controller
 
     protected $cardModel;
 
-    public function __construct(CardContract $cardRepository)
+    public function __construct(CardRepository $cardRepository)
     {
         $this->cardModel = $cardRepository;
 
@@ -31,12 +31,36 @@ class CardController extends Controller
         $this->cardModel->create();
        // return Inertia::render('CurrentDesk/CurrentDesk');
     }
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request):Response
     {
-        //dd($request);
-        $this->cardModel->store($request);
-        return redirect('/current-desk');
-       //return Inertia::render('CurrentDesk/CurrentDesk');
+//       // dd($request);
+//        $desk_id = $request['deskId'];
+//       // dd($desk_id);
+       $this->cardModel->store($request);
+//
+//      //return redirect('/current-desk?desk_id='.$desk_id);
+//      return redirect('/current-desk');
+
+
+        $desk_id = $request['deskId'];
+
+        if(!isset($desk_id))
+        {
+            return  redirect('/desk-panel');
+        }
+        // Fetch users who do not exist in the given desk using the doesNotHave relationship.
+        $users = User::whereDoesntHave('desks', function ($query) use ($desk_id) {
+            $query->where('desk_id', $desk_id);
+        })->get();
+
+        // Fetch the cards associated with the desk. I'm assuming you already have a method in your cardModel for this.
+        $cards = $this->cardModel->currentDesk($request);
+
+        return Inertia::render('CurrentDesk/CurrentDesk', [
+            'cards' => $cards,
+            'users' => $users,
+        ]);
+
     }
 
 //     public function currentDesk(Request $request):Response
@@ -47,17 +71,21 @@ class CardController extends Controller
 // //        return Inertia::render('CurrentDesk/CurrentDesk');
 //     }
 
-    public function currentDesk(Request $request): Response
+    public function currentDesk(Request $request)
     {
         $desk_id = $request->get('desk_id');
 
+        if(!isset($desk_id))
+        {
+            return  redirect('/desk-panel');
+        }
         // Fetch users who do not exist in the given desk using the doesNotHave relationship.
         $users = User::whereDoesntHave('desks', function ($query) use ($desk_id) {
             $query->where('desk_id', $desk_id);
         })->get();
 
         // Fetch the cards associated with the desk. I'm assuming you already have a method in your cardModel for this.
-        $cards = $this->cardModel->currentDesk();
+        $cards = $this->cardModel->currentDesk($request);
 
         return Inertia::render('CurrentDesk/CurrentDesk', [
             'cards' => $cards,

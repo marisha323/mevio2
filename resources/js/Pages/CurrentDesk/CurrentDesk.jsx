@@ -6,13 +6,28 @@ import {Card, Board} from '@/React-dnd-Components';
 import axios from 'axios';
 import {DashBoardLayout} from '@/Layouts/DashBoardLayout.jsx';
 import {Link, router} from '@inertiajs/react';
-//import card from "@/React-dnd-Components/Card.jsx";
+
+
 
 export default function CurrentDesk({cards, users}) {
 
+    console.log(cards);
+    console.log(users);
+    //const cardsArray = Object.values(cards);//перетворення на масив
+    const card1Array = Object.values(cards.card1);
+    const card1Array2 = Object.values(cards.card2);
+    const card1Array3 = Object.values(cards.card3);
+
+
+
+    //  GET ColumnID
     const urlSearchParams = new URLSearchParams(window.location.search);
     const columnId = urlSearchParams.get("columnId");
 
+    //GET DeskId
+
+    const deskId = urlSearchParams.get('desk_id');
+    console.log("DESK Id: " + deskId);
     const [searchValue, setSearchValue, setValues] = useState('');
 
     //filter user display search
@@ -110,25 +125,28 @@ export default function CurrentDesk({cards, users}) {
     //     setSelectedCardId(id); // Зберігаємо значення id в стані для модального вікна
     // };
 
-    const ToggleVisibleModal = (columnId) => {
+    const ToggleVisibleModal = (columnId,deskId) => {
         setIsVisible(!isVisible);
         setCardValues((prevValues) => ({
             ...prevValues,
             columnId: columnId,
+            deskId:deskId  ////////////////////////////added 21.7
+
         }));
     };
 
     //SAVE CARD TO DB
 
-    // Змініть стан для зберігання даних картки
+    //Change values
     const [cardValues, setCardValues] = useState({
         cardName: "",
         description: "",
         deadLine: "",
-        columnId: columnId || "", // Встановлюємо значення columnId з queryParams, або пустий рядок, якщо параметр відсутній
+        columnId: columnId || "",
+        deskId:deskId
     });
 
-// Опрацювання зміни для полів картки
+// Change values in the fields
     function handleCardChange(e) {
         const key = e.target.id;
         const value = e.target.value;
@@ -141,13 +159,20 @@ export default function CurrentDesk({cards, users}) {
 // Опрацювання подання форми для збереження картки
     async function handleCardSubmit(e) {
         e.preventDefault();
-        await router.post("/posts/createCard", cardValues);
+        console.log(cardValues);
+       axios.post("/posts/createCard", cardValues)
+           .then((response)=>{console.log(response)})
+           .catch((error)=>console.log(error));
         setCardValues({
             cardName: "",
             description: "",
             deadLine: "",
-            columnId: columnId,
+            columnId: "",
+            deskId: ""
         });
+        setIsVisible(false);
+        // Reload the page to show the new card after successful submission.
+        window.location.reload();
     }
 
     return (
@@ -208,14 +233,14 @@ export default function CurrentDesk({cards, users}) {
             <div className='Add_User_Background_Overlayer' onClick={ToggleInviteDesk}></div>
             <div className='middle_desks_container'>
                 <div className='middle_top_body_tasks'>
-                    <h1>Курсовой проект</h1>
+                    <h1>Курсовий проект</h1>
                     <div className='tasks_user_profiles'>
                         <img src='images/profile1.png' alt=''/>
                         <img src='images/profile2.png' alt=''/>
                         <img src='images/profile3.png' alt=''/>
                         <img src='images/Ellipse 11.png' alt=''/>
                     </div>
-                    <button onClick={ToggleInviteDesk}>Поделиться</button>
+                    <button onClick={ToggleInviteDesk}>Поділитися</button>
                     <img src='images/settings (1) 1.png' alt=''/>
                 </div>
                 <div className='Add_User_Overlayer'>
@@ -229,7 +254,7 @@ export default function CurrentDesk({cards, users}) {
                             onChange={(e) => setSearchValue(e.target.value)}
                         />
                         <button className='Add_unk_user' onClick={sendEmail}>
-                            Запросіть
+                            Запросити
                         </button>
                     </div>
 
@@ -238,7 +263,7 @@ export default function CurrentDesk({cards, users}) {
                         {filteredUsers.map((user) => (
                             <React.Fragment key={user.email}>
                                 <div className='User_Add_Container'>
-                                    <img className='add_user_pfp' src='{image}' alt=''/>
+                                    <img className='add_user_pfp' src={`public/userLogoPath/${user.userLogoPath}`} alt=''/>
                                     <p>{user.email}</p>
                                     <button className='add_btn_user_desk'>Додати</button>
                                 </div>
@@ -247,6 +272,7 @@ export default function CurrentDesk({cards, users}) {
                         ))}
                     </div>
                 </div>
+
                 <div className="main-container">
                     <ul className="columns">
                         <li className="column to-do-column">
@@ -254,13 +280,14 @@ export default function CurrentDesk({cards, users}) {
                                 <h4>Потрібно зробити</h4>
                                 <img src="images/bookmark (2) 2.png" alt=""/>
                             </div>
+
                             <Board id="to-do" className="task-list" columnId={1}>
-                                {cards.card1.map((card) => (
+                                {card1Array.map((card) => (
                                     <div key={card.id}>
                                         <Card
                                             className="task"
-                                            columnId={1} // add
-                                            cardId={card.id} // add
+                                            columnId={1}
+                                            cardId={card.id}
                                             key={card.id}
                                             id={card.id}
                                             draggable="true"
@@ -273,7 +300,7 @@ export default function CurrentDesk({cards, users}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('1')}>
+                            <button onClick={() => ToggleVisibleModal('1',deskId)}>
                                 <img
                                     className="plus_task"
                                     src="images/plus (3) 1.png"
@@ -288,12 +315,12 @@ export default function CurrentDesk({cards, users}) {
                                 <img src="images/bookmark (2) 2.png" alt=""/>
                             </div>
                             <Board id="doing" className="task-list" columnId={2}>
-                                {cards.card2.map((card) => (
+                                {card1Array2.map((card) => (
                                     <div key={card.id}>
                                         <Card
                                             className="task"
-                                            //columnId={2} //add
-                                            cardId={card.id} // add
+                                            columnId={2}
+                                            cardId={card.id}
                                             key={card.id}
                                             id={card.id}
                                             draggable="true"
@@ -306,7 +333,7 @@ export default function CurrentDesk({cards, users}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('2')}>
+                            <button onClick={() => ToggleVisibleModal('2',deskId)}>
                                 <img className="plus_task" src="images/plus (3) 1.png" alt=""/>
                             </button>
                         </li>
@@ -317,29 +344,31 @@ export default function CurrentDesk({cards, users}) {
                                 <img src="images/bookmark (2) 2.png" alt=""/>
                             </div>
                             <Board id="done" className="task-list" columnId={3}>
-                                {cards.card3.map((card) => (
+                                {card1Array3.map((card) => (
                                     <div key={card.id}>
-                                        <Card className="task"
-                                              columnId={3}
-                                              cardId={card.id}
-                                              id={card.id}
-                                              key={card.id}
-                                              draggable="true"
-                                              ref={cardRef}
-                                              onDragEnd={(e) => handleDragEnd(e, card.id, 3)}
-                                              data-original-board="done"
+                                        <Card
+                                            className="task"
+                                            columnId={3}
+                                            cardId={card.id}
+                                            key={card.id}
+                                            id={card.id}
+                                            draggable="true"
+                                            ref={cardRef}
+                                            onDragEnd={(e) => handleDragEnd(e, card.id, 3)}
+                                            data-original-board="done"
                                         >
                                             <p>{card.cardName}</p>
                                         </Card>
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('3')}>
+                            <button onClick={() => ToggleVisibleModal('3',deskId)}>
                                 <img className="plus_task" src="images/plus (3) 1.png" alt=""/>
                             </button>
                         </li>
                     </ul>
                 </div>
+
             </div>
         </DashBoardLayout>
     );

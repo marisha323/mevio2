@@ -30,42 +30,51 @@ class CardRepository implements CardContract
        // dd($request);
         $user = Auth::user();
 
-       // dd($user);
+        //dd($request->post('deskId'));
         $userId= $user->id;
 
         $card=new Card();
 
-        $card->cardName = $request->post('cardName');
-        $card->description = $request->post('description');
-        $card->deadLine = $request->post('deadLine');
-        $card->columnId = $request->post('columnId');
+        $card->cardName = $request['cardName'];
+        $card->description = $request['description'];
+        $card->deadLine = $request['deadLine'];
+        $card->columnId = $request['columnId'];
         $card->userId = $userId;
+        $card->desk_id = $request['deskId'];
 
 
         $card->created_at = new \DateTime();
         $card->updated_at = new \DateTime();
         $card->save();
-        return redirect('/current-desk');
 
-       // return Card::create();
     }
 
-    public function currentDesk()
+    public function currentDesk(Request $request)
     {
-        //  $data = ['cards' => Card::all()];
-
-        $cards1 = Card::where('columnId', 1)->get();
-        $cards2 = Card::where('columnId', 2)->get();
-        $cards3 = Card::where('columnId', 3)->get();
+        $deskId = $request->get('desk_id');
+        $cards = Card::where('desk_id', $deskId)->get();
 
 
-        $cards=[
-          'card1'=> $cards1,
-          'card2'=> $cards2,
-          'card3'=> $cards3,
+        $cards1 = Card::where('desk_id', $deskId)->where('columnId', 1)->get();
+        $cards2 = Card::where('desk_id', $deskId)->where('columnId', 2)->get();
+        $cards3 = Card::where('desk_id', $deskId)->where('columnId', 3)->get();
+
+//        $cards1 = $cards->where('columnId', 1);
+//        $cards2 = $cards->where('columnId', 2);
+//        $cards3 = $cards->where('columnId', 3);
+
+
+        $cards = [
+            'card1' => $cards1->ToArray(),
+            'card2' => $cards2->ToArray(),
+            'card3' => $cards3->ToArray(),
         ];
-       return $cards;
+
+
+        return $cards;
     }
+
+
 
     public function updateCardColumn(Request $request,$id)
     {

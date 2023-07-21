@@ -46,8 +46,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/calendar', [CalendarController::class, 'index']);
+
+
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
-//    Route::get('/current-desk',function (){
+
+
+    //    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
 //    });
 
@@ -68,7 +72,7 @@ Route::middleware('auth')->group(function () {
 //    Route::get('/create-card',function (){
 //        return Inertia::render('UserComponent/CreateCard');
 //    });
-    Route::post('/posts/createCard',[CardController::class,'store'])->name('post.store');
+    Route::post('/posts/createCard',[CardController::class,'store']);
 
 
     //FIND USER By Email

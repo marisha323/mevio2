@@ -14,6 +14,7 @@ class Card extends Model
         'columnId',
         'userId',
         'deadLine',
+        'deskId'
     ];
 
     public $timestamps = true;
