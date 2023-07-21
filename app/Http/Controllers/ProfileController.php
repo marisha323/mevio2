@@ -39,7 +39,7 @@ class ProfileController extends Controller
             //dd($request->userLogoPath);
             $file = $request->file('userLogoPath');
             // Виконайте потрібну обробку та збереження файлу
-            $destinationPath = 'public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
+            $destinationPath = 'userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
             $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
             $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
             $user->userLogoPath = $fileName;

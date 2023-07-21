@@ -76,18 +76,21 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                 <div className="mt-4">
                     <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
 
-                    <label htmlFor="uploadButton" className="btn btn-light">
+                    <label htmlFor="userLogoPath" className="btn btn-light" style={{
+
+                    }}>
                         Choose File
-                        <input
-                            id="userLogoPath"
-                            type="file"
-                            name="userLogoPath"
-                            className="file-input"
-                            autoComplete="username"
-                            onChange={(e) => setData('userLogoPath', e.target.files[0])}
-                            required
-                        />
                     </label>
+                    <input
+                        id="userLogoPath"
+                        type="file"
+                        name="userLogoPath"
+                        className="file-input"
+                        style={{ display: "none" }}
+                        autoComplete="username"
+                        onChange={(e) => setData('userLogoPath', e.target.files[0])}
+                        required
+                    />
                     <InputError message={errors.userLogoPath} className="mt-2"/>
                 </div>
 
