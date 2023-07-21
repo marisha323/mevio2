@@ -98,7 +98,7 @@ export const DashBoardLayout = ({ children }) => {
 
                         <img src={`/images/themes/${mainTheme.id}/logo.png`} alt=""/>
 
-                    <h2 style={{color: mainTheme.logo_font_color}}>Mevio</h2>
+                    <h2 style={{color: mainTheme.logo_font_color}}>Mevis</h2>
                 </div>
                 </Link>
                 <div className="toTheRight_container">

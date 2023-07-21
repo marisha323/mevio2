@@ -3,8 +3,18 @@ import { DashBoardLayout } from "@/Layouts/DashBoardLayout.jsx";
 import { Link } from "@inertiajs/react";
 import "../../../css/calendar/calendar.css";
 import "../../../css/calendar/week_calendar.css";
+import {useThemes} from "@/Hooks/useThemes.js";
 
 const WeekCalendar = ({ cardsData }) => {
+
+    const [mainTheme, setMainTheme] = useState({});
+    const {defaultTheme} = useThemes();
+
+    useEffect( () => {
+        setMainTheme(defaultTheme);
+    },[defaultTheme])
+
+
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
@@ -21,25 +31,16 @@ const WeekCalendar = ({ cardsData }) => {
     return (
         <DashBoardLayout>
             <div className="middle_desks_container">
-                <div className="middle_top_body">
+                <div className="middle_top_body"
+                     style={{backgroundColor: mainTheme.page_header_bg_color}}>
                     <h1>Тижневий календар</h1>
                 </div>
                 <div className="middle_middle_body">
                     <div className="weekly_control_box_container">
-                        <select className="combobox_weekly">
-                            <option value="" disabled selected hidden>
-                                {`${getMonthName(currentMonth)} ${currentYear} р.`}
-                            </option>
-                        </select>
-                        <div className="control_box">
-                            <button>&lt;</button>
-                            <label htmlFor="">Сьогодні</label>
-                            <button>&gt;</button>
-                        </div>
+
                     </div>
                     <div className="week_boxes">
                         {weekDays.map((date, index) => {
-                            console.log(date);
                             const tasksForDay = [];
 
                             cardsData.forEach((card) => {
@@ -55,7 +56,9 @@ const WeekCalendar = ({ cardsData }) => {
                             });
 
 
-                           return <div className="week_box" key={index}>
+                           return <div className="week_box" key={index}
+                                style={index === 5 || index === 6 ? {backgroundColor: mainTheme.layout_header_bg_color}
+                                    : {opacity: 0.7}}>
                                 <div className="dateRange">
                                     {getWeekDayName(index + 1)}
                                     <p>{`${getMonthName(new Date(date).getMonth())} ${new Date(date).getDate()}`}</p>
