@@ -42,7 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('/users', [UserController::class, 'returnUsers']);
-    Route::delete('/users/{id}', [UserController::class, 'delete']);
+    Route::delete('/users/{userId}/desk/{deskId}', [UserController::class, 'delete']);
 
     Route::get('/calendar',function (){
         return Inertia::render('Calendar/Calendar');
