@@ -3,7 +3,7 @@
 }
 
 .notification-img:hover {
-    animation: bellSwing 0.5s infinite ease-in-out;
+    animation: bellSwing 0.3s infinite ease-in-out;
 }
 
 @keyframes bellSwing {
@@ -15,7 +15,44 @@
     }
 }
 
+.notification-animate {
+    animation: bellSwing 0.3s infinite ease-in-out;
+}
+
 .notification-container {
     position: relative;
+}
+
+.notification-alert {
+    position: absolute;
+    width: 25px;
+    left: -6px;
+    visibility: hidden;
+}
+
+.alert {
+    visibility: visible;
+}
+
+.alert-img {
+    width: 100%;
+}
+
+.notification-modal {
+    position: absolute;
+    padding: 15px;
+    background: white;
+    border-radius: 8px;
+    width: 350px;
+    right: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.notification-modal-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.3s all ease-in-out;
 }
 

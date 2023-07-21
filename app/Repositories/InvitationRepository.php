@@ -11,7 +11,7 @@ class InvitationRepository implements InvitationContract
 
     function __construct()
     {
-        $this->model=new InvitationRepository();
+
     }
     public function create($data)
     {
@@ -28,5 +28,12 @@ class InvitationRepository implements InvitationContract
     {
 
     }
+
+    public function getAllInvitationsByUserId ($userId):array
+    {
+        $invitations = Invitation::where('targetId',$userId);
+
+        dd($invitations);
+    }
 }
-?>
+

@@ -103,11 +103,6 @@ export const DashBoardLayout = ({ children }) => {
                 </div>
                 </Link>
                 <div className="toTheRight_container">
-                    <div className="loupe_container">
-                        <img src={`images/themes/${mainTheme.id}/loupe.png`} alt=""/>
-                        <input className="searcher" type="text" placeholder="Пошук..."
-                            style={{color: mainTheme.layout_header_bg_color}}/>
-                    </div>
 
                     <Notification mainTheme={mainTheme} />
 
