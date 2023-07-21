@@ -30,27 +30,27 @@ class UserRepository implements UserContract
 {
     $loggedInUserId = auth()->user()->id;
 
-    // Get the desks of the authenticated user
-    $userDesks = Desk::whereHas('users', function ($query) use ($loggedInUserId) {
-            $query->where('users.id', $loggedInUserId);
-        })
+    $userDesks = Desk::join('desk_user', 'desks.id', '=', 'desk_user.desk_id')
+        ->where('desk_user.user_id', $loggedInUserId)
+        ->select('desks.*')
         ->get();
 
-    $deskIds = $userDesks->pluck('id')->toArray();
+    // Assuming 'desk_user' has columns 'desk_id' and 'user_id'
+    $desks = Desk::whereIn('id', $userDesks->pluck('id')->toArray())
+        ->get();
 
-    // Get users who belong to the same desks as the authenticated user
-    $usersInSameDesks = User::whereHas('desks', function ($query) use ($deskIds) {
-            $query->whereIn('desks.id', $deskIds);
-        })
+    $usersInSameDesks = User::join('desk_user', 'users.id', '=', 'desk_user.user_id')
+        ->whereIn('desk_user.desk_id', $desks->pluck('id')->toArray())
+        ->select('users.*')
+        ->distinct()
         ->get();
 
     $themes = Theme::all();
-    // dd($userDesks);
 
     return [
         'loggedInUserId' => $loggedInUserId,
         'desks' => $userDesks,
-        'desksusers' => $deskIds,
+        'desksusers' => $desks,
         'users' => $usersInSameDesks,
         'themes' => $themes
     ];
