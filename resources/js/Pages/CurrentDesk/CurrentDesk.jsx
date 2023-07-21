@@ -222,6 +222,7 @@ export default function CurrentDesk({cards, users}) {
                                        onChange={handleCardChange}/>
                             </div>
                         </div>
+
                         <div>
                             <button type="submit" className="btn btn-info btn2">
                                 Зберегти карточку
