@@ -19,9 +19,13 @@ class CalendarRepository implements CalendarContract
     {
         $this->model=$card;
     }
-    public function index()
+    public function index($userId)
     {
-        return Card::all();
+        return Card::where('userId',$userId)->get();
+    }
+    public function index_week($userId)
+    {
+        return Card::where('userId',$userId)->get();
     }
 
 

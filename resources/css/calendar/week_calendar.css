@@ -9,7 +9,8 @@ html::before, body::before {
 .combobox_weekly {
   color: #9AB9A3;
   font-size: 30px;
-  width: 12rem;
+  width: 16.5rem;
+  height: 3rem;
   background-color: transparent;
   appearance: none;
   border: none;
@@ -46,7 +47,7 @@ html::before, body::before {
     height: 100%;
     border-top: 1px solid #9AB9A3;
   }
-  
+
   .week_box {
     width: 100%;
     height: 100%;
@@ -69,3 +70,29 @@ html::before, body::before {
   .week_box:nth-last-child(-n+2) {
     opacity: 1;
   }
+  .dateRange
+  {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+.task_info {
+    overflow-y: auto;
+    max-width: 250px;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+    background-color: black;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 90%;
+    height: 15%;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin-bottom: 1rem;
+    border: 3px dashed transparent;
+    font-size: 20px;
+
+}

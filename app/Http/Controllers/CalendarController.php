@@ -7,6 +7,7 @@ use App\Models\Card;
 use App\Presenters\CardAsArrayPresenter;
 use App\Repositories\CalendarRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -20,8 +21,18 @@ class CalendarController extends Controller
 
     public function index() : Response
     {
-       $cards = (new CardAsArrayPresenter())->presentCollection($this->calendarRepository->index());
+       $userId = Auth::user()->getAuthIdentifier();
+       $cards = (new CardAsArrayPresenter())->presentCollection($this->calendarRepository->index($userId));
+
+
 
        return Inertia::render('Calendar/Calendar', ['cardsData' => $cards]);
+    }
+    public function index_week() : Response
+    {
+        $userId = Auth::user()->getAuthIdentifier();
+        $cards = (new CardAsArrayPresenter())->presentCollection($this->calendarRepository->index_week($userId));
+
+        return Inertia::render('Calendar/WeekCalendar', ['cardsData' => $cards]);
     }
 }
