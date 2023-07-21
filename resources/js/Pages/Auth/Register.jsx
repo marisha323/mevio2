@@ -69,24 +69,24 @@ export default function Register() {
                 </div>
 
 
-                <div className="mt-4">
-                    <InputLabel htmlFor="userLogoPath" value="Your avatar"/>
+                {/*<div className="mt-4">*/}
+                {/*    <InputLabel htmlFor="userLogoPath" value="Your avatar"/>*/}
 
-                    <label htmlFor="uploadButton" className="btn btn-light">
-                        Choose File
-                        <input
-                            id="userLogoPath"
-                            type="file"
-                            name="userLogoPath"
-                            className="file-input"
-                            autoComplete="username"
-                            onChange={(e) => setData('userLogoPath', e.target.files[0])}
-                            required
-                        />
-                    </label>
+                {/*    <label htmlFor="uploadButton" className="btn btn-light">*/}
+                {/*        Choose File*/}
+                {/*        <input*/}
+                {/*            id="userLogoPath"*/}
+                {/*            type="file"*/}
+                {/*            name="userLogoPath"*/}
+                {/*            className="file-input"*/}
+                {/*            autoComplete="username"*/}
+                {/*            onChange={(e) => setData('userLogoPath', e.target.files[0])}*/}
+                {/*            required*/}
+                {/*        />*/}
+                {/*    </label>*/}
 
-                    <InputError message={errors.userLogoPath} className="mt-2"/>
-                </div>
+                {/*    <InputError message={errors.userLogoPath} className="mt-2"/>*/}
+                {/*</div>*/}
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password"/>

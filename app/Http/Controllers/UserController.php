@@ -33,12 +33,12 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
-    public function returnUsers(){
-        //userModel is actually a UserRepository!
-        $users = $this->userModel->returnUsers();
-        return Inertia::render("Users/Users",['users' => $users,]);
+    public function returnUsers(UserRepository $userModel)
+    {
+        $data = $userModel->returnUsers();
+        return Inertia::render("Users/Users", $data);
     }
-    public function delete($id){
-        $this->userModel->delete($id);
+public function delete($userId, $deskId){
+        $this->userModel->delete($userId, $deskId);
     }
 }

@@ -28,7 +28,7 @@ function Board(props) {
             .post(`/update-card-column/${card_id}`, { columnId: newColumnId })
             .then((response) => {
                 console.log('Column updated successfully!');
-                window.location.href = '/current-desk';
+               // window.location.href = '/current-desk';
             })
             .catch((error) => {
                 console.error('Failed to update column:', error);
