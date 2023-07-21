@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class DesksUsers extends Model
 {
+    protected $table = 'desk_user';
     use HasFactory;
 
     protected $fillable = [

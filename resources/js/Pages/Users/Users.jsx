@@ -25,7 +25,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
 
     setFilteredUsers(() => {
       return users.filter((user) =>
-        desksusers.some((deskuser) => deskuser.deskId === board.id && deskuser.userId === user.id)
+        desksusers.some((deskuser) => deskuser.desk_id === board.id && deskuser.user_id === user.id)
       );
     });
     console.log(filteredUsers);
@@ -37,7 +37,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
       setFilteredUsers(updatedUsers);
 
       const deskIndex = filteredDesks.findIndex(
-        (deskuser) => deskuser.userId === userId && deskuser.deskId === selectedBoard.id
+        (deskuser) => deskuser.user_id === userId && deskuser.desk_id === selectedBoard.id
       );
 
       if (deskIndex !== -1) {
@@ -89,7 +89,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
                       ) : (
                         <button className="admin_user_btn">Користувач</button>
                       )}
-                      {loggedInUserId === selectedBoard.userId ? (
+                      {loggedInUserId === selectedBoard.user_id ? (
                         <InertiaLink
                           className="remove_user_btn"
                           onClick={() => handleRemoveUser(user.id)}
