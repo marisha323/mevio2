@@ -1,0 +1,21 @@
+.notification-img {
+    cursor: pointer;
+}
+
+.notification-img:hover {
+    animation: bellSwing 0.5s infinite ease-in-out;
+}
+
+@keyframes bellSwing {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(10deg);
+    }
+}
+
+.notification-container {
+    position: relative;
+}
+

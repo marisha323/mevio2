@@ -11,6 +11,7 @@ import {AddDeskModal} from "@/Components/Modal/AddDesk/AddDeskModal.jsx";
 import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 import {FavoriteDesks} from "@/Components/Sidebar/FavoriteDesks.jsx";
 import {ArchiveDesks} from "@/Components/Sidebar/ArchiveDesks.jsx";
+import {Notification} from "@/Components/Layout/Notification.jsx";
 
 
 
@@ -108,7 +109,8 @@ export const DashBoardLayout = ({ children }) => {
                             style={{color: mainTheme.layout_header_bg_color}}/>
                     </div>
 
-                    <img src={`/images/themes/${mainTheme.id}/bell.png`} alt=""/>
+                    <Notification mainTheme={mainTheme} />
+
                     <Link href={'/profile'}>
                         <img src="images/Ellipse 11.png" alt=""/>
                     </Link>
