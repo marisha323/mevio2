@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CalendarController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
@@ -32,6 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
     );
 
+    Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
+    Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
+        ->name('desk.panel');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -43,6 +48,8 @@ Route::middleware('auth')->group(function () {
         return Inertia::render('Calendar/Calendar');
     });
 
+    Route::get('/calendar', [CalendarController::class, 'index']);
+    Route::get('/week-calendar', [CalendarController::class, 'index_week']);
 
     //DESKS
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
@@ -61,9 +68,9 @@ Route::middleware('auth')->group(function () {
     //     return Inertia::render('Users/Users') ;
     // });
 
-    Route::get('/week-calendar',function (){
-        return Inertia::render('Calendar/WeekCalendar') ;
-    });
+//    Route::get('/week-calendar',function (){
+//        return Inertia::render('Calendar/WeekCalendar') ;
+//    });
 
     Route::get('/Home',function (){
         return Inertia::render('Home/Home') ;

@@ -1,10 +1,15 @@
-.calendar_month_h1{
+.calendar_month_h1:nth-child(1){
     color: #9AB9A3;
     font-weight: 700;
     margin-top: 1%;
     padding-left: 3%;
+    padding-right: 3%;
     font-size: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
+
 .calendar_container{
     width: 90%;
     height: 68vh;
@@ -41,34 +46,75 @@
     opacity: 0.95;
     border-radius: 0 0 10px 10px;
   }
-  
+
   .date {
     width: 14.285%;
     height: 72%;
-    color: #9AB9A3;
+    color: #bce0c7;
     padding-left: 0.3rem;
     background-color: #2B514D;
     opacity: 0.95;
     border-right: 1px solid rgba(5, 52, 47, 0.9);
     border-bottom: 1px solid rgba(5, 52, 47, 0.9);
+
+
+}
+.info
+{
+    overflow: auto;
+    height: 75%;
+}
+
+.date:nth-child(7n) {
   }
-  
+
   .date:nth-child(7n) {
     border-right: none; /* Remove right border for every 7th element */
   }
-  
+
   .date:nth-child(n+29) {
+}
+
+.date:nth-child(n+36) {
     border-bottom: none; /* Remove bottom border after the 28th element */
-  }
-  
-  .date:nth-child(29) {
+}
+
+.date:nth-child(36) {
     border-bottom-left-radius: 10px; /* Add border radius to bottom left corner of the 29th date */
-  }
-  
-  .date:nth-child(35) {
+}
+
+.date:nth-child(42) {
     border-bottom-right-radius: 10px; /* Add border radius to bottom right corner of the 35th date */
-  }
-  
-  .date.current-month-last-date ~ .date {
+}
+
+.date.current-month-last-date ~ .date {
     color: #000000; /* Change color for the next month's content */
+}
+.date.previous-month {
+    color: black;
+}
+.date.next-month
+{
+    color: black;
+}
+.task {
+    overflow: auto;
+    max-width: 300px;
+    display: flex;
+    flex-wrap: wrap;
+    word-break: break-all;
+    justify-content: center;
+    background-color: black;
+    padding: 1rem;
+    border-radius: 8px;
+    width: 98%;
+    height: 88%;
+    box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
+    margin-bottom: 1rem;
+    border: 3px dashed transparent;
+}
+
+
+
+
   }
