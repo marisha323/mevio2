@@ -44,14 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/users', [UserController::class, 'returnUsers']);
     Route::delete('/users/{id}', [UserController::class, 'delete']);
 
+    Route::get('/calendar',function (){
+        return Inertia::render('Calendar/Calendar');
+    });
 
     Route::get('/calendar', [CalendarController::class, 'index']);
-
-
+    Route::get('/week-calendar', [CalendarController::class, 'index_week']);
     Route::get('/current-desk', [CardController::class, 'currentDesk']);
-
-
-    //    Route::get('/current-desk',function (){
+//    Route::get('/current-desk',function (){
 //        return Inertia::render('CurrentDesk/CurrentDesk') ;
 //    });
 
@@ -59,13 +59,16 @@ Route::middleware('auth')->group(function () {
     //     return Inertia::render('Users/Users') ;
     // });
 
-    Route::get('/week-calendar',function (){
-        return Inertia::render('Calendar/WeekCalendar') ;
-    });
+//    Route::get('/week-calendar',function (){
+//        return Inertia::render('Calendar/WeekCalendar') ;
+//    });
 
     Route::get('/Home',function (){
         return Inertia::render('Home/Home') ;
     });
+
+    //SAVE DESK
+    Route::post('/create-desk',[DeskController::class,'actionCreateDesk']);
 
 
     //SAVE CARD

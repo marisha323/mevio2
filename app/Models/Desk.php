@@ -11,12 +11,14 @@ class Desk extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'creatorId',
+        'deskName',
+        'userId',
         'isPublic',
         'dateOfCreation',
         'themeId',
         'isArchive',
+        'created_at',
+        'updated_at'
     ];
 
     public function users (): BelongsToMany

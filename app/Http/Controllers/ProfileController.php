@@ -29,6 +29,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+
        $user= $request->user()->fill($request->validated());
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
@@ -36,11 +37,12 @@ class ProfileController extends Controller
 
         if ($request->hasFile('userLogoPath')) {
             // Отримайте файл з запиту
-            //dd($request->userLogoPath);
+
             $file = $request->file('userLogoPath');
             // Виконайте потрібну обробку та збереження файлу
-            $destinationPath = 'public/userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
+            $destinationPath = 'userLogoPath'; // Шлях до папки, де ви хочете зберегти файл
             $fileName = $file->getClientOriginalName(); // Отримання оригінального імені файлу
+
             $file->move($destinationPath, $fileName); // Збереження файлу у вказану папку
             $user->userLogoPath = $fileName;
         }
