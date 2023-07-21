@@ -1,7 +1,10 @@
 import "../../../css/desk_panel/desk_tool.css";
 import {useState} from "react";
+import {useActions} from "@/Hooks/useActions.js";
 
 export const DeskToolComponent = ({desk}) => {
+
+    const {toggleFavoriteTrue, toggleArchiveTrue} = useActions();
 
     const [isFavorite, setIsFavorite] = useState(desk.isFavorite);
     const [isArchive, setIasArchive] = useState(desk.isArchive);
@@ -11,8 +14,8 @@ export const DeskToolComponent = ({desk}) => {
         : "/images/desk_tool/favorite_false.svg";
 
     const archiveImg = isArchive
-        ? "/images/desk_tool/archive_true.svg"
-        : "/images/desk_tool/archive_false.svg";
+        ? "/images/desk_tool/archive_true.png"
+        : "/images/desk_tool/archive_false.png";
 
     function ArchiveToggleHandler(e) {
         e.preventDefault();
@@ -28,6 +31,7 @@ export const DeskToolComponent = ({desk}) => {
                 if (message === "success")
                 {
                     setIasArchive(!isArchive);
+                    toggleArchiveTrue();
                 }
             })
             .catch((error)=>console.log(error.message))
@@ -46,6 +50,7 @@ export const DeskToolComponent = ({desk}) => {
                 if (message === "success")
                 {
                     setIsFavorite(!isFavorite);
+                    toggleFavoriteTrue();
                 }
             })
             .catch((error)=>console.log(error.message))

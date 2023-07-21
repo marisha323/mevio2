@@ -6,7 +6,8 @@ interface FavoriteDeskContract
 {
     public function create($data);
     public function destroy($data);
-
     public function update($data);
+
+    public function getFavoriteDesksByUserId($userId):array;
 }
 

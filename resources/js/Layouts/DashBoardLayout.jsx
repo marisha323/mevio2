@@ -9,12 +9,14 @@ import {useActions} from "@/Hooks/useActions.js";
 import {useThemes} from "@/Hooks/useThemes.js";
 import {AddDeskModal} from "@/Components/Modal/AddDesk/AddDeskModal.jsx";
 import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
+import {FavoriteDesks} from "@/Components/Sidebar/FavoriteDesks.jsx";
+import {ArchiveDesks} from "@/Components/Sidebar/ArchiveDesks.jsx";
 
 
 
 
 export const DashBoardLayout = ({ children }) => {
-    const [showFavorite, setShowFavorite] = useState(true);
+    const [showFavorite, setShowFavorite] = useState(false);
     const [showMyDesks, setShowMyDesks] = useState(true);
     const [showArchive, setShowArchive] = useState(false);
 
@@ -149,41 +151,49 @@ export const DashBoardLayout = ({ children }) => {
                           </span>
                         </button>
                     </Link>
-                    <p className="sidebar-category-title"
+                    <p className="sidebar-category-title pointer"
+                       onClick={()=>setShowMyDesks(!showMyDesks)}
                        style={{backgroundColor: mainTheme.sidebar_category_bg_color,
-                           color: mainTheme.left_sidebar_font_color}}>Мої дошки
+                           color: mainTheme.left_sidebar_font_color,
+                            borderBottom: `2px solid`}}>Мої дошки
                         <span>
                             <img src={`/images/themes/${mainTheme.id}/arrow_down.svg`} alt=""
-                                className={`arrow-img ${showMyDesks ? "" : "rotate-arrow"}`}
-                                onClick={()=>setShowMyDesks(!showMyDesks)}/>
+                                className={`arrow-img ${showMyDesks ? "" : "rotate-arrow"}`}/>
                         </span>
                     </p>
                     <div className={`myDesks ${showMyDesks ? "" : "hide-my-desks"}`}>
                         {myDesks}
                     </div>
-                    <p className="sidebar-category-title"
+                    <p className="sidebar-category-title pointer"
+                       onClick={()=>setShowFavorite(!showFavorite)}
                        style={{backgroundColor: mainTheme.sidebar_category_bg_color,
-                           color: mainTheme.left_sidebar_font_color}}>
+                           color: mainTheme.left_sidebar_font_color,
+                            borderRight: `2px solid`}}>
                         Обране
                         <span>
-                            <img className="rotate_img"
+                            <img className={`arrow-img ${showFavorite ? "" : "rotate-arrow"}`}
                                  src={`/images/themes/${mainTheme.id}/arrow_down.svg`}
                                  alt=""/>
                         </span>
                     </p>
-                    <div className="myDesks">
-                        <button className="desk">
-                          <span>
-                            <img src="images/background1.png" alt=""/>
-                            <span>Курсовий проект</span>
-                          </span>
-                        </button>
-                        <button className="desk">
-              <span>
-                <img src="images/background2.png" alt=""/>
-                <span>CRM Project</span>
-              </span>
-                        </button>
+                    <div className={`myDesks ${showFavorite ? "" : "hide-my-desks"}`}>
+                        <FavoriteDesks mainTheme ={mainTheme} />
+                    </div>
+
+                    <p className="sidebar-category-title pointer"
+                       onClick={()=>setShowArchive(!showArchive)}
+                       style={{backgroundColor: mainTheme.sidebar_category_bg_color,
+                           color: mainTheme.left_sidebar_font_color,
+                            borderTop: `2px solid`}}>
+                        Архів
+                        <span>
+                            <img className={`arrow-img ${showArchive ? "" : "rotate-arrow"}`}
+                                 src={`/images/themes/${mainTheme.id}/arrow_down.svg`}
+                                 alt=""/>
+                        </span>
+                    </p>
+                    <div className={`myDesks ${showArchive ? "" : "hide-my-desks"}`}>
+                        <ArchiveDesks mainTheme ={mainTheme} />
                     </div>
                 </div>
                 {children}

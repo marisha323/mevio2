@@ -26,6 +26,7 @@ class DeskAsArrayPresenter implements IPresenter
         return $result;
     }
 
+
     public function presentCollection($models): array
     {
         $returns = [];
@@ -34,5 +35,27 @@ class DeskAsArrayPresenter implements IPresenter
         }
 
         return $returns;
+    }
+
+
+    public function presentCollectionByIdArray($data):array
+    {
+        $presents = [];
+
+        foreach ($data as $key => $value){
+            $desk =  new Desk();
+            $desk = Desk::where('id',$value->deskId)->get();
+
+            $item = $desk[0];
+
+            $presents[] = [
+                'id'=> $item['id'],
+                'deskName' => $item['deskName'],
+                'deskTheme' => (new ThemeRepository())->getThemeByDesk($item)->attributesToArray()
+            ];
+
+        }
+
+        return $presents;
     }
 }

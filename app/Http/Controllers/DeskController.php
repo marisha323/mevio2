@@ -130,4 +130,19 @@ class DeskController extends Controller
 
         return json_encode(['message' => $message]);
     }
+
+    public function actionGetFavoriteDesks():bool|string
+    {
+        $favoriteDesks = $this->favoriteModel
+            ->getFavoriteDesksByUserId(Auth::user()->getAuthIdentifier());
+
+        return json_encode($favoriteDesks, true);
+    }
+
+    public function actionGetArchiveDesks():bool|string
+    {
+        $archiveDesks = $this->archiveModel->getArchiveDesksByUserId(Auth::user()->getAuthIdentifier());
+
+        return json_encode($archiveDesks, true);
+    }
 }

@@ -3,6 +3,7 @@ namespace App\Repositories;
 use App\Contracts\FavoriteDeskContract;
 use App\Models\FavoriteDesk;
 use App\Models\User;
+use App\Presenters\DeskAsArrayPresenter;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
@@ -63,6 +64,15 @@ class FavoriteDeskRepository implements FavoriteDeskContract
         catch (\Exception $ex){
             return false;
         }
+    }
+
+
+    public function getFavoriteDesksByUserId($userId):array
+    {
+        $idArrays = DB::table('favorite_desks')->select('deskId')
+            ->where('userId',$userId)->get();
+
+        return (new DeskAsArrayPresenter())->presentCollectionByIdArray($idArrays);
     }
 }
 

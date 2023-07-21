@@ -9,6 +9,8 @@ interface ArchiveContract
 
     public function update($data);
 
+    public function getArchiveDesksByUserId ($userId):array;
+
 }
 
 

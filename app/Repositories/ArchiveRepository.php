@@ -6,6 +6,7 @@ use App\Contracts\ArchiveContract;
 use App\Models\Archive;
 use App\Models\FavoriteDesk;
 use App\Models\User;
+use App\Presenters\DeskAsArrayPresenter;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\DB;
 
@@ -65,6 +66,15 @@ class ArchiveRepository implements ArchiveContract
         catch (\Exception $ex){
             return false;
         }
+    }
+
+
+    public function getArchiveDesksByUserId ($userId):array
+    {
+        $idArrays = DB::table('archives')->select('deskId')
+            ->where('userId',$userId)->get();
+
+        return (new DeskAsArrayPresenter())->presentCollectionByIdArray($idArrays);
     }
 
 }
