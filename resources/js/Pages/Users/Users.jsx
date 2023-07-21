@@ -12,7 +12,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
   const handleSearch = (e) => {
     const searchTerm = e.target.value;
     setSearchTerm(searchTerm);
-  
+
     setFilteredUsers(() => {
       return users.filter((user) =>
         filteredDesks.some(
@@ -61,10 +61,13 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
               {desks.map((desk) => {
                 const theme = themes.find((theme) => theme.id === desk.themeId);
                 return (
-                  <div key={desk.id} className='BoardListed' onClick={() => handleSelectBoard(desk)}>
-                    <img className='BoardListed_img' src={theme.backGroundImage} alt="" />
-                    <h1 className='BoardListed_name'>{desk.deskName}</h1>
-                  </div>
+                    <div key={desk.id} className='BoardListed' onClick={() => handleSelectBoard(desk)}>
+                        <div className='BoardListed_imgContainer'>
+                            <img className='BoardListed_img' src={theme.backGroundImage} alt="" />
+                            <h1 className='BoardListed_name'>{desk.deskName}</h1>
+                        </div>
+                    </div>
+
                 );
               })}
             </div>
