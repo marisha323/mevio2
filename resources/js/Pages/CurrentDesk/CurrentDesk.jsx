@@ -145,11 +145,14 @@ export default function CurrentDesk({cards, users,deskUsers}) {
         description: "",
         deadLine: "",
         columnId: columnId || "",
-        deskId:deskId
+        deskId:deskId,
+
     });
+
 
 // Change values in the fields
     function handleCardChange(e) {
+        console.log(e);
         const key = e.target.id;
         const value = e.target.value;
         setCardValues((prevCardValues) => ({
@@ -170,7 +173,8 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             description: "",
             deadLine: "",
             columnId: "",
-            deskId: ""
+            deskId: "",
+            userId:"",
         });
         setIsVisible(false);
         // Reload the page to show the new card after successful submission.
@@ -223,6 +227,17 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                        value={cardValues.deadLine}
                                        onChange={handleCardChange}/>
                             </div>
+                        </div>
+
+                        <div>
+                            {/*<select value={selectedUserId} onChange={(e) => this.handleCardChange(e.target.value)}>*/}
+                            {/*    <option value="">Choose a user</option>*/}
+                            {/*    {deskUsers.map((user) => (*/}
+                            {/*        <option key={user.id} value={user.id}>*/}
+                            {/*            {user.name}*/}
+                            {/*        </option>*/}
+                            {/*    ))}*/}
+                            {/*</select>*/}
                         </div>
                         <div>
                             <button type="submit" className="btn btn-info btn2">
