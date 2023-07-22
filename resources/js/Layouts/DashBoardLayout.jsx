@@ -12,6 +12,7 @@ import {useAddDeskModalVisibility} from "@/Hooks/useAddDeskModalVisibility.js";
 import {FavoriteDesks} from "@/Components/Sidebar/FavoriteDesks.jsx";
 import {ArchiveDesks} from "@/Components/Sidebar/ArchiveDesks.jsx";
 import {Notification} from "@/Components/Layout/Notification.jsx";
+import axios from "axios";
 
 
 
@@ -102,23 +103,42 @@ export const DashBoardLayout = ({ children }) => {
     const [isInvitesVisible, setIsInvitesVisible] = useState(false);
 
 
+    function checkInvitations () {
+        axios.get("/get-all-invitations")
+            .then((resp)=>{
+                if(resp.data.length === 0){
+                    setIsInvitations(false);
+                }
+            })
+    }
+
+
     function RejectInviteHandle (id) {
-        // setInvitations(invitations.filter((item)=>item.id !== id))
         const invite = document.getElementById(`invite_${id}`);
         invite.classList.add("invite-reject");
         setTimeout(()=>{
             invite.remove();
         },300)
 
+        axios.post('/set-invite-to-reject',{
+            id:id
+        }).then((resp)=>console.log(resp))
+            .catch((error)=>console.log(error))
+
+        checkInvitations();
     }
 
     function AcceptInviteHandle (id) {
-        // setInvitations(invitations.filter((item)=>item.id !== id))
         const invite = document.getElementById(`invite_${id}`);
         invite.classList.add("invite-accept");
         setTimeout(()=>{
             invite.remove();
         },300)
+
+        axios.post('/accept-invite',{
+            id:id
+        }).then((resp)=>console.log(resp))
+            .catch((error)=>console.log(error))
     }
 
 
