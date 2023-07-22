@@ -31,6 +31,8 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
+    Route::post('/set-invite-to-reject',[InvitationController::class,'actionRejectInvitation']);
+
     Route::get('/get-all-invitations', [InvitationController::class,'actionGetAllInvitations']);
     Route::post('/create-invitation',[InvitationController::class,'actionCreateInvitation']);
 

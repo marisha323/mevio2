@@ -12,6 +12,8 @@ interface InvitationContract
     public function getAllInvitationsByUserId ($userId):array;
 
     public function isExists($data):bool;
+
+    public function rejectInvitation($data):bool;
 }
 
 

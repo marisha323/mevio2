@@ -64,5 +64,14 @@ class InvitationRepository implements InvitationContract
 
         return count($invitation) > 0;
     }
+
+    public function rejectInvitation($data):bool
+    {
+        $invitation = Invitation::where('id',$data['id'])->first();
+        $invitation->isRejected = true;
+        $invitation->save();
+
+        return true;
+    }
 }
 
