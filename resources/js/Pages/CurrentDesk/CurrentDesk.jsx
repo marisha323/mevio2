@@ -121,7 +121,8 @@ export default function CurrentDesk({cards, users,deskUsers}) {
     };
 //////////////////////////////// FOR MODAL WINDOW
     const [isVisible, setIsVisible] = useState(false);
-    const [selectedCardId, setSelectedCardId] = useState(null); //
+    const [userId2, setUserId2] = useState('');
+
     // const ToggleVisibleModal = (id) => {
     //     setIsVisible(!isVisible);
     //     setSelectedCardId(id); // Зберігаємо значення id в стані для модального вікна
@@ -132,13 +133,17 @@ export default function CurrentDesk({cards, users,deskUsers}) {
         setCardValues((prevValues) => ({
             ...prevValues,
             columnId: columnId,
-            deskId:deskId  ////////////////////////////added 21.7
+            deskId:deskId,  ////////////////////////////added 21.7
 
         }));
     };
 
     //SAVE CARD TO DB
 
+
+    // const handleCardChange = (userId) => {
+    //     setSelectedUserId(userId);
+    // };
     //Change values
     const [cardValues, setCardValues] = useState({
         cardName: "",
@@ -146,22 +151,19 @@ export default function CurrentDesk({cards, users,deskUsers}) {
         deadLine: "",
         columnId: columnId || "",
         deskId:deskId,
-
     });
 
 
-// Change values in the fields
     function handleCardChange(e) {
-        console.log(e);
         const key = e.target.id;
         const value = e.target.value;
+        console.log("VALUE:" + value);
         setCardValues((prevCardValues) => ({
             ...prevCardValues,
             [key]: value,
         }));
     }
-
-// Опрацювання подання форми для збереження картки
+// SAVE Card
     async function handleCardSubmit(e) {
         e.preventDefault();
         console.log(cardValues);
@@ -174,13 +176,22 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             deadLine: "",
             columnId: "",
             deskId: "",
-            userId:"",
+
         });
         setIsVisible(false);
         // Reload the page to show the new card after successful submission.
         window.location.reload();
     }
 
+    // Під час вибору опції з select, оновити значення userId в стані
+    const handleUserSelect = (e) => {
+        const selectedUserId = e.target.value;
+        setUserId2(selectedUserId);
+        setCardValues((prevCardValues) => ({
+            ...prevCardValues,
+            userId: selectedUserId,
+        }));
+    };
     return (
         <DashBoardLayout>
            <div onClick={ToggleVisibleModal}
@@ -218,7 +229,10 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                             </textarea>
                             </div>
                         </div>
-                        <div>
+                        <div><div>
+                            <label  className="label_style">
+                                Дата:</label>
+                        </div>
                             <div>
                                 <input type="date"
                                        className="card_date"
@@ -228,16 +242,18 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                        onChange={handleCardChange}/>
                             </div>
                         </div>
-
                         <div>
-                            {/*<select value={selectedUserId} onChange={(e) => this.handleCardChange(e.target.value)}>*/}
-                            {/*    <option value="">Choose a user</option>*/}
-                            {/*    {deskUsers.map((user) => (*/}
-                            {/*        <option key={user.id} value={user.id}>*/}
-                            {/*            {user.name}*/}
-                            {/*        </option>*/}
-                            {/*    ))}*/}
-                            {/*</select>*/}
+                            <label htmlFor="description" className="label_style">
+                                Відповідальний за завдання:</label>
+                        </div>
+                        <div>
+                            <select value={userId2} onChange={handleUserSelect} className="select_card">
+                                  {deskUsers.map((user) => (
+                                    <option key={user.id} value={user.id}>
+                                        {user.name}
+                                    </option>
+                                ))}
+                            </select>
                         </div>
                         <div>
                             <button type="submit" className="btn btn-info btn2">
@@ -318,7 +334,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('1',deskId)}>
+                            <button onClick={() => ToggleVisibleModal('1',deskId,setSelectedUserId)}>
                                 <img
                                     className="plus_task"
                                     src="images/plus (3) 1.png"

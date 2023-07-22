@@ -33,7 +33,6 @@ class CardRepository implements CardContract
        // dd($request);
         $user = Auth::user();
 
-        //dd($request->post('deskId'));
         $userId= $user->id;
 
         $card=new Card();
