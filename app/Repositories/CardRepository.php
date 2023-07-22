@@ -30,7 +30,8 @@ class CardRepository implements CardContract
     }
     public function store(Request $request)
     {
-       // dd($request);
+       // dd($request['setUserId2']);
+
         $user = Auth::user();
 
         $userId= $user->id;
@@ -49,7 +50,7 @@ class CardRepository implements CardContract
         $card->updated_at = new \DateTime();
 
         $card->save();
-        $userCard->userId=$request['userId'];
+        $userCard->userId=$request['setUserId2'];
         $userCard->deskId=$request['deskId'];
         $userCard->created_at = new \DateTime();
         $userCard->updated_at = new \DateTime();

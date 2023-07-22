@@ -121,7 +121,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
     };
 //////////////////////////////// FOR MODAL WINDOW
     const [isVisible, setIsVisible] = useState(false);
-    const [userId2, setUserId2] = useState('');
+    const [userId2, setUserId2] = useState('');/////////////////////FOR USER ID
 
     // const ToggleVisibleModal = (id) => {
     //     setIsVisible(!isVisible);
@@ -134,7 +134,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             ...prevValues,
             columnId: columnId,
             deskId:deskId,  ////////////////////////////added 21.7
-
+            userId2:userId2
         }));
     };
 
@@ -151,6 +151,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
         deadLine: "",
         columnId: columnId || "",
         deskId:deskId,
+        userId2:userId2
     });
 
 
@@ -176,7 +177,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             deadLine: "",
             columnId: "",
             deskId: "",
-
+            userId2:""
         });
         setIsVisible(false);
         // Reload the page to show the new card after successful submission.
@@ -189,7 +190,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
         setUserId2(selectedUserId);
         setCardValues((prevCardValues) => ({
             ...prevCardValues,
-            userId: selectedUserId,
+            userId: userId2,
         }));
     };
     return (
@@ -334,7 +335,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('1',deskId,setSelectedUserId)}>
+                            <button onClick={() => ToggleVisibleModal('1',deskId,setUserId2)}>
                                 <img
                                     className="plus_task"
                                     src="images/plus (3) 1.png"
@@ -367,7 +368,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('2',deskId)}>
+                            <button onClick={() => ToggleVisibleModal('2',deskId,setUserId2)}>
                                 <img className="plus_task" src="images/plus (3) 1.png" alt=""/>
                             </button>
                         </li>
@@ -396,7 +397,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                     </div>
                                 ))}
                             </Board>
-                            <button onClick={() => ToggleVisibleModal('3',deskId)}>
+                            <button onClick={() => ToggleVisibleModal('3',deskId,setUserId2)}>
                                 <img className="plus_task" src="images/plus (3) 1.png" alt=""/>
                             </button>
                         </li>
