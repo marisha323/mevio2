@@ -77,6 +77,79 @@ export const DashBoardLayout = ({ children }) => {
         </Link>
     ))
 
+
+
+
+
+    const [invitations, setInvitations] = useState([]);
+    const [isInvitations, setIsInvitations] = useState(false);
+
+    useEffect(()=>{
+        if (invitations.length > 0){
+            setIsInvitations(true);
+        }
+    },[invitations])
+
+
+    useEffect(()=>{
+        axios.get("/get-all-invitations")
+            .then((resp)=>{
+                setInvitations(resp.data);
+                console.log(resp.data);
+            })
+    },[])
+
+    const [isInvitesVisible, setIsInvitesVisible] = useState(false);
+
+
+    function RejectInviteHandle (id) {
+        // setInvitations(invitations.filter((item)=>item.id !== id))
+        const invite = document.getElementById(`invite_${id}`);
+        invite.classList.add("invite-reject");
+        setTimeout(()=>{
+            invite.remove();
+        },300)
+
+    }
+
+    function AcceptInviteHandle (id) {
+        // setInvitations(invitations.filter((item)=>item.id !== id))
+        const invite = document.getElementById(`invite_${id}`);
+        invite.classList.add("invite-accept");
+        setTimeout(()=>{
+            invite.remove();
+        },300)
+    }
+
+
+    const invites = invitations.map((invite)=>{
+        return(
+            <div className="invite"
+                id={`invite_${invite.id}`}>
+                <div className="invite-user-name">{invite.senderUser.name}</div>
+                <div className="invite-user-email">{invite.senderUser.email}</div>
+                <div className="invite-text">Запрошує вас до дошки:</div>
+                <div className="invite-desk-name">"{invite.Desk.deskName}"</div>
+                <div className="invite-buttons">
+                    <button className="invite-button reject"
+                            onClick={()=>RejectInviteHandle(invite.id)}>
+                        Відхилити
+                    </button>
+                    <button className="invite-button accept"
+                            onClick={()=>AcceptInviteHandle(invite.id)}>
+                        Прийняти
+                    </button>
+                </div>
+
+            </div>
+        )
+    })
+
+
+
+
+
+
     const image = mainTheme.backGroundImage ?? "/images/preloader/preload_background.png";
 
     if (isLoading){
@@ -88,6 +161,9 @@ export const DashBoardLayout = ({ children }) => {
     }
     return (
         <div>
+            <div className={`notification-modal ${isInvitesVisible ? 'notification-modal-visible' : ''} `}>
+                {invites}
+            </div>
             <div style={{backgroundImage: `url(${image})`}} className={"background-block"}>
 
             </div>
@@ -103,8 +179,17 @@ export const DashBoardLayout = ({ children }) => {
                 </div>
                 </Link>
                 <div className="toTheRight_container">
+                    <div className="notification-container">
 
-                    <Notification mainTheme={mainTheme} />
+
+                        <img onClick={()=>setIsInvitesVisible(!isInvitesVisible)}
+                             className={`notification-img ${isInvitations ? 'notification-animate' : ''}`}
+                             src={`/images/themes/${mainTheme.id}/bell.png`} alt=""/>
+                    </div>
+
+
+
+                    {/*<Notification mainTheme={mainTheme} />*/}
 
                     <Link href={'/profile'}>
                         <img src="images/Ellipse 11.png" alt=""/>

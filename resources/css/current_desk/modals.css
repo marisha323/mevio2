@@ -1,0 +1,38 @@
+.info-modal {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 380px;
+    background: #6E4796;
+    border-radius: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 30px 15px;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s all ease-in-out;
+}
+
+.info-modal-visible {
+    visibility: visible;
+    opacity: 1;
+    transition: 0.3s all ease-in-out;
+}
+
+.info-modal-button {
+    width: 200px;
+    height: 67px;
+    background: aqua;
+    font-size: 30px;
+    font-weight: 700;
+    border-radius: 8px;
+}
+
+.info-modal-message {
+    color: cornsilk;
+    font-size: 20px;
+}

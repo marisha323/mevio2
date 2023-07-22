@@ -32,7 +32,7 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function () {
 
     Route::get('/get-all-invitations', [InvitationController::class,'actionGetAllInvitations']);
-
+    Route::post('/create-invitation',[InvitationController::class,'actionCreateInvitation']);
 
     Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
     );
