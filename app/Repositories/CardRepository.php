@@ -50,7 +50,7 @@ class CardRepository implements CardContract
         $card->updated_at = new \DateTime();
 
         $card->save();
-        $userCard->userId=$request['setUserId2'];
+        $userCard->userId=$request['userId2serId2'];
         $userCard->deskId=$request['deskId'];
         $userCard->created_at = new \DateTime();
         $userCard->updated_at = new \DateTime();

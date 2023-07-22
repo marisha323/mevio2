@@ -9,7 +9,7 @@ import {Link, router} from '@inertiajs/react';
 
 
 
-export default function CurrentDesk({cards, users,deskUsers}) {
+export default function CurrentDesk({cards, users,deskUsers,desk}) {
 
     console.log(cards);
     console.log(users);
@@ -267,7 +267,7 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             <div className='Add_User_Background_Overlayer' onClick={ToggleInviteDesk}></div>
             <div className='middle_desks_container'>
                 <div className='middle_top_body_tasks'>
-                    <h1>Курсовий проект</h1>
+                    <h1>{desk.deskName}</h1>
                     <div className='tasks_user_profiles'>
                         {deskUsers.map((user)=>(
                         <img className='imguser' src={`userLogoPath/${user.userLogoPath}`} alt=''/>

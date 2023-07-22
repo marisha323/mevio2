@@ -75,6 +75,9 @@ class CardController extends Controller
     public function currentDesk(Request $request)
     {
         $desk_id = $request->get('desk_id');
+        $desk = Desk::find($desk_id);
+
+        //dd($desk_id);
         $cards = Card::where('desk_id', $desk_id)->get();
         $current_desk= Desk::where('id',$desk_id)->first();
 
@@ -96,6 +99,7 @@ class CardController extends Controller
             'cards' => $cards,
             'users' => $users,
             'deskUsers'=>$current_desk_users,
+            'desk'=>$desk
         ]);
     }
 
