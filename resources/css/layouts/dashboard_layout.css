@@ -446,3 +446,7 @@ hr {
 .pointer {
     cursor: pointer
 }
+
+.user-logo {
+    width:50px
+}

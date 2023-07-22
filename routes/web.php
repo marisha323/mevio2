@@ -38,6 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-all-invitations', [InvitationController::class,'actionGetAllInvitations']);
     Route::post('/create-invitation',[InvitationController::class,'actionCreateInvitation']);
 
+
+    Route::get("/api/user-logo",[UserController::class,'getUserLogo']);
     Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']);
     Route::get("/api/user-desks", [DeskController::class,'actionApiUserDesks']);
 

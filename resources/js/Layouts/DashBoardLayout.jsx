@@ -166,6 +166,14 @@ export const DashBoardLayout = ({ children }) => {
         )
     })
 
+    const [imgLogo, setImgLogo] = useState("");
+
+    useEffect(()=>{
+        axios.get("/api/user-logo").
+        then((resp)=>{
+            setImgLogo(resp.data.image)
+        }).catch((error)=>console.log(error))
+    },[])
 
     const {toggleUpdateDesksTrue} = useActions();
 
@@ -211,10 +219,10 @@ export const DashBoardLayout = ({ children }) => {
 
 
 
-                    {/*<Notification mainTheme={mainTheme} />*/}
+
 
                     <Link href={'/profile'}>
-                        <img src="images/Ellipse 11.png" alt=""/>
+                        <img className="user-logo" src={`userLogoPath/${imgLogo}`} alt=""/>
                     </Link>
                 </div>
             </div>
