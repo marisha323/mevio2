@@ -40,6 +40,14 @@ class InvitationController extends Controller
     public function actionRejectInvitation (Request $request):bool|string
     {
         $isUpdated = $this->invitationModel->rejectInvitation($request);
-        dd($isUpdated);
+
+        return json_encode(['message'=> $isUpdated]);
+    }
+
+    public function actionAcceptInvitation (Request $request) :bool|string
+    {
+        $isUpdated = $this->invitationModel->acceptInvitation($request);
+
+        return json_encode(['message'=> $isUpdated]);
     }
 }

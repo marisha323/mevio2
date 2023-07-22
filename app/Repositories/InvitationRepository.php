@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories;
 
+use App\Contracts\DesksUsersContract;
 use App\Contracts\InvitationContract;
 use App\Models\Invitation;
 use App\Models\User;
@@ -8,11 +9,11 @@ use App\Presenters\InvitationAsArrayPresenter;
 
 class InvitationRepository implements InvitationContract
 {
-    protected $model;
+    protected DesksUsersRepository $deskUserModel;
 
-    function __construct()
+    function __construct(DesksUsersContract $deskUderRepos)
     {
-
+        $this->deskUserModel = $deskUderRepos;
     }
     public function create($data):bool
     {
@@ -72,6 +73,15 @@ class InvitationRepository implements InvitationContract
         $invitation->save();
 
         return true;
+    }
+
+    public function acceptInvitation($data): bool
+    {
+        $invitation = Invitation::where('id',$data['id'])->first();
+        $invitation->isAccept = true;
+        $invitation->save();
+
+        return $this->deskUserModel->create($invitation->deskId, $invitation->targetId);
     }
 }
 

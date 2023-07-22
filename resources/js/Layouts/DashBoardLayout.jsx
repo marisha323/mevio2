@@ -139,6 +139,8 @@ export const DashBoardLayout = ({ children }) => {
             id:id
         }).then((resp)=>console.log(resp))
             .catch((error)=>console.log(error))
+
+        checkInvitations();
     }
 
 

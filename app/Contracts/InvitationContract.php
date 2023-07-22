@@ -14,6 +14,8 @@ interface InvitationContract
     public function isExists($data):bool;
 
     public function rejectInvitation($data):bool;
+
+    public function acceptInvitation($data): bool;
 }
 
 
