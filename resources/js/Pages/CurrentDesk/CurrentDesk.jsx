@@ -1,5 +1,6 @@
 import '../../../css/current_desk/current_desk.css';
 import "../../../css/modal/modal_desk.css";
+import "../../../css/current_desk/modals.css";
 
 import React, {useRef, useEffect, useState} from 'react';
 import {Card, Board} from '@/React-dnd-Components';
@@ -175,12 +176,46 @@ export default function CurrentDesk({cards, users,deskUsers}) {
             description: "",
             deadLine: "",
             columnId: "",
-            deskId: "",
-
+            deskId: ""
         });
         setIsVisible(false);
         // Reload the page to show the new card after successful submission.
         window.location.reload();
+    }
+
+
+
+    const [infoMessage, setInfoMessage] = useState("Fgjigj");
+
+    function AddUserHandle(id){
+        const infoModal = document.querySelector(".info-modal");
+        const message = "Запрошення не відправлено"
+        axios.post("/create-invitation",{
+            targetId: id,
+            deskId: parseInt(deskId)
+        })
+            .then((resp)=>{
+                const data = resp.data.message;
+                if(data === "success"){
+                    setInfoMessage("Запрошення відправлено");
+                }
+                else {
+                    setInfoMessage(message);
+                }
+                infoModal.classList.add("info-modal-visible");
+            })
+            .catch((error)=>{
+                console.log(error);
+                setInfoMessage(message);
+                infoModal.classList.add("info-modal-visible");
+            })
+
+        ToggleInviteDesk();
+    }
+
+    function HideInfoModal () {
+        const infoModal = document.querySelector(".info-modal");
+        infoModal.classList.remove("info-modal-visible");
     }
 
     // Під час вибору опції з select, оновити значення userId в стані
@@ -263,6 +298,15 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                     </form>
                 </div>
             </div>
+
+           <div className="info-modal">
+                <div className="info-modal-message">{infoMessage}</div>
+               <button onClick={HideInfoModal}
+                   className="info-modal-button">OK</button>
+           </div>
+
+
+
             <div className='Add_User_Background_Overlayer' onClick={ToggleInviteDesk}></div>
             <div className='middle_desks_container'>
                 <div className='middle_top_body_tasks'>
@@ -299,7 +343,8 @@ export default function CurrentDesk({cards, users,deskUsers}) {
                                 <div className='User_Add_Container'>
                                     <img className='add_user_pfp' src={`userLogoPath/${user.userLogoPath}`} alt=''/>
                                     <p>{user.email}</p>
-                                    <button className='add_btn_user_desk'>Додати</button>
+                                    <button onClick={()=>AddUserHandle(user.id)}
+                                        className='add_btn_user_desk'>Додати</button>
                                 </div>
                                 <hr/>
                             </React.Fragment>

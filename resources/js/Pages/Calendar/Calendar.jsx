@@ -3,8 +3,16 @@ import { Link } from "@inertiajs/react";
 import {useEffect,useState} from "react";
 import "../../../css/calendar/calendar.css";
 import React from "react";
+import {useThemes} from "@/Hooks/useThemes.js";
 
 const Calendar = ({ cardsData }) => {
+    const [mainTheme, setMainTheme] = useState({});
+    const {defaultTheme} = useThemes();
+
+    useEffect( () => {
+        setMainTheme(defaultTheme);
+    },[defaultTheme])
+
     const currentDate = new Date();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
@@ -36,7 +44,8 @@ const Calendar = ({ cardsData }) => {
     return (
         <DashBoardLayout>
             <div className="middle_desks_container">
-                <div className="middle_top_body">
+                <div className="middle_top_body"
+                     style={{backgroundColor: mainTheme.page_header_bg_color}}>
                     <h1>Календар</h1>
                 </div>
                 <div className="middle_middle_body">
@@ -45,7 +54,8 @@ const Calendar = ({ cardsData }) => {
                         <button className="button_week"> <Link href={"/week-calendar"}>Тижневий</Link></button>
                     </h1>
                     <div className="calendar_container">
-                        <div className="display_weeks">
+                        <div className="display_weeks"
+                            style={{backgroundColor: mainTheme.sidebar_category_bg_color}}>
                             <p>
                                 Понеділок
                             </p>
@@ -70,7 +80,8 @@ const Calendar = ({ cardsData }) => {
                         </div>
                         <div className="display_dates">
                             {previousMonthDays.map((day) => (
-                                <div className="date previous-month" key={day}>
+                                <div className="date previous-month" key={day}
+                                style={{backgroundColor: mainTheme.page_header_bg_color}}>
                                     {day}
                                 </div>
                             ))}
@@ -90,7 +101,8 @@ const Calendar = ({ cardsData }) => {
                                 });
 
                                 return (
-                                    <div className="date" key={monthDay}>
+                                    <div className="date" key={monthDay}
+                                         style={{backgroundColor: mainTheme.page_header_bg_color}}>
                                         {monthDay}
                                         <div className="info">
                                             {tasksForDay.length > 0 && tasksForDay.map((task, index) => (
@@ -108,7 +120,8 @@ const Calendar = ({ cardsData }) => {
 
 
                             {nextMonthDays.map((day) => (
-                                <div className="date next-month" key={day}>
+                                <div className="date next-month" key={day}
+                                     style={{backgroundColor: mainTheme.page_header_bg_color}}>
                                     {day}
                                 </div>
                             ))}

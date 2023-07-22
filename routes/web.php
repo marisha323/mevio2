@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\InvitationController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CardController;
@@ -30,10 +31,14 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
+    Route::get('/get-all-invitations', [InvitationController::class,'actionGetAllInvitations']);
+    Route::post('/create-invitation',[InvitationController::class,'actionCreateInvitation']);
+
     Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
     );
 
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
+
     Route::get('/desk-panel',[DeskController::class,'actionGetAllUsersDesks'])
         ->name('desk.panel');
 
