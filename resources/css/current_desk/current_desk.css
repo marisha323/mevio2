@@ -64,11 +64,12 @@
 }
 .plus_task{
   display: flex;
-  margin-left: auto;
+  margin-left: 25px;
   margin-right: 1rem;
-  margin-top: -0.5rem;
+  margin-bottom: 0.5rem;
   padding-bottom: 0.5rem;
   cursor: pointer;
+
 }
 .add-task-container {
   display: -webkit-box;
