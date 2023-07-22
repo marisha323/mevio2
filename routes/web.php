@@ -38,8 +38,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/get-all-invitations', [InvitationController::class,'actionGetAllInvitations']);
     Route::post('/create-invitation',[InvitationController::class,'actionCreateInvitation']);
 
-    Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']
-    );
+    Route::get('api/themes',[DeskController::class, 'actionGetAllThemes']);
+    Route::get("/api/user-desks", [DeskController::class,'actionApiUserDesks']);
 
     Route::get('/user-own-desks',[DeskController::class,'actionGetUserOwnDesks']);
 

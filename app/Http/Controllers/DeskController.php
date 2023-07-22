@@ -145,4 +145,11 @@ class DeskController extends Controller
 
         return json_encode($archiveDesks, true);
     }
+
+    public function actionApiUserDesks () :bool|string
+    {
+        $desksData = $this->desk_model->getAllUserDesks(Auth::user()->getAuthIdentifier());
+
+        return json_encode($desksData, true);
+    }
 }

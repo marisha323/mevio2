@@ -96,7 +96,6 @@ export const DashBoardLayout = ({ children }) => {
         axios.get("/get-all-invitations")
             .then((resp)=>{
                 setInvitations(resp.data);
-                console.log(resp.data);
             })
     },[])
 
@@ -139,7 +138,7 @@ export const DashBoardLayout = ({ children }) => {
             id:id
         }).then((resp)=>console.log(resp))
             .catch((error)=>console.log(error))
-
+        toggleUpdateDesksTrue();
         checkInvitations();
     }
 
@@ -168,6 +167,7 @@ export const DashBoardLayout = ({ children }) => {
     })
 
 
+    const {toggleUpdateDesksTrue} = useActions();
 
 
 
