@@ -4,6 +4,7 @@ namespace App\Repositories;
 use App\Contracts\CardContract;
 use App\Models\Card;
 
+use App\Models\CardsUsers;
 use App\Models\Desk;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
@@ -32,10 +33,10 @@ class CardRepository implements CardContract
        // dd($request);
         $user = Auth::user();
 
-        //dd($request->post('deskId'));
         $userId= $user->id;
 
         $card=new Card();
+        $userCard=new CardsUsers();
 
         $card->cardName = $request['cardName'];
         $card->description = $request['description'];
@@ -44,11 +45,15 @@ class CardRepository implements CardContract
         $card->userId = $userId;
         $card->desk_id = $request['deskId'];
 
-
         $card->created_at = new \DateTime();
         $card->updated_at = new \DateTime();
-        $card->save();
 
+        $card->save();
+        $userCard->userId=$request['userId'];
+        $userCard->deskId=$request['deskId'];
+        $userCard->created_at = new \DateTime();
+        $userCard->updated_at = new \DateTime();
+        $userCard->save();
     }
 
     public function currentDesk(Request $request)

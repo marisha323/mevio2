@@ -90,7 +90,7 @@ export default function Users({ users, desks, desksusers, loggedInUserId, themes
                     </div>
                     <div className="user_list_control">
                       <h4>На доске(?)</h4>
-                      {loggedInUserId === user.id ? (
+                      {user.id === selectedBoard.userId ? (
                         <button className="admin_user_btn">Адміністратор</button>
                       ) : (
                         <button className="admin_user_btn">Користувач</button>

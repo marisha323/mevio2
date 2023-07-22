@@ -40,18 +40,20 @@
 .card_name{
     border-radius: 7px;
     cursor: pointer;
+    width: 280px;
 }
 
 .card_textarea{
     border-radius: 7px;
     cursor: pointer;
+    width: 280px;
 }
 
 .card_date{
     box-sizing: border-box;
     display: flex;
     height: 2.8rem;
-    width: 9rem;
+    width: 280px;
     flex-direction: row;
     align-items: center;
     padding-left: 0.6rem;
@@ -68,7 +70,7 @@
 
 
 .label_style{
-    width: 9rem;
+    width: 280px;
     height: 1.5rem;
     font-style: normal;
     font-weight: 600;
@@ -80,4 +82,9 @@
 .btn2{
     background: lightskyblue ;
 
+}
+
+.select_card{
+    width: 280px;
+    border-radius: 7px;
 }
